@@ -48,5 +48,6 @@ module.exports = {
     camelcase: 'off',
     'react/jsx-no-useless-fragment': 0,
     'jsx-a11y/control-has-associated-label': 0,
+    'import/prefer-default-export': 0,
   },
 };
