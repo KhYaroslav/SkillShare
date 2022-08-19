@@ -13,6 +13,7 @@ import Add from './Components/Add/Add';
 import Signin from './Components/Auth/Signin/Signin';
 import Signup from './Components/Auth/Signup/Signup';
 import Loading from './Components/Different/loading/Loading';
+import News from './Components/News/News';
 
 import './App.css';
 import { userCheck } from './Redux/actions/userActions';
@@ -49,7 +50,7 @@ function App() {
                         <Route path="/" element={<Feed />} />
                         <Route path="/popular" element={<h1>popular</h1>} />
                         <Route path="/new" element={<h1>Новые посты</h1>} />
-                        <Route path="/news" element={<h1>Новости</h1>} />
+                        <Route path="/news" element={<News />} />
                       </Routes>
                       <Rightbar />
                     </Stack>
