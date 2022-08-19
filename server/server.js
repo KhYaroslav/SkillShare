@@ -7,15 +7,18 @@ const FileStore = require('session-file-store')(session);
 
 const authUser = require('./middleware/middleware');
 const apiRouter = require('./routes/apiRouter');
+const newsRouter = require('./routes/newsRouter');
 
 const PORT = process.env.PORT ?? 3001;
 
 const app = express();
 
-app.use(cors({
-  credentials: true,
-  origin: true,
-}));
+app.use(
+  cors({
+    credentials: true,
+    origin: true,
+  }),
+);
 
 const sessionConfig = {
   name: process.env.SESSION_NAME ?? 'yeah',
@@ -36,6 +39,7 @@ app.use(session(sessionConfig));
 app.use(authUser);
 
 app.use('/api/v1', apiRouter);
+app.use('/news', newsRouter);
 
 app.listen(PORT, () => {
   console.log(`App has started on port ${PORT}`);
