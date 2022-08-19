@@ -1,5 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import {
+  Typography,
+} from '@mui/material';
 import NewsCard from './NewsCard';
 
 export default function News() {
@@ -10,6 +13,9 @@ export default function News() {
   }, []);
   return (
     <>
+      <Typography variant="h6" fontWeight={100} mt={2}>
+        IT новости
+      </Typography>
       {viewNews.map((el) => <NewsCard key={el.url} news={el} />)}
     </>
   );

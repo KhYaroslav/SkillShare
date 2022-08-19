@@ -1,11 +1,11 @@
-const express = require("express");
-const cheerio = require("cheerio");
+const express = require('express');
+const cheerio = require('cheerio');
 
-const axios = require("axios");
+const axios = require('axios');
 
 const router = express.Router();
 
-router.get("/v1", async (req, res) => {
+router.get('/v1', async (req, res) => {
   const news = () => {
     const titleArr = [];
     // let imgArr = []
@@ -13,10 +13,10 @@ router.get("/v1", async (req, res) => {
     const urlArr = [];
     const result = [];
 
-    return axios.get("https://habr.com/ru/news/").then((html) => {
+    return axios.get('https://habr.com/ru/news/').then((html) => {
       const $ = cheerio.load(html.data);
 
-      $("div.tm-article-snippet > h2").each((i, elem) => {
+      $('div.tm-article-snippet > h2').each((i, elem) => {
         titleArr.push(`${$(elem).text()}`);
       });
 
@@ -29,9 +29,9 @@ router.get("/v1", async (req, res) => {
       //   })
 
       $(
-        "div.tm-article-snippet > div.tm-article-body.tm-article-snippet__lead > a"
+        'div.tm-article-snippet > div.tm-article-body.tm-article-snippet__lead > a',
       ).each((i, elem) => {
-        urlArr.push(`https://habr.com/${$(elem).attr("href")}`);
+        urlArr.push(`https://habr.com/${$(elem).attr('href')}`);
       });
 
       // console.log('1', titleArr.length);
@@ -48,8 +48,8 @@ router.get("/v1", async (req, res) => {
         result.push(obj);
       }
       console.log(
-        "🚀 ~ file: newsRouter.js ~ line 52 ~ returnaxios.get ~ result",
-        result
+        '🚀 ~ file: newsRouter.js ~ line 52 ~ returnaxios.get ~ result',
+        result,
       );
       return result;
       // console.log(titleArr, imgArr, textArr, urlArr);
