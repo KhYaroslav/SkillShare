@@ -7,7 +7,7 @@ export default function Feed() {
 
   setTimeout(() => {
     setLoading(false);
-  }, [3000]);
+  }, [100]);
 
   return (
     <Box flex={4} p={{ xs: 0, md: 2 }}>

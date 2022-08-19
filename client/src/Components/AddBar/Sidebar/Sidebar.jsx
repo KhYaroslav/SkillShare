@@ -7,6 +7,7 @@ import {
   Person,
   Settings,
   Storefront,
+
 } from '@mui/icons-material';
 import {
   Box,
@@ -16,16 +17,34 @@ import {
   ListItemIcon,
   ListItemText,
   Switch,
+
 } from '@mui/material';
 import React from 'react';
+import LogoutIcon from '@mui/icons-material/Logout';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import CropDinIcon from '@mui/icons-material/CropDin';
+import ShowChartIcon from '@mui/icons-material/ShowChart';
+import ScatterPlotIcon from '@mui/icons-material/ScatterPlot';
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import NewspaperIcon from '@mui/icons-material/Newspaper';
+import { logoutUser } from '../../../Redux/actions/userActions';
 
 const Sidebar = ({ mode, setMode }) => {
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const logoutHandler = () => {
+    dispatch(logoutUser());
+    navigate('/');
+  };
   return (
     <Box flex={1} p={2} sx={{ display: { xs: 'none', sm: 'block' } }}>
       <Box position="fixed">
         <List>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#home">
+            <ListItemButton component="a" onClick={() => navigate('/')}>
               <ListItemIcon>
                 <Home />
               </ListItemIcon>
@@ -33,31 +52,55 @@ const Sidebar = ({ mode, setMode }) => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
+            <ListItemButton component="a" onClick={() => navigate('/popular')}>
               <ListItemIcon>
-                <Person />
+                <ShowChartIcon />
               </ListItemIcon>
-              <ListItemText primary="Пользователи" />
+              <ListItemText primary="Популярные" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
+            <ListItemButton component="a" onClick={() => navigate('/new')}>
               <ListItemIcon>
-                <Settings />
+                <ScatterPlotIcon />
               </ListItemIcon>
-              <ListItemText primary="Настройки" />
+              <ListItemText primary="Новые" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
+            <ListItemButton component="a" onClick={() => navigate('/news')}>
               <ListItemIcon>
-                <AccountBox />
+                <NewspaperIcon />
               </ListItemIcon>
-              <ListItemText primary="Профиль" />
+              <ListItemText primary="Новости" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
+            <ListItemButton component="a" onClick={() => navigate('/mytape')}>
+              <ListItemIcon>
+                <CropDinIcon />
+              </ListItemIcon>
+              <ListItemText primary="Моя лента" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton component="a" onClick={() => navigate('/favorite')}>
+              <ListItemIcon>
+                <StarBorderIcon />
+              </ListItemIcon>
+              <ListItemText primary="Избранное" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton component="a" onClick={logoutHandler}>
+              <ListItemIcon>
+                <LogoutIcon />
+              </ListItemIcon>
+              <ListItemText primary="Выйти" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton component="a">
               <ListItemIcon>
                 <ModeNight />
               </ListItemIcon>
