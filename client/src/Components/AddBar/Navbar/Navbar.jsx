@@ -12,6 +12,10 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import { logoutUser } from '../../../Redux/actions/userActions';
 
 const StyledToolbar = styled(Toolbar)({
   display: 'flex',
@@ -42,58 +46,72 @@ const UserBox = styled(Box)(({ theme }) => ({
     display: 'none',
   },
 }));
-const Navbar = () => {
+export default function Navbar() {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  const logoutHandler = () => {
+    dispatch(logoutUser());
+    navigate('/');
+  };
+
   return (
     <AppBar position="sticky">
       <StyledToolbar>
-        <Typography variant="h6" sx={{ display: { xs: 'none', sm: 'block' } }}>
+        <Typography onClick={() => navigate('/')} variant="h6" sx={{ display: { xs: 'none', sm: 'block' } }}>
           Skill Share
         </Typography>
         <Pets sx={{ display: { xs: 'block', sm: 'none' } }} />
         <Search>
           <InputBase placeholder="Поиск..." />
         </Search>
-        <Icons>
-          <Badge badgeContent={4} color="error">
-            <Mail />
-          </Badge>
-          <Badge badgeContent={2} color="error">
-            <Notifications />
-          </Badge>
-          <Avatar
-            sx={{ width: 30, height: 30 }}
-            onClick={(e) => setOpen(true)}
-          />
-        </Icons>
-        <UserBox onClick={(e) => setOpen(true)}>
-          <Avatar
-            sx={{ width: 30, height: 30 }}
-            src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-          />
-          <Typography variant="span">John</Typography>
-        </UserBox>
+        {user.id ? (
+          <>
+            <Icons>
+              <Badge badgeContent={3} color="error">
+                <Notifications />
+              </Badge>
+              <Avatar
+                sx={{ width: 30, height: 30 }}
+                onClick={(e) => setOpen(true)}
+              />
+            </Icons>
+            <UserBox onClick={(e) => setOpen(true)}>
+              <Avatar
+                sx={{ width: 30, height: 30 }}
+                src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              />
+              <Typography variant="span">John</Typography>
+            </UserBox>
+            <Menu
+              id="demo-positioned-menu"
+              aria-labelledby="demo-positioned-button"
+              open={open}
+              onClose={(e) => setOpen(false)}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+            >
+              <MenuItem>Избранное</MenuItem>
+              <MenuItem>Мои посты</MenuItem>
+              <MenuItem onClick={logoutHandler}>Выйти</MenuItem>
+            </Menu>
+          </>
+        ) : (
+          <div>
+            <Button sx={{ right: '5%' }} variant="contained" onClick={() => navigate('/login')}>Вход</Button>
+            <Button variant="contained" onClick={() => navigate('/signup')}>Регистрация</Button>
+          </div>
+        )}
       </StyledToolbar>
-      <Menu
-        id="demo-positioned-menu"
-        aria-labelledby="demo-positioned-button"
-        open={open}
-        onClose={(e) => setOpen(false)}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-      >
-        <MenuItem>Profile</MenuItem>
-        <MenuItem>My account</MenuItem>
-        <MenuItem>Выйти</MenuItem>
-      </Menu>
     </AppBar>
-  );
-};
 
-export default Navbar;
+  );
+}

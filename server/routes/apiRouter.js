@@ -16,6 +16,7 @@ router.post('/check', async (req, res) => {
 });
 
 router.post('/signup', async (req, res) => {
+  console.log(req.body);
   const hashpass = await bcrypt.hash(req.body.password, 10);
   const [currentUser, created] = await User.findOrCreate({
     where: { username: req.body.username },
