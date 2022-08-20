@@ -29,13 +29,14 @@ export default function SignUp() {
   const navigate = useNavigate();
 
   const [reg, setReg] = useState({
-    username: '', password: '', repeat: '', email: ''
+    name: '', password: '', repeat: '', email: ''
   });
 
   const SubmitSignUp = (e) => {
     e.preventDefault();
-    if (reg.password !== '' && reg.username !== '' && reg.repeat === reg.password) {
+    if (reg.password !== '' && reg.name !== '' && reg.repeat === reg.password) {
       dispatch(userSignUp(reg));
+      setReg({});
       navigate('/');
     }
   };
@@ -63,12 +64,12 @@ export default function SignUp() {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                value={reg.username}
+                value={reg.name}
                 onChange={ChangeSignUp}
-                name="username"
+                name="name"
                 required
                 fullWidth
-                id="email"
+                id="name"
                 label="Введите никнейм..."
                 autoComplete="nickname"
               />
