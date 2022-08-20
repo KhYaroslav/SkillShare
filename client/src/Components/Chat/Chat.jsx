@@ -40,8 +40,8 @@ export default function ChatTest() {
             {messages.map((el) => <MessageItem key={el.msId} message={el} />)}
           </div>
         </div>
-        <form onSubmit={submitHandler}>
-          <input value={input} onChange={inputHAndler} type="text" placeholder="Enter your message" />
+        <form className="chatForm" onSubmit={submitHandler}>
+          <input className="inpChat" value={input} onChange={inputHAndler} type="text" placeholder="Enter your message" />
         </form>
       </div>
     </div>

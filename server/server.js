@@ -3,10 +3,10 @@ const express = require('express');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const cors = require('cors');
-// ws part
+
 const http = require('http');
 const wss = require('./webSocket');
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 app.locals.ws = new Map();

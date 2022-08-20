@@ -94,7 +94,6 @@ export default function SignUp() {
                 onChange={ChangeSignUp}
                 name="password"
                 label="Введите пароль..."
-                type="password"
                 id="password"
               />
             </Grid>
@@ -106,7 +105,6 @@ export default function SignUp() {
                 onChange={ChangeSignUp}
                 name="repeat"
                 label="Повторите пароль..."
-                type="password"
                 id="password"
               />
             </Grid>
