@@ -44,7 +44,7 @@ function App() {
                 {(location.pathname !== '/login' && location.pathname !== '/signup' && location.pathname !== '/mytape' && location.pathname !== '/favorite') && (
                   <>
                     <Navbar />
-                    <Stack direction="row" spacing={2} justifyContent="space-between">
+                    <Stack direction="row" spacing={2} justifyContent="space-between" style={{ position: 'relative' }}>
                       <Sidebar setMode={setMode} mode={mode} />
                       <Routes>
                         <Route path="/" element={<Feed />} />
