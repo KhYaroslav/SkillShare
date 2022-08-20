@@ -10,9 +10,11 @@ export default function NewsCard({ news }) {
     <>
       <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
         <ListItem alignItems="flex-start">
-          <ListItemText
-            primary={news.title}
-          />
+          <a target="_blank" href={news.url} style={{ color: '#A1A1A1', textDecoration: 'none' }} rel="noreferrer">
+            <ListItemText
+              primary={news.title}
+            />
+          </a>
         </ListItem>
       </List>
     </>
