@@ -112,6 +112,7 @@ export default function SignUp() {
             </Grid>
           </Grid>
           <Button
+            disabled={!((reg.name && reg.password && reg.repeat))}
             type="submit"
             fullWidth
             variant="contained"
