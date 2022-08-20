@@ -3,19 +3,13 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: [
-    'plugin:react/recommended',
-    'airbnb',
-  ],
-  overrides: [
-  ],
+  extends: ['plugin:react/recommended', 'airbnb'],
+  overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-  ],
+  plugins: ['react'],
   rules: {
     'react/jsx-filename-extension': 0,
     'arrow-body-style': 0,
@@ -49,5 +43,7 @@ module.exports = {
     'react/jsx-no-useless-fragment': 0,
     'jsx-a11y/control-has-associated-label': 0,
     'import/prefer-default-export': 0,
+    'object-curly-newline': 0,
+    'no-param-reassign': 0,
   },
 };
