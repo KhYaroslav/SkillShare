@@ -111,6 +111,5 @@ export default function Navbar() {
         )}
       </StyledToolbar>
     </AppBar>
-
   );
 }

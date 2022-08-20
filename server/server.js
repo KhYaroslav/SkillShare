@@ -6,16 +6,7 @@ const cors = require('cors');
 // ws part
 const http = require('http');
 const wss = require('./webSocket');
-
-<<<<<<< HEAD
-const authUser = require('./middleware/middleware');
-const apiRouter = require('./routes/postRouter');
-const newsRouter = require('./routes/newsRouter');
-
-const PORT = process.env.PORT ?? 3001;
-=======
-const PORT = process.env.PORT || 3001;
->>>>>>> 459faeb8e3477662d0f6616de93da9cd4cb5659c
+const PORT = process.env.PORT || 3001
 
 const app = express();
 app.locals.ws = new Map();
@@ -25,6 +16,7 @@ const newsRouter = require('./routes/newsRouter');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 app.use(
   cors({
     credentials: true,
@@ -42,24 +34,11 @@ const sessionParser = session({
     expires: 24 * 60 * 60e3,
     httpOnly: true,
   },
-<<<<<<< HEAD
-};
-app.use(express.static('public'));
-app.use(express.json());
-app.use(morgan('dev'));
-app.use(express.urlencoded({ extended: true }));
-app.use(session(sessionConfig));
-app.use(authUser);
-
-app.use('/api/v1', apiRouter);
-app.use('/api/post', apiRouter);
-=======
 });
 
 app.use(sessionParser);
 
 app.use('/api/user', userRouter);
->>>>>>> 459faeb8e3477662d0f6616de93da9cd4cb5659c
 app.use('/news', newsRouter);
 
 const server = http.createServer(app);

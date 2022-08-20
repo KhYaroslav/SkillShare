@@ -41,7 +41,10 @@ export default function AddPost() {
               value={post.title}
               onChange={changeHandler}
             />
-            <MenuBarSimple />
+            <MenuBarSimple
+              type="text"
+              name="discription"
+            />
             <TextField
               // style={{ width: '400px', margin: '5px' }}
               type="file"
