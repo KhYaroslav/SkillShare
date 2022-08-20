@@ -99,8 +99,7 @@ export default function Navbar() {
                 horizontal: 'right',
               }}
             >
-              <MenuItem>Избранное</MenuItem>
-              <MenuItem>Мои посты</MenuItem>
+              <MenuItem>Загрузить фото</MenuItem>
               <MenuItem onClick={logoutHandler}>Выйти</MenuItem>
             </Menu>
           </>
@@ -112,6 +111,5 @@ export default function Navbar() {
         )}
       </StyledToolbar>
     </AppBar>
-
   );
 }

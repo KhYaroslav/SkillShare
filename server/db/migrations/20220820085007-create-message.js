@@ -1,32 +1,25 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Posts', {
+    await queryInterface.createTable('Messages', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      title: {
-        type: Sequelize.STRING,
-      },
-      description: {
-        type: Sequelize.TEXT,
-      },
-      file: {
-        type: Sequelize.TEXT,
-      },
-      url_video: {
-        type: Sequelize.TEXT,
-      },
       user_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: {
-            tableName: 'Users',
-          },
+          model: 'Users',
           key: 'id',
         },
+        onDelete: 'CASCADE',
+      },
+      message: {
+        type: Sequelize.TEXT,
+      },
+      to: {
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
@@ -39,6 +32,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Posts');
+    await queryInterface.dropTable('Messages');
   },
 };

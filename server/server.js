@@ -1,18 +1,22 @@
 require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
-const morgan = require('morgan');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
-
-const authUser = require('./middleware/middleware');
-const apiRouter = require('./routes/apiRouter');
-const newsRouter = require('./routes/newsRouter');
-
-const PORT = process.env.PORT ?? 3001;
+const cors = require('cors');
+// ws part
+const http = require('http');
+const wss = require('./webSocket');
+const PORT = process.env.PORT || 3001
 
 const app = express();
+app.locals.ws = new Map();
 
+const userRouter = require('./routes/userRouter');
+const newsRouter = require('./routes/newsRouter');
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 app.use(
   cors({
     credentials: true,
@@ -20,27 +24,43 @@ app.use(
   }),
 );
 
-const sessionConfig = {
-  name: process.env.SESSION_NAME ?? 'yeah',
-  secret: process.env.SESSION_SECRET ?? 'test',
-  resave: true,
-  store: new FileStore(),
+const sessionParser = session({
+  name: process.env.SESSION_NAME,
+  store: new FileStore({}),
+  secret: process.env.SESSION_SECRET,
   saveUninitialized: false,
+  resave: false,
   cookie: {
-    maxAge: 1000 * 60 * 60 * 12,
+    expires: 24 * 60 * 60e3,
     httpOnly: true,
   },
-};
+});
 
-app.use(express.json());
-app.use(morgan('dev'));
-app.use(express.urlencoded({ extended: true }));
-app.use(session(sessionConfig));
-app.use(authUser);
+app.use(sessionParser);
 
-app.use('/api/v1', apiRouter);
+app.use('/api/user', userRouter);
 app.use('/news', newsRouter);
 
-app.listen(PORT, () => {
-  console.log(`App has started on port ${PORT}`);
+const server = http.createServer(app);
+
+server.on('upgrade', (request, socket, head) => {
+  console.log('Parsing session from request...', app.locals.ws);
+
+  sessionParser(request, {}, () => {
+    if (!request.session.user) {
+      socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
+      socket.destroy();
+      return;
+    }
+
+    console.log('Session is parsed!');
+
+    wss.handleUpgrade(request, socket, head, (ws) => {
+      wss.emit('connection', ws, request, app.locals.ws);
+    });
+  });
+});
+
+server.listen(PORT, () => {
+  console.log('server start on port ', PORT);
 });

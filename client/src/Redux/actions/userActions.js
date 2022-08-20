@@ -8,7 +8,7 @@ export const userAdd = (value) => ({
 
 export const userCheck = () => (dispatch) => {
   axios
-    .post('/api/v1/check')
+    .post('/api/user/check')
     .then((res) => {
       setTimeout(() => {
         dispatch(userAdd(res.data));
@@ -21,20 +21,20 @@ export const userCheck = () => (dispatch) => {
 
 export const userSignUp = (reg) => (dispatch) => {
   axios
-    .post('/api/v1/signup', reg)
+    .post('/api/user/signup', reg)
     .then((res) => dispatch(userAdd(res.data)))
     .catch((err) => console.log(err));
 };
 
 export const userLogin = (log) => (dispatch) => {
   axios
-    .post('/api/v1/login', log)
+    .post('/api/user/signin', log)
     .then((res) => dispatch(userAdd(res.data)))
     .catch((err) => console.log(err));
 };
 
 export const logoutUser = () => (dispatch) => {
-  axios('/api/v1/logout')
+  axios('/api/user/logout')
     .then((res) => dispatch(userAdd({})))
     .catch((err) => console.log('err'));
 };

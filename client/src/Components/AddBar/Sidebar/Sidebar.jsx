@@ -26,12 +26,14 @@ import CropDinIcon from '@mui/icons-material/CropDin';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 import ScatterPlotIcon from '@mui/icons-material/ScatterPlot';
 import { useNavigate } from 'react-router-dom';
+import ChatIcon from '@mui/icons-material/Chat';
 import { useSelector, useDispatch } from 'react-redux';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import { logoutUser } from '../../../Redux/actions/userActions';
 
 const Sidebar = ({ mode, setMode }) => {
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
 
@@ -75,30 +77,43 @@ const Sidebar = ({ mode, setMode }) => {
               <ListItemText primary="Новости" />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" onClick={() => navigate('/mytape')}>
-              <ListItemIcon>
-                <CropDinIcon />
-              </ListItemIcon>
-              <ListItemText primary="Моя лента" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" onClick={() => navigate('/favorite')}>
-              <ListItemIcon>
-                <StarBorderIcon />
-              </ListItemIcon>
-              <ListItemText primary="Избранное" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" onClick={logoutHandler}>
-              <ListItemIcon>
-                <LogoutIcon />
-              </ListItemIcon>
-              <ListItemText primary="Выйти" />
-            </ListItemButton>
-          </ListItem>
+          {user.id
+            && (
+              <>
+                <ListItem disablePadding>
+                  <ListItemButton component="a" onClick={() => navigate('/mytape')}>
+                    <ListItemIcon>
+                      <CropDinIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Моя лента" />
+                  </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                  <ListItemButton component="a" onClick={() => navigate('/favorite')}>
+                    <ListItemIcon>
+                      <StarBorderIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Избранное" />
+                  </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                  <ListItemButton component="a" onClick={() => navigate('/chat')}>
+                    <ListItemIcon>
+                      <ChatIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Чат" />
+                  </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                  <ListItemButton component="a" onClick={logoutHandler}>
+                    <ListItemIcon>
+                      <LogoutIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Выйти" />
+                  </ListItemButton>
+                </ListItem>
+              </>
+            )}
           <ListItem disablePadding>
             <ListItemButton component="a">
               <ListItemIcon>
