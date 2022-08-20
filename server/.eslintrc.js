@@ -6,11 +6,12 @@ module.exports = {
     node: true,
   },
   extends: 'airbnb-base',
-  overrides: [
-  ],
+  overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',
   },
   rules: {
+    'no-restricted-syntax': 0,
+    'o-case-declarations': 0,
   },
 };

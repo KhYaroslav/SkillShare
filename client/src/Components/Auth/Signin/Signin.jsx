@@ -27,14 +27,15 @@ export default function SignIn() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [log, setLog] = useState({ username: '', password: '' });
+  const [log, setLog] = useState({ name: '', password: '' });
 
   const ChangeLogin = (e) => setLog((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
   const SubmitLogin = (e) => {
     e.preventDefault();
-    if (log.password !== '' && log.username !== '') {
+    if (log.password !== '' && log.name !== '') {
       dispatch(userLogin(log));
+      setLog({});
       navigate('/');
     }
   };
@@ -57,9 +58,9 @@ export default function SignIn() {
         </Typography>
         <Box component="form" onSubmit={SubmitLogin} noValidate sx={{ mt: 1 }}>
           <TextField
-            value={log.username}
+            value={log.name}
             onChange={ChangeLogin}
-            name="username"
+            name="name"
             margin="normal"
             required
             fullWidth
@@ -81,6 +82,7 @@ export default function SignIn() {
             autoComplete="current-password"
           />
           <Button
+            disabled={!((log.name && log.password))}
             type="submit"
             fullWidth
             variant="contained"

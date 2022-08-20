@@ -17,11 +17,13 @@ import News from './Components/News/News';
 import AddPost from './Components/AddPost/AddPost';
 import './App.css';
 import { userCheck } from './Redux/actions/userActions';
+import { socketInit } from './Redux/actions/wsActions';
 
 function App() {
   const [mode, setMode] = useState('light');
   const user = useSelector((state) => state.user);
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const darkTheme = createTheme({
     palette: {
@@ -29,7 +31,12 @@ function App() {
     },
   });
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    if (user.id) {
+      dispatch(socketInit());
+    }
+  }, [user]);
+
   useEffect(() => {
     dispatch(userCheck());
   }, []);
@@ -44,8 +51,13 @@ function App() {
                 {(location.pathname !== '/login' && location.pathname !== '/signup' && location.pathname !== '/mytape' && location.pathname !== '/favorite') && (
                   <>
                     <Navbar />
+<<<<<<< HEAD
                     <Stack direction="row" spacing={2} justifyContent="space-between">
                       {/* <Sidebar setMode={setMode} mode={mode} /> */}
+=======
+                    <Stack direction="row" spacing={2} justifyContent="space-between" style={{ position: 'relative' }}>
+                      <Sidebar setMode={setMode} mode={mode} />
+>>>>>>> 459faeb8e3477662d0f6616de93da9cd4cb5659c
                       <Routes>
                         <Route path="/" element={<Feed />} />
                         <Route path="/popular" element={<h1>popular</h1>} />

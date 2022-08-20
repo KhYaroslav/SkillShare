@@ -47,16 +47,12 @@ router.get('/v1', async (req, res) => {
         obj.url = urlArr[i];
         result.push(obj);
       }
-      console.log(
-        '🚀 ~ file: newsRouter.js ~ line 52 ~ returnaxios.get ~ result',
-        result,
-      );
+
       return result;
       // console.log(titleArr, imgArr, textArr, urlArr);
     });
   };
   const data = await news();
-  console.log(data);
   res.json(data);
   // res.sendStatus(200);
 });
