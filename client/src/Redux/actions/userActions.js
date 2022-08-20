@@ -12,7 +12,7 @@ export const userCheck = () => (dispatch) => {
     .then((res) => {
       setTimeout(() => {
         dispatch(userAdd(res.data));
-      }, 2090);
+      }, 2000);
     })
     .catch((err) => {
       dispatch(userAdd({}));
