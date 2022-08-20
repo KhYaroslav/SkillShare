@@ -2,25 +2,3 @@
   margin: 0;
   padding: 0;
 }
-
-.chatUsers {
-  color: purple;
-}
-.chatWrapper {
-  min-height: 50vh;
-  height: 50vh;
-  webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-  -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-}
-.userWrapper {
-  -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6);
--moz-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6);
-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6);
-}
-
-.messageWindow {
-  height: 325px;
-  white-space: nowrap;
-  overflow-y: scroll;
-}
