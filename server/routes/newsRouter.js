@@ -56,7 +56,7 @@ router.get('/v1', async (req, res) => {
     });
   };
   const data = await news();
-  console.log(data);
+  // console.log(data);
   res.json(data);
   // res.sendStatus(200);
 });

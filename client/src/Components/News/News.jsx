@@ -3,13 +3,21 @@ import React, { useEffect, useState } from 'react';
 import {
   Typography,
 } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
 import NewsCard from './NewsCard';
+import { getNews } from '../../Redux/actions/newsActions';
 
 export default function News() {
   const [viewNews, setViewNews] = useState([]);
 
+  const news = useSelector((state) => state.news);
+
+  console.log('------->', news);
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    axios('/news/v1').then((res) => setViewNews(res.data));
+    dispatch(getNews());
   }, []);
   return (
     <>
