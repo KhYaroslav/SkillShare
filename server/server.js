@@ -6,7 +6,7 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 
 const authUser = require('./middleware/middleware');
-const apiRouter = require('./routes/apiRouter');
+const apiRouter = require('./routes/postRouter');
 const newsRouter = require('./routes/newsRouter');
 
 const PORT = process.env.PORT ?? 3001;
@@ -31,7 +31,7 @@ const sessionConfig = {
     httpOnly: true,
   },
 };
-
+app.use(express.static('public'));
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
@@ -39,6 +39,7 @@ app.use(session(sessionConfig));
 app.use(authUser);
 
 app.use('/api/v1', apiRouter);
+app.use('/api/post', apiRouter);
 app.use('/news', newsRouter);
 
 app.listen(PORT, () => {

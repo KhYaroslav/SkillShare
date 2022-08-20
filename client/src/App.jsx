@@ -14,7 +14,7 @@ import Signin from './Components/Auth/Signin/Signin';
 import Signup from './Components/Auth/Signup/Signup';
 import Loading from './Components/Different/loading/Loading';
 import News from './Components/News/News';
-
+import AddPost from './Components/AddPost/AddPost';
 import './App.css';
 import { userCheck } from './Redux/actions/userActions';
 
@@ -45,12 +45,13 @@ function App() {
                   <>
                     <Navbar />
                     <Stack direction="row" spacing={2} justifyContent="space-between">
-                      <Sidebar setMode={setMode} mode={mode} />
+                      {/* <Sidebar setMode={setMode} mode={mode} /> */}
                       <Routes>
                         <Route path="/" element={<Feed />} />
                         <Route path="/popular" element={<h1>popular</h1>} />
                         <Route path="/new" element={<h1>Новые посты</h1>} />
                         <Route path="/news" element={<News />} />
+                        <Route path="/newpost" element={<AddPost />} />
                       </Routes>
                       <Rightbar />
                     </Stack>

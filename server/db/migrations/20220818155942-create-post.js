@@ -13,7 +13,7 @@ module.exports = {
       description: {
         type: Sequelize.TEXT,
       },
-      url_text: {
+      file: {
         type: Sequelize.TEXT,
       },
       url_video: {
