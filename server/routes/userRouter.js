@@ -36,7 +36,7 @@ router.route('/signup').post(async (req, res) => {
     try {
       const newUser = await User.create({ name, email, password: pass });
       req.session.user = { name: newUser.name, id: newUser.id };
-      return res.json({ name: newUser.name, id: newUser.id });
+      return res.json({ name: newUser.name, id: newUser.id }).sendStatus(222);
     } catch (err) {
       console.log(err);
       return res.sendStatus(401);

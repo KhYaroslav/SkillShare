@@ -5,7 +5,6 @@ import { GET_CHAT_MESSAGES, SET_CHAT_MESSAGE, SET_WS } from '../types';
 function createSocketChannel(socket, action) {
   return eventChannel((emit) => {
     socket.onopen = () => {
-      console.log('action --->', action);
       emit({ type: SET_WS, payload: true });
     };
 
@@ -14,7 +13,6 @@ function createSocketChannel(socket, action) {
     };
 
     socket.onmessage = function (event) {
-      console.log('message --->>', JSON.parse(event.data));
       emit(JSON.parse(event.data));
     };
 
@@ -36,7 +34,6 @@ function createWebSocketConnection() {
 function* userMessage(socket) {
   while (true) {
     const message = yield take(SET_CHAT_MESSAGE);
-    console.log('mess---->>', message);
     socket.send(JSON.stringify(message));
   }
 }

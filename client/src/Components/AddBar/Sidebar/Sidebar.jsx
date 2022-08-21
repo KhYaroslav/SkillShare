@@ -21,9 +21,12 @@ import ScatterPlotIcon from '@mui/icons-material/ScatterPlot';
 import { useNavigate } from 'react-router-dom';
 import ChatIcon from '@mui/icons-material/Chat';
 import { useSelector, useDispatch } from 'react-redux';
+import Alert from '@mui/material/Alert';
 import { logoutUser } from '../../../Redux/actions/userActions';
 
 const Sidebar = ({ mode, setMode }) => {
+  const alert = useSelector((state) => state.alert);
+
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
 
@@ -108,6 +111,7 @@ const Sidebar = ({ mode, setMode }) => {
           </ListItem>
         </List>
       </Box>
+      { alert ? <Alert severity="warning">This is a warning alert — check it out!</Alert> : <Alert severity="success">This is a success alert — check it out!</Alert>}
     </Box>
   );
 };
