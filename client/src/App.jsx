@@ -52,7 +52,7 @@ function App() {
                   <>
                     <Navbar />
                     <Stack direction="row" spacing={2} justifyContent="space-between" style={{ position: 'relative' }}>
-                      <Sidebar setMode={setMode} mode={mode} />
+                      {/* <Sidebar setMode={setMode} mode={mode} /> */}
                       <Routes>
                         <Route path="/" element={<Feed />} />
                         <Route path="/popular" element={<h1>popular</h1>} />

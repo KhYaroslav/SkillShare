@@ -8,6 +8,7 @@ import {
   Menu,
   MenuItem,
   styled,
+  TextField,
   Toolbar,
   Typography,
 } from '@mui/material';
@@ -15,6 +16,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import axios from 'axios';
 import { logoutUser } from '../../../Redux/actions/userActions';
 
 const StyledToolbar = styled(Toolbar)({
@@ -56,7 +58,23 @@ export default function Navbar() {
     dispatch(logoutUser());
     navigate('/');
   };
-
+  const [avatar, setAvatar] = useState({ avatar: null });
+  const [ava, setAva] = useState('');
+  console.log('avatar------>', avatar);
+  console.log('ava------>', ava);
+  const changeHandler2 = (e) => setAvatar((prev) => ({ ...prev, [e.target.name]: e.target.files[0] }));
+  // console.log('ava----->', ava);
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append('avatar', avatar.avatar);
+    console.log('data--->', data);
+    axios.post('/api/user/avatar', data)
+      .then((res) => {
+        setAva(res?.data);
+        // navigate('/');
+      });
+  };
   return (
     <AppBar position="sticky">
       <StyledToolbar>
@@ -99,7 +117,11 @@ export default function Navbar() {
                 horizontal: 'right',
               }}
             >
-              <MenuItem>Загрузить фото</MenuItem>
+              {/* Загрузить фото */}
+              <form onSubmit={submitHandler}>
+                <TextField name="avatar" type="file" onChange={changeHandler2} />
+                <button type="submit">Ok</button>
+              </form>
               <MenuItem onClick={logoutHandler}>Выйти</MenuItem>
             </Menu>
           </>
