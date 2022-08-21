@@ -8,6 +8,9 @@ import {
   Typography,
 } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
+import { styled } from '@mui/material/styles';
+import Badge from '@mui/material/Badge';
+import Stack from '@mui/material/Stack';
 import React, { useEffect } from 'react';
 import News from '../../News/News';
 import { getChatMessages } from '../../../Redux/actions/chatActions';
@@ -24,17 +27,53 @@ const Rightbar = () => {
       dispatch(getChatMessages());
     }
   }, [user, ws]);
+
+  const StyledBadge = styled(Badge)(({ theme }) => ({
+    '& .MuiBadge-badge': {
+      backgroundColor: '#44b700',
+      color: '#44b700',
+      boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+      '&::after': {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        borderRadius: '50%',
+        animation: 'ripple 1.2s infinite ease-in-out',
+        border: '1px solid currentColor',
+        content: '""',
+      },
+    },
+    '@keyframes ripple': {
+      '0%': {
+        transform: 'scale(.8)',
+        opacity: 1,
+      },
+      '100%': {
+        transform: 'scale(2.4)',
+        opacity: 0,
+      },
+    },
+  }));
+
   return (
     <Box flex={2} p={2} sx={{ display: { sm: 'block' } }}>
       <Box position="fixed" width={300}>
         <Typography variant="h6" fontWeight={100}>
           Пользователи онлайн
         </Typography>
-        <AvatarGroup max={7}>
+        <Stack direction="row" spacing={2} max={7}>
           {chatUsers.map((el) => (
-            <h1>{el.name}</h1>
+            <StyledBadge
+              overlap="circular"
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+              variant="dot"
+            >
+              <Avatar alt={el.name} src={el?.img || '/broken-image.jpg"'} />
+            </StyledBadge>
           ))}
-        </AvatarGroup>
+        </Stack>
         <Typography variant="h6" fontWeight={100} mt={2} mb={2}>
           Последние фото
         </Typography>
