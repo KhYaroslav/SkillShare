@@ -118,6 +118,15 @@ export default function SignUp() {
           >
             Готово
           </Button>
+          <Button
+            type="button"
+            fullWidth
+            variant="contained"
+            onClick={() => navigate('/')}
+            sx={{ mt: 0, mb: 2 }}
+          >
+            на главную
+          </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link onClick={() => navigate('/login')} variant="body2">

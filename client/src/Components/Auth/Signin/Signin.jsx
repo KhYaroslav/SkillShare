@@ -88,7 +88,16 @@ export default function SignIn() {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign In
+            Готово
+          </Button>
+          <Button
+            type="button"
+            fullWidth
+            variant="contained"
+            onClick={() => navigate('/')}
+            sx={{ mt: 0, mb: 2 }}
+          >
+            на главную
           </Button>
           <Grid container>
             <Grid>

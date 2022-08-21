@@ -22,12 +22,6 @@ const Rightbar = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (user.id && ws) {
-      dispatch(getChatMessages());
-    }
-  }, [user, ws]);
-
   const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
       backgroundColor: '#44b700',
@@ -57,23 +51,33 @@ const Rightbar = () => {
     },
   }));
 
+  useEffect(() => {
+    if (user.id && ws) {
+      dispatch(getChatMessages());
+    }
+  }, [user, ws, StyledBadge]);
+
   return (
     <Box flex={2} p={2} sx={{ display: { sm: 'block' } }}>
       <Box position="fixed" width={300}>
-        <Typography variant="h6" fontWeight={100}>
-          Пользователи онлайн
-        </Typography>
-        <Stack direction="row" spacing={2} max={7}>
-          {chatUsers.map((el) => (
-            <StyledBadge
-              overlap="circular"
-              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-              variant="dot"
-            >
-              <Avatar alt={el.name} src={el?.img || '/broken-image.jpg"'} />
-            </StyledBadge>
-          ))}
-        </Stack>
+        {user.id && (
+          <>
+            <Typography variant="h6" fontWeight={100}>
+              Пользователи онлайн
+            </Typography>
+            <Stack direction="row" spacing={2} max={7}>
+              {chatUsers.map((el) => (
+                <StyledBadge
+                  overlap="circular"
+                  anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                  variant="dot"
+                >
+                  <Avatar alt={el.name} src={el?.img || '/broken-image.jpg"'} />
+                </StyledBadge>
+              ))}
+            </Stack>
+          </>
+        )}
         <Typography variant="h6" fontWeight={100} mt={2} mb={2}>
           Последние фото
         </Typography>
