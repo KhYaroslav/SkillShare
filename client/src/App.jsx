@@ -13,11 +13,11 @@ import Add from './Components/Add/Add';
 import Signin from './Components/Auth/Signin/Signin';
 import Signup from './Components/Auth/Signup/Signup';
 import Loading from './Components/Different/loading/Loading';
-import News from './Components/News/News';
 import AddPost from './Components/AddPost/AddPost';
 import './App.css';
 import { userCheck } from './Redux/actions/userActions';
 import { socketInit } from './Redux/actions/wsActions';
+import Chat from './Components/Chat/Chat';
 
 function App() {
   const [mode, setMode] = useState('light');
@@ -42,43 +42,62 @@ function App() {
   }, []);
 
   return (
-    <ThemeProvider theme={darkTheme}>
-      <Box bgcolor="background.default" color="text.primary">
-        <>
-          <>
-            {!user.loading ? (
-              <>
-                {(location.pathname !== '/login' && location.pathname !== '/signup' && location.pathname !== '/mytape' && location.pathname !== '/favorite') && (
-                  <>
-                    <Navbar />
-                    <Stack direction="row" spacing={2} justifyContent="space-between" style={{ position: 'relative' }}>
-                      {/* <Sidebar setMode={setMode} mode={mode} /> */}
-                      <Routes>
-                        <Route path="/" element={<Feed />} />
-                        <Route path="/popular" element={<h1>popular</h1>} />
-                        <Route path="/new" element={<h1>Новые посты</h1>} />
-                        <Route path="/news" element={<News />} />
-                        <Route path="/newpost" element={<AddPost />} />
-                      </Routes>
-                      <Rightbar />
-                    </Stack>
-                    <Add />
-                  </>
-                )}
-              </>
-            ) : <Loading />}
-          </>
-          <>
-            <Routes>
-              <Route path="/login" element={<Signin />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/mytape" element={<h1>Моя лента</h1>} />
-              <Route path="/favorite" element={<h1>Избранное</h1>} />
-            </Routes>
-          </>
-        </>
-      </Box>
-    </ThemeProvider>
+    <>
+      {!user.loading ? (
+        <ThemeProvider theme={darkTheme}>
+          <Box bgcolor="background.default" color="text.primary">
+            <>
+              {(location.pathname === '/' || location.pathname === '/popular'
+                || location.pathname === '/new') && (
+                <>
+                  <Navbar />
+                  <Stack direction="row" spacing={2} justifyContent="space-between" style={{ position: 'relative' }}>
+                    <Sidebar setMode={setMode} mode={mode} />
+                    <Routes>
+                      <Route path="/" element={<Feed />} />
+                      <Route path="/popular" element={<h1>popular</h1>} />
+                      <Route path="/new" element={<h1>Новые посты</h1>} />
+                    </Routes>
+                    <Rightbar />
+                  </Stack>
+                  <Add />
+                </>
+              )}
+            </>
+            <>
+              {(location.pathname === '/login' || location.pathname === '/signup') && (
+                <>
+                  <Navbar />
+                  <Stack direction="row" spacing={2} justifyContent="space-between" style={{ position: 'relative' }}>
+                    <Routes>
+                      <Route path="/login" element={<Signin />} />
+                      <Route path="/signup" element={<Signup />} />
+                    </Routes>
+                  </Stack>
+                </>
+              )}
+            </>
+            <>
+              {(location.pathname === '/mytape' || location.pathname === '/chat'
+                || location.pathname === '/newpost' || location.pathname === '/favorite') && (
+                <>
+                  <Navbar />
+                  <Stack direction="row" spacing={2} justifyContent="space-between" style={{ position: 'relative' }}>
+                    <Sidebar setMode={setMode} mode={mode} />
+                    <Routes>
+                      <Route path="/mytape" element={<h1>Моя лента</h1>} />
+                      <Route path="/chat" element={<Chat />} />
+                      <Route path="/newpost" element={<AddPost />} />
+                      <Route path="/favorite" element={<h1>favorite</h1>} />
+                    </Routes>
+                  </Stack>
+                </>
+              )}
+            </>
+          </Box>
+        </ThemeProvider>
+      ) : <Loading />}
+    </>
   );
 }
 

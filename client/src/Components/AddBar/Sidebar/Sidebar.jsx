@@ -1,13 +1,6 @@
 import {
-  AccountBox,
-  Article,
-  Group,
   Home,
   ModeNight,
-  Person,
-  Settings,
-  Storefront,
-
 } from '@mui/icons-material';
 import {
   Box,
@@ -28,10 +21,12 @@ import ScatterPlotIcon from '@mui/icons-material/ScatterPlot';
 import { useNavigate } from 'react-router-dom';
 import ChatIcon from '@mui/icons-material/Chat';
 import { useSelector, useDispatch } from 'react-redux';
-import NewspaperIcon from '@mui/icons-material/Newspaper';
+import Alert from '@mui/material/Alert';
 import { logoutUser } from '../../../Redux/actions/userActions';
 
 const Sidebar = ({ mode, setMode }) => {
+  const alert = useSelector((state) => state.alert);
+
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
 
@@ -67,14 +62,6 @@ const Sidebar = ({ mode, setMode }) => {
                 <ScatterPlotIcon />
               </ListItemIcon>
               <ListItemText primary="Новые" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" onClick={() => navigate('/news')}>
-              <ListItemIcon>
-                <NewspaperIcon />
-              </ListItemIcon>
-              <ListItemText primary="Новости" />
             </ListItemButton>
           </ListItem>
           {user.id
@@ -124,6 +111,7 @@ const Sidebar = ({ mode, setMode }) => {
           </ListItem>
         </List>
       </Box>
+      { alert ? <Alert severity="warning">This is a warning alert — check it out!</Alert> : <Alert severity="success">This is a success alert — check it out!</Alert>}
     </Box>
   );
 };

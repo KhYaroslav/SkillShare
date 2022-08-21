@@ -17,6 +17,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 import { logoutUser } from '../../../Redux/actions/userActions';
 
 const StyledToolbar = styled(Toolbar)({
@@ -49,10 +50,12 @@ const UserBox = styled(Box)(({ theme }) => ({
   },
 }));
 export default function Navbar() {
+
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const logoutHandler = () => {
     dispatch(logoutUser());
@@ -82,9 +85,13 @@ export default function Navbar() {
           Skill Share
         </Typography>
         <Pets sx={{ display: { xs: 'block', sm: 'none' } }} />
-        <Search>
-          <InputBase placeholder="Поиск..." />
-        </Search>
+        {(location.pathname === '/' || location.pathname === '/popular'
+          || location.pathname === '/new' || location.pathname === '/mytape'
+        || location.pathname === '/favorite') && (
+          <Search>
+            <InputBase placeholder="Поиск..." />
+          </Search>
+        )}
         {user.id ? (
           <>
             <Icons>

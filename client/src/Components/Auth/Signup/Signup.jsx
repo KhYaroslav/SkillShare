@@ -10,7 +10,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import Alert from '@mui/material/Alert';
 import { userSignUp } from '../../../Redux/actions/userActions';
 
 function Copyright(props) {
@@ -94,7 +95,6 @@ export default function SignUp() {
                 onChange={ChangeSignUp}
                 name="password"
                 label="Введите пароль..."
-                type="password"
                 id="password"
               />
             </Grid>
@@ -106,18 +106,27 @@ export default function SignUp() {
                 onChange={ChangeSignUp}
                 name="repeat"
                 label="Повторите пароль..."
-                type="password"
                 id="password"
               />
             </Grid>
           </Grid>
           <Button
+            disabled={!((reg.name && reg.password && reg.repeat))}
             type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
             Готово
+          </Button>
+          <Button
+            type="button"
+            fullWidth
+            variant="contained"
+            onClick={() => navigate('/')}
+            sx={{ mt: 0, mb: 2 }}
+          >
+            на главную
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
