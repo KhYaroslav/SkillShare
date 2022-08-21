@@ -1,4 +1,4 @@
-import { Mail, Notifications, Pets } from '@mui/icons-material';
+import { Notifications, Pets } from '@mui/icons-material';
 import {
   AppBar,
   Avatar,
@@ -50,10 +50,10 @@ const UserBox = styled(Box)(({ theme }) => ({
   },
 }));
 export default function Navbar() {
-
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const user = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -65,7 +65,8 @@ export default function Navbar() {
   const [ava, setAva] = useState('');
   console.log('avatar------>', avatar);
   console.log('ava------>', ava);
-  const changeHandler2 = (e) => setAvatar((prev) => ({ ...prev, [e.target.name]: e.target.files[0] }));
+  const changeHandler2 = (e) => setAvatar((prev) => (
+    { ...prev, [e.target.name]: e.target.files[0] }));
   // console.log('ava----->', ava);
   const submitHandler = (e) => {
     e.preventDefault();
@@ -108,7 +109,7 @@ export default function Navbar() {
                 sx={{ width: 30, height: 30 }}
                 src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
               />
-              <Typography variant="span">John</Typography>
+              <Typography variant="span">{user.name}</Typography>
             </UserBox>
             <Menu
               id="demo-positioned-menu"
@@ -133,10 +134,10 @@ export default function Navbar() {
             </Menu>
           </>
         ) : (
-          <div>
+          <>
             <Button sx={{ right: '5%' }} variant="contained" onClick={() => navigate('/login')}>Вход</Button>
             <Button variant="contained" onClick={() => navigate('/signup')}>Регистрация</Button>
-          </div>
+          </>
         )}
       </StyledToolbar>
     </AppBar>
