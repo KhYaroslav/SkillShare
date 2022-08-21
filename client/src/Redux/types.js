@@ -11,3 +11,10 @@ export const SOCKET_INIT = 'SOCKET_INIT';
 
 export const ALERT_TRUE = 'ALERT_TRUE';
 export const ALERT_FALSE = 'ALERT_FALSE';
+
+export const ADD_POST = 'ADD_POST';
+export const ADD_POSTS = 'ADD_POSTS';
+export const DEL_POST = 'DEL_POST';
+export const FAVORITE_POST = 'FAVORITE_POST';
+
+export const ADD_LIKE = 'ADD_LIKE';

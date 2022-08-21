@@ -12,16 +12,21 @@ import {
   IconButton,
   Typography,
 } from '@mui/material';
-
+import parse from 'html-react-parser';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addLike } from '../../Redux/actions/likeActions';
 
-export default function Post() {
+export default function Post({ post }) {
+  const { likes } = useSelector((state) => state);
+  const dispatch = useDispatch();
+  // console.log('post+User--->', post);
   return (
     <Card sx={{ margin: 5 }}>
       <CardHeader
         avatar={(
           <Avatar sx={{ bgcolor: 'red' }} aria-label="recipe">
-            R
+            {post?.User?.id}
           </Avatar>
         )}
         action={(
@@ -29,24 +34,25 @@ export default function Post() {
             <MoreVert />
           </IconButton>
         )}
-        title="John Doe"
-        subheader="September 14, 2022"
+        title={post?.User?.name}
+        subheader={post?.createdAt}
       />
       <CardMedia
         component="img"
         height="20%"
-        image="https://images.pexels.com/photos/4534200/pexels-photo-4534200.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        image={`http://localhost:3000/${post?.img}` || 'https://images.pexels.com/photos/4534200/pexels-photo-4534200.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'}
         alt="Paella dish"
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
+          <div className="ProseMirror">{parse(post?.description)}</div>
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton
+          aria-label="add to favorites"
+          onClick={() => dispatch(addLike(post?.id))}
+        >
           <Checkbox
             icon={<FavoriteBorder />}
             checkedIcon={<Favorite sx={{ color: 'red' }} />}
