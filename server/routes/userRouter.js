@@ -1,6 +1,7 @@
 require('dotenv').config();
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
+const upload = require('../middleware/multer/multer');
 const { User } = require('../db/models');
 
 router.route('/').get(async (req, res) => {
@@ -64,6 +65,17 @@ router.route('/logout').get((req, res) => {
   }
   req.session.destroy();
   res.clearCookie(process.env.SESSION_NAME).sendStatus(200);
+});
+
+router.post('/avatar', upload.single('avatar'), async (req, res) => {
+  // console.log('req.file---->', req.file);
+  const avatar = req.file?.path.replace('public', '');
+  console.log('avatar----->', avatar);
+  const findUser = await User.findOne({ where: { id: req.session.user.id } });
+  console.log('user------>', findUser);
+  await findUser.update({ avatar });
+  // await User.create({ avatar: req.file?.path.replace('public', '') });
+  res.json(avatar);
 });
 
 module.exports = router;
