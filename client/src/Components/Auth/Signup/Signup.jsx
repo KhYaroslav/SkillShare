@@ -94,7 +94,6 @@ export default function SignUp() {
                 onChange={ChangeSignUp}
                 name="password"
                 label="Введите пароль..."
-                type="password"
                 id="password"
               />
             </Grid>
@@ -106,12 +105,12 @@ export default function SignUp() {
                 onChange={ChangeSignUp}
                 name="repeat"
                 label="Повторите пароль..."
-                type="password"
                 id="password"
               />
             </Grid>
           </Grid>
           <Button
+            disabled={!((reg.name && reg.password && reg.repeat))}
             type="submit"
             fullWidth
             variant="contained"

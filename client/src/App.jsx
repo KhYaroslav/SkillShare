@@ -13,11 +13,11 @@ import Add from './Components/Add/Add';
 import Signin from './Components/Auth/Signin/Signin';
 import Signup from './Components/Auth/Signup/Signup';
 import Loading from './Components/Different/loading/Loading';
-import News from './Components/News/News';
 import AddPost from './Components/AddPost/AddPost';
 import './App.css';
 import { userCheck } from './Redux/actions/userActions';
 import { socketInit } from './Redux/actions/wsActions';
+import Chat from './Components/Chat/Chat';
 
 function App() {
   const [mode, setMode] = useState('light');
@@ -48,7 +48,9 @@ function App() {
           <>
             {!user.loading ? (
               <>
-                {(location.pathname !== '/login' && location.pathname !== '/signup' && location.pathname !== '/mytape' && location.pathname !== '/favorite') && (
+                {(location.pathname !== '/login' && location.pathname !== '/signup'
+                  && location.pathname !== '/mytape' && location.pathname !== '/favorite'
+                  && location.pathname !== '/chat') && (
                   <>
                     <Navbar />
                     <Stack direction="row" spacing={2} justifyContent="space-between" style={{ position: 'relative' }}>
@@ -57,7 +59,6 @@ function App() {
                         <Route path="/" element={<Feed />} />
                         <Route path="/popular" element={<h1>popular</h1>} />
                         <Route path="/new" element={<h1>Новые посты</h1>} />
-                        <Route path="/news" element={<News />} />
                         <Route path="/newpost" element={<AddPost />} />
                       </Routes>
                       <Rightbar />
@@ -73,7 +74,8 @@ function App() {
               <Route path="/login" element={<Signin />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/mytape" element={<h1>Моя лента</h1>} />
-              <Route path="/favorite" element={<h1>Избранное</h1>} />
+              <Route path="/new" element={<h1>Новые посты</h1>} />
+              <Route path="/chat" element={<Chat />} />
             </Routes>
           </>
         </>

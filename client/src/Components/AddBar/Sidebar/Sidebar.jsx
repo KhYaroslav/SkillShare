@@ -1,13 +1,6 @@
 import {
-  AccountBox,
-  Article,
-  Group,
   Home,
   ModeNight,
-  Person,
-  Settings,
-  Storefront,
-
 } from '@mui/icons-material';
 import {
   Box,
@@ -28,7 +21,6 @@ import ScatterPlotIcon from '@mui/icons-material/ScatterPlot';
 import { useNavigate } from 'react-router-dom';
 import ChatIcon from '@mui/icons-material/Chat';
 import { useSelector, useDispatch } from 'react-redux';
-import NewspaperIcon from '@mui/icons-material/Newspaper';
 import { logoutUser } from '../../../Redux/actions/userActions';
 
 const Sidebar = ({ mode, setMode }) => {
@@ -67,14 +59,6 @@ const Sidebar = ({ mode, setMode }) => {
                 <ScatterPlotIcon />
               </ListItemIcon>
               <ListItemText primary="Новые" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" onClick={() => navigate('/news')}>
-              <ListItemIcon>
-                <NewspaperIcon />
-              </ListItemIcon>
-              <ListItemText primary="Новости" />
             </ListItemButton>
           </ListItem>
           {user.id
