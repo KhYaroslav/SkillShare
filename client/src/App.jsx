@@ -12,16 +12,18 @@ import Navbar from './Components/AddBar/Navbar/Navbar';
 import Add from './Components/Add/Add';
 import Signin from './Components/Auth/Signin/Signin';
 import Signup from './Components/Auth/Signup/Signup';
-import Loading from './Components/Different/loading/Loading';
+import Loading from './Components/Different/Loading/Loading';
 import AddPost from './Components/AddPost/AddPost';
 import './App.css';
 import { userCheck } from './Redux/actions/userActions';
 import { socketInit } from './Redux/actions/wsActions';
 import Chat from './Components/Chat/Chat';
+import AlertComp from './Components/Different/Alert/AlertComp';
 
 function App() {
   const [mode, setMode] = useState('light');
   const user = useSelector((state) => state.user);
+
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -40,6 +42,7 @@ function App() {
   useEffect(() => {
     dispatch(userCheck());
   }, []);
+
 
   return (
     <>
@@ -60,6 +63,7 @@ function App() {
                     </Routes>
                     <Rightbar />
                   </Stack>
+                  <AlertComp />
                   <Add />
                 </>
               )}
@@ -79,7 +83,7 @@ function App() {
             </>
             <>
               {(location.pathname === '/mytape' || location.pathname === '/chat'
-                || location.pathname === '/newpost' || location.pathname === '/favorite') && (
+                || location.pathname === '/addpost' || location.pathname === '/favorite') && (
                 <>
                   <Navbar />
                   <Stack direction="row" spacing={2} justifyContent="space-between" style={{ position: 'relative' }}>
@@ -87,10 +91,11 @@ function App() {
                     <Routes>
                       <Route path="/mytape" element={<h1>Моя лента</h1>} />
                       <Route path="/chat" element={<Chat />} />
-                      <Route path="/newpost" element={<AddPost />} />
+                      <Route path="/addpost" element={<AddPost />} />
                       <Route path="/favorite" element={<h1>favorite</h1>} />
                     </Routes>
                   </Stack>
+                  <Add />
                 </>
               )}
             </>

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import Alert from '@mui/material/Alert';
 import { ADD_USER, ALERT_TRUE, ALERT_FALSE } from '../types';
 
 export const userAdd = (value) => ({
@@ -26,6 +25,7 @@ export const userCheck = () => (dispatch) => {
       }, 2000);
     })
     .catch((err) => {
+      console.log(err);
       dispatch(userAdd({}));
     });
 };
@@ -48,8 +48,16 @@ export const userSignUp = (reg) => (dispatch) => {
 export const userLogin = (log) => (dispatch) => {
   axios
     .post('/api/user/signin', log)
-    .then((res) => dispatch(userAdd(res.data)))
-    .catch((err) => console.log(err));
+    .then((res) => {
+      dispatch(userAdd(res.data));
+      dispatch(alertTrue());
+    })
+    .catch((err) => {
+      console.log(err);
+      if (err.response.status === 401) {
+        dispatch(alertFalse());
+      }
+    });
 };
 
 export const logoutUser = () => (dispatch) => {

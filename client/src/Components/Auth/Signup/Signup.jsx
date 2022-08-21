@@ -10,8 +10,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import Alert from '@mui/material/Alert';
+import { useDispatch } from 'react-redux';
 import { userSignUp } from '../../../Redux/actions/userActions';
 
 function Copyright(props) {
@@ -46,6 +45,7 @@ export default function SignUp() {
 
   return (
     <Container component="main" maxWidth="xs">
+
       <CssBaseline />
       <Box
         sx={{
