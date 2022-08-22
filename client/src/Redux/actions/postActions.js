@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ADD_POST, ADD_POSTS, DEL_POST } from '../types';
+import { ADD_POST, ADD_POSTS, DEL_POST, ADD_LIKE } from '../types';
 
 export const postAdd = (value) => ({
   type: ADD_POST,
@@ -16,4 +16,9 @@ export const deletePost = (id) => {
     type: DEL_POST,
     payload: id,
   };
+};
+
+export const addLike = (postId) => (dispatch) => {
+  axios(`/api/likes/${postId}`).then((res) => dispatch({ type: ADD_LIKE, payload: res.data }));
+  // {user.id:post.id}
 };

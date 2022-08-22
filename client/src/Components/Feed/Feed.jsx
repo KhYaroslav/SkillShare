@@ -9,16 +9,16 @@ export default function Feed() {
   const [loading, setLoading] = useState(true);
   setTimeout(() => {
     setLoading(false);
-  }, [90]);
-  const { posts } = useSelector((state) => state);
-  // console.log('posts--!!->', posts);
-
+  }, [80]);
+  const posts = useSelector((state) => state.posts);
   const dispatch = useDispatch();
   useEffect(() => {
     if (!posts.length) {
       dispatch(addPosts());
     }
   }, [posts]);
+  console.log('posts--!!->', posts);
+
   return (
     <>
       <Box flex={4} p={{ xs: 0, md: 2 }}>
@@ -31,7 +31,7 @@ export default function Feed() {
           </Stack>
         ) : (
           <>
-            {posts && posts.map((el) => <Post key={el.id} post={el} />)}
+            {posts.length && posts.map((el) => <Post key={el.id} post={el} />)}
           </>
         )}
       </Box>

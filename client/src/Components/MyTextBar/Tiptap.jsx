@@ -113,6 +113,7 @@ export const Tiptap = ({ setPost }) => {
   const editor = useEditor({
     extensions: [StarterKit, Underline],
     content: '',
+    // eslint-disable-next-line no-shadow
     onUpdate: ({ editor }) => {
       const html = editor.getHTML();
       setPost((prev) => ({ ...prev, description: html }));

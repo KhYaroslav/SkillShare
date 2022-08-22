@@ -18,3 +18,4 @@ export const DEL_POST = 'DEL_POST';
 export const FAVORITE_POST = 'FAVORITE_POST';
 
 export const ADD_LIKE = 'ADD_LIKE';
+export const ADD_LIKES = 'ADD_LIKE';
