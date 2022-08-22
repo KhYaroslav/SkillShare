@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ADD_POST, ADD_POSTS, DEL_POST, ADD_LIKE } from '../types';
+import { ADD_POST, ADD_POSTS, DEL_POST, ADD_LIKE, FAVORITE_POST } from '../types';
 
 export const postAdd = (value) => ({
   type: ADD_POST,
@@ -12,6 +12,7 @@ export const addPosts = () => (dispatch) => {
 };
 
 export const deletePost = (id) => {
+  axios.delete(`/api/post/${id}`);
   return {
     type: DEL_POST,
     payload: id,
@@ -20,5 +21,7 @@ export const deletePost = (id) => {
 
 export const addLike = (postId) => (dispatch) => {
   axios(`/api/likes/${postId}`).then((res) => dispatch({ type: ADD_LIKE, payload: res.data }));
-  // {user.id:post.id}
+};
+export const addFavorite = (postId) => (dispatch) => {
+  axios(`/api/favorites/${postId}`).then((res) => dispatch({ type: FAVORITE_POST, payload: res.data }));
 };

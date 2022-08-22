@@ -18,6 +18,8 @@ import './App.css';
 import { userCheck } from './Redux/actions/userActions';
 import { socketInit } from './Redux/actions/wsActions';
 import Chat from './Components/Chat/Chat';
+import MyTape from './Components/MyTape/MyTape';
+import MyFavorites from './Components/MyFavorites/MyFavorites';
 
 function App() {
   const [mode, setMode] = useState('light');
@@ -86,10 +88,11 @@ function App() {
                   <Stack direction="row" spacing={2} justifyContent="space-between" style={{ position: 'relative' }}>
                     <Sidebar setMode={setMode} mode={mode} />
                     <Routes>
-                      <Route path="/mytape" element={<h1>Моя лента</h1>} />
                       <Route path="/chat" element={<Chat />} />
                       <Route path="/addpost" element={<AddPost />} />
-                      <Route path="/favorite" element={<h1>favorite</h1>} />
+                      <Route path="/favorite" element={<MyFavorites />} />
+                      <Route path="/mytape" element={<MyTape />} />
+                      <Route path="/mypost/:id" element={<AddPost />} />
                     </Routes>
                   </Stack>
                   <Add />

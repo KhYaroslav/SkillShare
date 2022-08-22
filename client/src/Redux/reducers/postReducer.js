@@ -1,4 +1,4 @@
-import { ADD_POSTS, ADD_POST, DEL_POST, ADD_LIKE } from '../types';
+import { ADD_POSTS, ADD_POST, DEL_POST, ADD_LIKE, FAVORITE_POST } from '../types';
 
 const postReducer = (state = [], action) => {
   const { type, payload } = action;
@@ -11,7 +11,13 @@ const postReducer = (state = [], action) => {
       return state.filter((el) => el.id !== payload);
     case ADD_LIKE:
       return state.map((el) => {
-        // console.log('---->>> Payload:', payload, 'Element:', el);
+        if (el.id === payload.id) {
+          return { ...payload };
+        }
+        return { ...el };
+      });
+    case FAVORITE_POST:
+      return state.map((el) => {
         if (el.id === payload.id) {
           return { ...payload };
         }
