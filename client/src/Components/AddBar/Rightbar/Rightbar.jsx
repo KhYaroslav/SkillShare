@@ -72,7 +72,7 @@ const Rightbar = () => {
                   anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                   variant="dot"
                 >
-                  <Avatar alt={el.name} src={el?.img || '/broken-image.jpg"'} />
+                  <Avatar alt={el.name} src={el?.img || '/broken-image.jpg'} />
                 </StyledBadge>
               ))}
             </Stack>
