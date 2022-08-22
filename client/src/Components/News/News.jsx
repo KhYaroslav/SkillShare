@@ -14,7 +14,7 @@ export default function News() {
   return (
     <>
       <Typography variant="h6" fontWeight={100} mt={2} mb={2}>
-        IT новости
+        Актуальные IT новости
       </Typography>
       <div style={{
         overflowY: 'scroll',
