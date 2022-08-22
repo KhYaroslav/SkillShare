@@ -107,7 +107,7 @@ export default function Navbar() {
             <UserBox onClick={(e) => setOpen(true)}>
               <Avatar
                 sx={{ width: 30, height: 30 }}
-                src={user?.avatar || '/broken-image.jpg'}
+                src={user.avatar || '/broken-image.jpg'}
               />
               <Typography variant="span">{user.name}</Typography>
             </UserBox>
