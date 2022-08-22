@@ -18,7 +18,6 @@ import './App.css';
 import { userCheck } from './Redux/actions/userActions';
 import { socketInit } from './Redux/actions/wsActions';
 import Chat from './Components/Chat/Chat';
-import AlertComp from './Components/Different/Alert/AlertComp';
 
 function App() {
   const [mode, setMode] = useState('light');
@@ -43,7 +42,6 @@ function App() {
     dispatch(userCheck());
   }, []);
 
-
   return (
     <>
       {!user.loading ? (
@@ -63,7 +61,6 @@ function App() {
                     </Routes>
                     <Rightbar />
                   </Stack>
-                  <AlertComp />
                   <Add />
                 </>
               )}
