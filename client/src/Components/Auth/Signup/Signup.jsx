@@ -45,6 +45,7 @@ export default function SignUp() {
 
   return (
     <Container component="main" maxWidth="xs">
+
       <CssBaseline />
       <Box
         sx={{
@@ -117,6 +118,15 @@ export default function SignUp() {
             sx={{ mt: 3, mb: 2 }}
           >
             Готово
+          </Button>
+          <Button
+            type="button"
+            fullWidth
+            variant="contained"
+            onClick={() => navigate('/')}
+            sx={{ mt: 0, mb: 2 }}
+          >
+            на главную
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>

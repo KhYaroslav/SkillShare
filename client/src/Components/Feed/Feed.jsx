@@ -1,13 +1,23 @@
 import { Box, Stack, Skeleton } from '@mui/material';
 import React, { useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addPosts } from '../../Redux/actions/postActions';
 import Post from '../Post/Post';
 
 export default function Feed() {
   const [loading, setLoading] = useState(true);
-
   setTimeout(() => {
     setLoading(false);
-  }, [100]);
+  }, [80]);
+  const posts = useSelector((state) => state.posts);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (!posts.length) {
+      dispatch(addPosts());
+    }
+  }, [posts]);
+  console.log('posts--!!->', posts);
 
   return (
     <>
@@ -21,15 +31,7 @@ export default function Feed() {
           </Stack>
         ) : (
           <>
-            <Post />
-            <Post />
-            <Post />
-            <Post />
-            <Post />
-            <Post />
-            <Post />
-            <Post />
-            <Post />
+            {posts.length && posts.map((el) => <Post key={el.id} post={el} />)}
           </>
         )}
       </Box>

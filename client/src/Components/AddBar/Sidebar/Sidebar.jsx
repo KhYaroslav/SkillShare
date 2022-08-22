@@ -21,6 +21,7 @@ import ScatterPlotIcon from '@mui/icons-material/ScatterPlot';
 import { useNavigate } from 'react-router-dom';
 import ChatIcon from '@mui/icons-material/Chat';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { logoutUser } from '../../../Redux/actions/userActions';
 
 const Sidebar = ({ mode, setMode }) => {

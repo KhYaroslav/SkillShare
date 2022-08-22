@@ -6,6 +6,7 @@ const cors = require('cors');
 
 const http = require('http');
 const wss = require('./webSocket');
+
 const PORT = process.env.PORT || 3001;
 
 const app = express();
@@ -13,6 +14,8 @@ app.locals.ws = new Map();
 
 const userRouter = require('./routes/userRouter');
 const newsRouter = require('./routes/newsRouter');
+const postRouter = require('./routes/postRouter');
+const likeRouter = require('./routes/likesRouter');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -40,6 +43,8 @@ app.use(sessionParser);
 
 app.use('/api/user', userRouter);
 app.use('/news', newsRouter);
+app.use('/api/post', postRouter);
+app.use('/api/likes', likeRouter);
 
 const server = http.createServer(app);
 
@@ -52,9 +57,7 @@ server.on('upgrade', (request, socket, head) => {
       socket.destroy();
       return;
     }
-
     console.log('Session is parsed!');
-
     wss.handleUpgrade(request, socket, head, (ws) => {
       wss.emit('connection', ws, request, app.locals.ws);
     });
