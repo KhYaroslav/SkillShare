@@ -1,16 +1,28 @@
 const express = require('express');
 const upload = require('../middleware/multer/multer');
-const { Post } = require('../db/models');
+const { Post, User, Like } = require('../db/models');
 
 const router = express.Router();
+
+router.get('/posts', async (req, res) => {
+  const posts = await Post.findAll({
+    include: [
+      { model: User },
+      { model: Like },
+    ],
+  });
+  // res.sendStatus(200);
+  res.json(posts);
+});
 
 router.post('/posts', upload.single('file'), async (req, res) => {
   // console.log('req.file---->', req.file);
   // console.log('req.body---->', req.body);
-  await Post.create({ title: req.body.title, description: req.body.description, file: req.file?.path.replace('public', '') });
-  const posts = await Post.findAll();
+  const post = await Post.create({
+    title: req.body.title, description: req.body.description, file: req.file?.path.replace('public', ''), user_id: req.session.user.id,
+  });
   // res.sendStatus(200);
-  res.json(posts);
+  res.json(post);
 });
 
 module.exports = router;

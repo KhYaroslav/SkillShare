@@ -5,17 +5,18 @@ import {
 import { Container } from '@mui/system';
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useEffect } from 'react';
-import Details from '../MyTextBar/Details';
+import { useNavigate } from 'react-router-dom';
 import { Tiptap } from '../MyTextBar/Tiptap';
 
 export default function AddPost() {
+  const navigate = useNavigate();
   const [posts, setPosts] = useState('');
-  console.log('posts----->', posts);
+  // console.log('posts----->', posts);
   const [post, setPost] = useState({ title: '', description: '', file: null });
   const changeHandler = (e) => setPost((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  const changeHandler2 = (e) => setPost((prev) => ({ ...prev, [e.target.name]: e.target.files[0] }));
-  useEffect(() => { console.log('post------------>', post); }, [post]);
+  const changeHandler2 = (e) => {
+    setPost((prev) => ({ ...prev, [e.target.name]: e.target.files[0] }));
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -28,12 +29,10 @@ export default function AddPost() {
       .then((res) => {
         console.log(res.data);
         setPosts(res.data);
-      // navigate('/');
+        navigate('/');
       });
   };
-  // const updateDesc = (data) => {
-  //   setPost((prev) => ({ ...prev, description: data }));
-  // };
+
   return (
     <Container>
       <div className="App">
@@ -51,7 +50,6 @@ export default function AddPost() {
             />
             <div className="App">
               <Tiptap setPost={setPost} />
-              <Details posts={posts} />
             </div>
             <TextField
               // style={{ width: '400px', margin: '5px' }}
