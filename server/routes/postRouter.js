@@ -6,10 +6,7 @@ const router = express.Router();
 
 router.get('/posts', async (req, res) => {
   const posts = await Post.findAll({
-    include: [
-      { model: User },
-      { model: Like },
-    ],
+    include: [{ model: User }, { model: Like }],
   });
   // res.sendStatus(200);
   res.json(posts);
@@ -19,7 +16,10 @@ router.post('/posts', upload.single('file'), async (req, res) => {
   // console.log('req.file---->', req.file);
   // console.log('req.body---->', req.body);
   const post = await Post.create({
-    title: req.body.title, description: req.body.description, file: req.file?.path.replace('public', ''), user_id: req.session.user.id,
+    title: req.body.title,
+    description: req.body.description,
+    file: req.file?.path.replace('public', ''),
+    user_id: req.session.user.id,
   });
   // res.sendStatus(200);
   res.json(post);
