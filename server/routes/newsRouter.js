@@ -31,7 +31,7 @@ router.get('/v1', async (req, res) => {
       $(
         'div.tm-article-snippet > div.tm-article-body.tm-article-snippet__lead > a',
       ).each((i, elem) => {
-        urlArr.push(`https://habr.com/${$(elem).attr('href')}`);
+        urlArr.push(`https://habr.com${$(elem).attr('href')}`);
       });
 
       // console.log('1', titleArr.length);

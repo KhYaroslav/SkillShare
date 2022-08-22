@@ -82,8 +82,18 @@ export default function Navbar() {
   return (
     <AppBar position="sticky">
       <StyledToolbar>
-        <Typography onClick={() => navigate('/')} variant="h6" sx={{ display: { xs: 'none', sm: 'block' } }}>
-          Skill Share
+        <Typography
+          onClick={() => navigate('/')}
+          variant="h6"
+          sx={{ display: { xs: 'none', sm: 'block' } }}
+        >
+          <a>
+            <img src="https://i.ibb.co/dGbBs5f/666.png" alt="logo" border="0" width="10%" height="10%" style={{ marginTop: '8px' }} />
+            {' '}
+            <a>
+              Skill Share
+            </a>
+          </a>
         </Typography>
         <Pets sx={{ display: { xs: 'block', sm: 'none' } }} />
         {(location.pathname === '/' || location.pathname === '/popular'

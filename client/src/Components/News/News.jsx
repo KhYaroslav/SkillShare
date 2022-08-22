@@ -13,10 +13,19 @@ export default function News() {
   }, []);
   return (
     <>
-      <Typography variant="h6" fontWeight={100} mt={2}>
+      <Typography variant="h6" fontWeight={100} mt={2} mb={2}>
         IT новости
       </Typography>
-      {viewNews.map((el) => <NewsCard key={el.url} news={el} />)}
+      <div style={{
+        overflowY: 'scroll',
+        position: 'fixed',
+        height: '60%',
+        marginRight: '4%',
+        marginLeft: '-1%',
+      }}
+      >
+        {viewNews.map((el) => <NewsCard key={el.url} news={el} />)}
+      </div>
     </>
   );
 }
