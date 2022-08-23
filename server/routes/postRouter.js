@@ -20,6 +20,21 @@ router.get('/posts', async (req, res) => {
   res.json(posts);
 });
 
+router.get('/:id', async (req, res) => {
+  const { id } = req.params;
+  const post = await Post.findOne({
+    where: { id },
+    include: [
+      { model: User },
+      { model: Like },
+      { model: Favorite },
+      { model: Comment },
+    ],
+  });
+  // res.sendStatus(200);
+  res.json(post);
+});
+
 router.post('/posts', upload.single('file'), async (req, res) => {
   const post = await Post.create({
     title: req.body.title,
