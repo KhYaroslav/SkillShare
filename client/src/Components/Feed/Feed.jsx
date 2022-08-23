@@ -17,8 +17,8 @@ export default function Feed() {
       dispatch(addPosts());
     }
   }, [posts]);
-  console.log('posts--!!->', posts);
-
+  console.log('posts--!!->', posts[0]);
+  // posts?.filter((el) => el.Likes)
   return (
     <>
       <Box flex={4} p={{ xs: 0, md: 2 }}>
