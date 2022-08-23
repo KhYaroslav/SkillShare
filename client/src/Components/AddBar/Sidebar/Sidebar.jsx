@@ -21,6 +21,7 @@ import ScatterPlotIcon from '@mui/icons-material/ScatterPlot';
 import { useNavigate } from 'react-router-dom';
 import ChatIcon from '@mui/icons-material/Chat';
 import { useSelector, useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 import { logoutUser } from '../../../Redux/actions/userActions';
 
@@ -34,35 +35,39 @@ const Sidebar = ({ mode, setMode }) => {
     dispatch(logoutUser());
     navigate('/');
   };
+
+  const location = useLocation();
   return (
-    <Box flex={1} p={2} sx={{ display: { xs: 'none', sm: 'block' } }}>
-      <Box position="fixed">
-        <List>
-          <ListItem disablePadding>
-            <ListItemButton component="a" onClick={() => navigate('/')}>
-              <ListItemIcon>
-                <Home />
-              </ListItemIcon>
-              <ListItemText primary="Домой" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" onClick={() => navigate('/popular')}>
-              <ListItemIcon>
-                <ShowChartIcon />
-              </ListItemIcon>
-              <ListItemText primary="Популярные" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" onClick={() => navigate('/new')}>
-              <ListItemIcon>
-                <ScatterPlotIcon />
-              </ListItemIcon>
-              <ListItemText primary="Новые" />
-            </ListItemButton>
-          </ListItem>
-          {user.id
+    <>
+      {(location.pathname !== '/login' && location.pathname !== '/signup') && (
+        <Box flex={1} p={2} sx={{ display: { xs: 'none', sm: 'block' } }}>
+          <Box position="fixed">
+            <List>
+              <ListItem disablePadding>
+                <ListItemButton component="a" onClick={() => navigate('/')}>
+                  <ListItemIcon>
+                    <Home />
+                  </ListItemIcon>
+                  <ListItemText primary="Домой" />
+                </ListItemButton>
+              </ListItem>
+              <ListItem disablePadding>
+                <ListItemButton component="a" onClick={() => navigate('/popular')}>
+                  <ListItemIcon>
+                    <ShowChartIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Популярные" />
+                </ListItemButton>
+              </ListItem>
+              <ListItem disablePadding>
+                <ListItemButton component="a" onClick={() => navigate('/new')}>
+                  <ListItemIcon>
+                    <ScatterPlotIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Новые" />
+                </ListItemButton>
+              </ListItem>
+              {user.id
             && (
               <>
                 <ListItem disablePadding>
@@ -70,7 +75,7 @@ const Sidebar = ({ mode, setMode }) => {
                     <ListItemIcon>
                       <CropDinIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Моя лента" onClick={() => navigate('/mytape')} />
+                    <ListItemText primary="Моя лента" />
                   </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
@@ -99,17 +104,19 @@ const Sidebar = ({ mode, setMode }) => {
                 </ListItem>
               </>
             )}
-          <ListItem disablePadding>
-            <ListItemButton component="a">
-              <ListItemIcon>
-                <ModeNight />
-              </ListItemIcon>
-              <Switch onChange={(e) => setMode(mode === 'light' ? 'dark' : 'light')} />
-            </ListItemButton>
-          </ListItem>
-        </List>
-      </Box>
-    </Box>
+              <ListItem disablePadding>
+                <ListItemButton component="a">
+                  <ListItemIcon>
+                    <ModeNight />
+                  </ListItemIcon>
+                  <Switch onChange={(e) => setMode(mode === 'light' ? 'dark' : 'light')} />
+                </ListItemButton>
+              </ListItem>
+            </List>
+          </Box>
+        </Box>
+      )}
+    </>
   );
 };
 
