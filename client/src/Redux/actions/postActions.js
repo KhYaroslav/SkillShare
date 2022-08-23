@@ -1,11 +1,10 @@
 import axios from 'axios';
 import { ADD_POST, ADD_POSTS, DEL_POST, ADD_LIKE, FAVORITE_POST, ADD_COMMENT, ADD_COMMENTS, DEL_COMMENT } from '../types';
 
-export const postAdd = (value) => ({
-  type: ADD_POST,
-  payload: value,
-});
-
+export const postAdd = (data) => (dispatch) => {
+  // try
+  axios.post('/api/post/posts', data).then((res) => dispatch({ type: ADD_POST, payload: res.data }));
+};
 export const addPosts = () => (dispatch) => {
   axios('/api/post/posts')
     .then((res) => dispatch({ type: ADD_POSTS, payload: res.data }));
