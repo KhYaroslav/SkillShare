@@ -7,17 +7,18 @@ const router = express.Router();
 
 router.post('/:id', async (req, res) => {
   const { id } = req.params;
-  const { comment_desc } = req.body;
+  const { input } = req.body;
   const userId = req.session.user.id;
-  const comment = await Comment.create({ user_id: userId, post_id: id, comment_desc });
+  const comment = await Comment.create({ user_id: userId, post_id: id, comment_desc: input });
   // res.sendStatus(200);
+  console.log('comment----->', comment);
   res.json(comment);
 });
 router.patch('/:id', async (req, res) => {
   const { id } = req.params;
   const userId = req.session.user.id;
   const findComment = await Comment.findOne({ where: { id, user_id: userId } });
-  const comment = await findComment.update({ user_id: userId, post_id: id, comment_desc });
+  const comment = await findComment.update({ user_id: userId, post_id: id, comment_desc });// скорее всего ошибка в comment_desc
   // res.sendStatus(200);
   res.json(comment);
 });
