@@ -8,13 +8,13 @@
     --font-family: Arial, Helvetica, sans-serif;
   }
   
-  * {
+  /* * {
     box-sizing: border-box;
   }
   
   body {
     font-family: var(--font-family);
-  }
+  } */
   
   textarea {
     font-family: var(--font-family);
