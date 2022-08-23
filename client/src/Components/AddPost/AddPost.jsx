@@ -5,14 +5,17 @@ import {
 import { Container } from '@mui/system';
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Tiptap } from '../MyTextBar/Tiptap';
 
 export default function AddPost() {
+  const posts = useSelector((state) => state.posts);
+  const { id } = useParams();
   const navigate = useNavigate();
-  const [posts, setPosts] = useState('');
+  const [allPosts, setAllPosts] = useState('');
   // console.log('posts----->', posts);
-  const [post, setPost] = useState({ title: '', description: '', file: null });
+  const [post, setPost] = useState({ title: posts?.id?.title || '', description: posts?.id?.description || '', file: posts?.id?.file || null });
   const changeHandler = (e) => setPost((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   const changeHandler2 = (e) => {
     setPost((prev) => ({ ...prev, [e.target.name]: e.target.files[0] }));
@@ -24,11 +27,9 @@ export default function AddPost() {
     data.append('title', post.title);
     data.append('description', post.description);
     data.append('file', post.file);
-    console.log('data---->', data);
     axios.post('/api/post/posts', data)
       .then((res) => {
-        console.log(res.data);
-        setPosts(res.data);
+        setAllPosts(res.data);
         navigate('/');
       });
   };

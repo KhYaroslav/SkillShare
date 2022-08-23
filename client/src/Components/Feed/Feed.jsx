@@ -17,7 +17,7 @@ export default function Feed() {
       dispatch(addPosts());
     }
   }, [posts]);
-  console.log('posts--!!->', posts);
+  // console.log('posts--!!->', posts);
 
   return (
     <>

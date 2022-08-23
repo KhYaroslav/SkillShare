@@ -70,7 +70,7 @@ const Sidebar = ({ mode, setMode }) => {
                     <ListItemIcon>
                       <CropDinIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Моя лента" />
+                    <ListItemText primary="Моя лента" onClick={() => navigate('/mytape')} />
                   </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
