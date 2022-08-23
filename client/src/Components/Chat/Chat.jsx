@@ -13,11 +13,13 @@ import Avatar from '@mui/material/Avatar';
 import Fab from '@mui/material/Fab';
 import SendIcon from '@mui/icons-material/Send';
 import { useSelector, useDispatch } from 'react-redux';
+import { Button } from '@mui/material';
 import ChatUserId from './ChatUserId';
 import { sendChatMessage, getChatMessages } from '../../Redux/actions/chatActions';
 import OtherUser from './OtherUser';
 import IdMessage from './IdMessage';
 import OtherMessage from './OtherMessage';
+import { alarmWsAction } from '../../Redux/actions/alarmActions';
 
 // const useStyles = styled({
 //   table: {
@@ -66,49 +68,51 @@ const Chat = () => {
     dispatch(sendChatMessage({ message: input }));
     setInput('');
   };
-  console.log('🚀 ~ file: Chat.jsx ~ line 46 ~ Chat ~ chatUsers', chatUsers.filter((el) => el.id !== user.id));
   return (
-    <div>
-      <Grid container>
-        <Grid item xs={12}>
-          <Typography variant="h5" className="header-message">Chat</Typography>
+    <>
+      <Button sx={{ right: '5%' }} variant="contained" onClick={() => dispatch(alarmWsAction())}>Тревога</Button>
+      <div>
+        <Grid container>
+          <Grid item xs={12}>
+            <Typography variant="h5" className="header-message">Chat</Typography>
+          </Grid>
         </Grid>
-      </Grid>
-      <Grid container component={Paper} className="asfsf">
-        <Grid item xs={3} className="asfasf">
-          <ChatUserId user={user} />
-          <Divider />
-          {chatUsers.filter((el) => el.id !== user.id).map(
-            (el) => <OtherUser key={el.id} user={el} />
-          )}
-        </Grid>
-        <Grid item xs={9}>
-          <List className="sagsg">
-            {messages.filter((el) => el.id === user.id).map(
-              (el) => <IdMessage key={el.msId} message={el} />
+        <Grid container component={Paper} className="asfsf">
+          <Grid item xs={3} className="asfasf">
+            <ChatUserId user={user} />
+            <Divider />
+            {chatUsers.filter((el) => el.id !== user.id).map(
+              (el) => <OtherUser key={el.id} user={el} />
             )}
-            {messages.filter((el) => el.id !== user.id).map(
-              (el) => <OtherMessage key={el.msId} message={el} />
-            )}
-          </List>
-          <Divider />
-          <Grid container style={{ padding: '20px' }}>
-            <Grid item xs={11}>
-              <TextField
-                id="outlined-basic-email"
-                value={input}
-                onChange={inputHAndler}
-                label="Введите сообщение.."
-                fullWidth
-              />
-            </Grid>
-            <Grid xs={1} align="right">
-              <Fab color="primary" aria-label="add" onClick={submitHandler}><SendIcon /></Fab>
+          </Grid>
+          <Grid item xs={9}>
+            <List className="sagsg">
+              {messages.filter((el) => el.id === user.id).map(
+                (el) => <IdMessage key={el.msId} message={el} />
+              )}
+              {messages.filter((el) => el.id !== user.id).map(
+                (el) => <OtherMessage key={el.msId} message={el} />
+              )}
+            </List>
+            <Divider />
+            <Grid container style={{ padding: '20px' }}>
+              <Grid item xs={11}>
+                <TextField
+                  id="outlined-basic-email"
+                  value={input}
+                  onChange={inputHAndler}
+                  label="Введите сообщение.."
+                  fullWidth
+                />
+              </Grid>
+              <Grid xs={1} align="right">
+                <Fab color="primary" aria-label="add" onClick={submitHandler}><SendIcon /></Fab>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </div>
+      </div>
+    </>
   );
 };
 

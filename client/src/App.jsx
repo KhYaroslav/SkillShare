@@ -4,7 +4,6 @@ import {
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 import Sidebar from './Components/AddBar/Sidebar/Sidebar';
 import Feed from './Components/Feed/Feed';
 import Rightbar from './Components/AddBar/Rightbar/Rightbar';
@@ -27,7 +26,6 @@ export default function App() {
   const user = useSelector((state) => state.user);
   const posts = useSelector((state) => state.posts);
 
-  const location = useLocation();
   const dispatch = useDispatch();
 
   const darkTheme = createTheme({

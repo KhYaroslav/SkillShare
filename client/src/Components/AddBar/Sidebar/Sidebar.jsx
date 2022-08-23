@@ -10,7 +10,6 @@ import {
   ListItemIcon,
   ListItemText,
   Switch,
-
 } from '@mui/material';
 import React from 'react';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -22,12 +21,14 @@ import { useNavigate } from 'react-router-dom';
 import ChatIcon from '@mui/icons-material/Chat';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import './Sidebar.css';
 
 import { logoutUser } from '../../../Redux/actions/userActions';
 
 const Sidebar = ({ mode, setMode }) => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
+  const alarm = useSelector((state) => state.alarm);
 
   const dispatch = useDispatch();
 
@@ -91,7 +92,8 @@ const Sidebar = ({ mode, setMode }) => {
                     <ListItemIcon>
                       <ChatIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Чат" />
+                    {alarm ? <ListItemText className="alarm" primary="Чат" />
+                      : <ListItemText primary="Чат" />}
                   </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
