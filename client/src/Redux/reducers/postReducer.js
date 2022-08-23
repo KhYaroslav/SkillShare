@@ -26,7 +26,7 @@ const postReducer = (state = [], action) => {
     case ADD_COMMENT:
       return [...state, payload];
     case DEL_COMMENT:
-      return state.filter((el) => el.id !== payload);
+      return state.map((el) => el?.Comments).filter((el) => el.id !== payload);
     default:
       return state;
   }

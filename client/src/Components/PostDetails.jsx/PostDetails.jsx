@@ -17,8 +17,8 @@ export default function PostDetails() {
   useEffect(() => {
     axios(`/api/post/${id}`)
       .then((res) => setPost(res.data));
-  }, [post]);
-
+  }, []);
+  // console.log('comment-post--->', post);
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(addComment(post?.id, comment));
@@ -34,7 +34,7 @@ export default function PostDetails() {
     >
       <form onSubmit={submitHandler}>
         PostDetails
-        <Tiptap setComment={setComment} />
+        <Tiptap setComment={setComment} editComment={post} />
         {/* <CommentBox /> */}
         <Button variant="contained" type="submit">Ок</Button>
       </form>

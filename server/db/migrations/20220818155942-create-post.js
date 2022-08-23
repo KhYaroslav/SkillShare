@@ -16,8 +16,9 @@ module.exports = {
       file: {
         type: Sequelize.TEXT,
       },
-      url_video: {
-        type: Sequelize.TEXT,
+      view: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
       },
       user_id: {
         type: Sequelize.INTEGER,

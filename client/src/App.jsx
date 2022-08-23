@@ -21,6 +21,8 @@ import Chat from './Components/Chat/Chat';
 import MyTape from './Components/MyTape/MyTape';
 import MyFavorites from './Components/MyFavorites/MyFavorites';
 import PostDetails from './Components/PostDetails.jsx/PostDetails';
+import Post from './Components/Post/Post';
+import Popular from './Components/Popular/Popular';
 
 export default function App() {
   const [mode, setMode] = useState('light');
@@ -56,13 +58,13 @@ export default function App() {
               <Sidebar setMode={setMode} mode={mode} />
               <Routes>
                 <Route path="/" element={<Feed />} />
-                <Route path="/popular" element={<h1>popular</h1>} />
+                <Route path="/popular" element={<Popular />} />
                 <Route path="/new" element={<h1>Новые посты</h1>} />
                 <Route path="/chat" element={<Chat />} />
                 <Route path="/addpost" element={<AddPost />} />
                 <Route path="/favorite" element={<MyFavorites />} />
                 <Route path="/mytape" element={<MyTape />} />
-                <Route path="/editmypost/:id" element={<AddPost />} />
+                <Route path="/mypost/:id" element={<AddPost />} />
                 <Route path="/post/:id" element={<PostDetails />} />
                 <Route path="/login" element={<Signin />} />
                 <Route path="/signup" element={<Signup />} />

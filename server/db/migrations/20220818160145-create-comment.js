@@ -9,6 +9,7 @@ module.exports = {
       },
       comment_desc: {
         type: Sequelize.TEXT,
+        allowNull: false,
       },
       user_id: {
         type: Sequelize.INTEGER,

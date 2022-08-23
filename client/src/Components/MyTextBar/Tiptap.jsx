@@ -109,10 +109,12 @@ const MenuBar = ({ editor }) => {
   );
 };
 
-export const Tiptap = ({ setPost, setComment }) => {
+export const Tiptap = ({ setPost, setComment, post }) => {
+  // console.log('post Tiptap-->', post);
+
   const editor = useEditor({
     extensions: [StarterKit, Underline],
-    content: '',
+    content: `${post?.description || ''}`,
     // eslint-disable-next-line no-shadow
     onUpdate: ({ editor }) => {
       const html = editor.getHTML();
