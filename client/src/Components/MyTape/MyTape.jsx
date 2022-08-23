@@ -8,7 +8,7 @@ export default function MyTape() {
   const user = useSelector((state) => state.user);
   return (
     <div>
-      MyTape
+      Мои посты
       {posts && posts?.filter((el) => el?.user_id === user?.id)
         .map((el) => <Post key={el?.id} mypost={el} />)}
     </div>

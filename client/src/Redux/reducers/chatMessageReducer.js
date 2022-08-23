@@ -4,7 +4,7 @@ const chatMessageReducer = (state = [], action) => {
   const { type, payload } = action;
   switch (type) {
     case ADD_CHAT_MESSAGE:
-      return [payload, ...state];
+      return [...state, payload];
     case ADD_CHAT_MESSAGES:
       return payload;
     default:

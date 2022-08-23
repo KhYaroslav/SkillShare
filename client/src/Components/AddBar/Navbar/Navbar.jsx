@@ -12,13 +12,14 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import { logoutUser } from '../../../Redux/actions/userActions';
+import { getSearchPost } from '../../../Redux/actions/postActions';
 
 const StyledToolbar = styled(Toolbar)({
   display: 'flex',
@@ -52,6 +53,7 @@ const UserBox = styled(Box)(({ theme }) => ({
 export default function Navbar() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [input, setInput] = useState({});
   const user = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -63,8 +65,7 @@ export default function Navbar() {
   };
   const [avatar, setAvatar] = useState({ avatar: null });
   const [ava, setAva] = useState('');
-  console.log('avatar------>', avatar);
-  console.log('ava------>', ava);
+
   const changeHandler2 = (e) => setAvatar((prev) => (
     { ...prev, [e.target.name]: e.target.files[0] }));
   // console.log('ava----->', ava);
@@ -79,6 +80,17 @@ export default function Navbar() {
         // navigate('/');
       });
   };
+
+  const changeHandler = (e) => {
+    setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  useEffect(() => {
+    if (input.input) {
+      dispatch(getSearchPost(input));
+    }
+  }, [input]);
+
   return (
     <AppBar position="sticky">
       <StyledToolbar>
@@ -100,7 +112,12 @@ export default function Navbar() {
           || location.pathname === '/new' || location.pathname === '/mytape'
         || location.pathname === '/favorite') && (
           <Search>
-            <InputBase placeholder="Поиск..." />
+            <InputBase
+              name="input"
+              value={input.input || ''}
+              onChange={changeHandler}
+              placeholder="Поиск..."
+            />
           </Search>
         )}
         {user.id ? (

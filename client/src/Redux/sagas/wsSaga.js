@@ -1,4 +1,4 @@
-import { take, put, call, fork, takeLatest, takeEvery } from 'redux-saga/effects';
+import { take, put, call, fork, takeEvery } from 'redux-saga/effects';
 import { eventChannel, END } from 'redux-saga';
 import { GET_CHAT_MESSAGES, SET_CHAT_MESSAGE, SET_WS } from '../types';
 
