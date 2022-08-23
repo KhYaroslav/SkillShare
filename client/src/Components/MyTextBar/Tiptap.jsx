@@ -109,14 +109,16 @@ const MenuBar = ({ editor }) => {
   );
 };
 
-export const Tiptap = ({ setPost }) => {
+export const Tiptap = ({ setPost, setComment }) => {
   const editor = useEditor({
     extensions: [StarterKit, Underline],
     content: '',
     // eslint-disable-next-line no-shadow
     onUpdate: ({ editor }) => {
       const html = editor.getHTML();
-      setPost((prev) => ({ ...prev, description: html }));
+      if (setPost) { setPost((prev) => ({ ...prev, description: html })); } else {
+        setComment((prev) => ({ ...prev, input: html }));
+      }
     },
   });
 

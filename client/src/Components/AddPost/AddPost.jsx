@@ -6,11 +6,13 @@ import { Container } from '@mui/system';
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Tiptap } from '../MyTextBar/Tiptap';
+import { postAdd } from '../../Redux/actions/postActions';
 
 export default function AddPost() {
   const posts = useSelector((state) => state.posts);
+  const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
   const [allPosts, setAllPosts] = useState('');
@@ -27,11 +29,8 @@ export default function AddPost() {
     data.append('title', post.title);
     data.append('description', post.description);
     data.append('file', post.file);
-    axios.post('/api/post/posts', data)
-      .then((res) => {
-        setAllPosts(res.data);
-        navigate('/');
-      });
+    dispatch(postAdd(data));
+    navigate('/');
   };
 
   return (
