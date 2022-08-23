@@ -21,6 +21,7 @@ export const deletePost = (id) => {
 export const addLike = (postId) => (dispatch) => {
   axios(`/api/likes/${postId}`).then((res) => dispatch({ type: ADD_LIKE, payload: res.data }));
 };
+
 export const addFavorite = (postId) => (dispatch) => {
   axios(`/api/favorites/${postId}`).then((res) => dispatch({ type: FAVORITE_POST, payload: res.data }));
 };

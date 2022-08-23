@@ -1,4 +1,5 @@
 const express = require('express');
+const { Op } = require('sequelize');
 const upload = require('../middleware/multer/multer');
 const {
   Post, User, Like, Favorite, Comment,
@@ -20,8 +21,6 @@ router.get('/posts', async (req, res) => {
 });
 
 router.post('/posts', upload.single('file'), async (req, res) => {
-  // console.log('req.file---->', req.file);
-  // console.log('req.body---->', req.body);
   const post = await Post.create({
     title: req.body.title,
     description: req.body.description,
@@ -31,12 +30,28 @@ router.post('/posts', upload.single('file'), async (req, res) => {
   // res.sendStatus(200);
   res.json(post);
 });
+
+router.route('/filter/posts').post(async (req, res) => {
+  const { input } = req.body;
+  const posts = await Post.findAll({
+    where: {
+      title: {
+        [Op.like]: `%${input}%`,
+      },
+    },
+  });
+  res.json(posts);
+});
+
 router.patch('/:id', async (req, res) => {
   const { id } = req.params;
   const userId = req.session.user.id;
   const findPost = await Post.findOne({ where: { id, user_id: userId } });
   const post = await findPost.update({
-    title: req.body.title, description: req.body.description, file: req.file?.path.replace('public', ''), user_id: req.session.user.id,
+    title: req.body.title,
+    description: req.body.description,
+    file: req.file?.path.replace('public', ''),
+    user_id: req.session.user.id,
   });
   // res.sendStatus(200);
   res.json(post);
