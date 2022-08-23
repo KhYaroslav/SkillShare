@@ -20,6 +20,7 @@ import { socketInit } from './Redux/actions/wsActions';
 import Chat from './Components/Chat/Chat';
 import MyTape from './Components/MyTape/MyTape';
 import MyFavorites from './Components/MyFavorites/MyFavorites';
+import PostDetails from './Components/PostDetails.jsx/PostDetails';
 
 function App() {
   const [mode, setMode] = useState('light');
@@ -82,7 +83,7 @@ function App() {
             </>
             <>
               {(location.pathname === '/mytape' || location.pathname === '/chat'
-                || location.pathname === '/addpost' || location.pathname === '/favorite') && (
+                || location.pathname === '/addpost' || location.pathname === '/favorite' || location.pathname === '/post/1') && (
                 <>
                   <Navbar />
                   <Stack direction="row" spacing={2} justifyContent="space-between" style={{ position: 'relative' }}>
@@ -92,7 +93,8 @@ function App() {
                       <Route path="/addpost" element={<AddPost />} />
                       <Route path="/favorite" element={<MyFavorites />} />
                       <Route path="/mytape" element={<MyTape />} />
-                      <Route path="/mypost/:id" element={<AddPost />} />
+                      <Route path="/editmypost/:id" element={<AddPost />} />
+                      <Route path="/post/1" element={<PostDetails />} />
                     </Routes>
                   </Stack>
                   <Add />
