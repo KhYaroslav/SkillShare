@@ -1,6 +1,12 @@
 import { take, put, call, fork, takeEvery } from 'redux-saga/effects';
 import { eventChannel, END } from 'redux-saga';
-import { GET_CHAT_MESSAGES, SET_CHAT_MESSAGE, SET_WS } from '../types';
+import {
+  GET_CHAT_MESSAGES,
+  SET_CHAT_MESSAGE,
+  SET_WS,
+  WS_ALARM,
+} from '../types';
+import alarmWsAction from '../actions/alarmActions';
 
 function createSocketChannel(socket, action) {
   return eventChannel((emit) => {
@@ -45,12 +51,20 @@ function* getUserMessages(socket) {
   }
 }
 
+function* alarmUserEffect(socket) {
+  while (true) {
+    const message = yield take(WS_ALARM);
+    socket.send(JSON.stringify(message));
+  }
+}
+
 function* chatWatcer(action) {
   const socket = yield call(createWebSocketConnection);
   const socketChannel = yield call(createSocketChannel, socket, action);
 
   yield fork(userMessage, socket);
   yield fork(getUserMessages, socket);
+  yield fork(alarmUserEffect, socket);
 
   while (true) {
     try {

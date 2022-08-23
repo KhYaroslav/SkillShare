@@ -1,16 +1,24 @@
+import { SettingsInputCompositeTwoTone } from '@mui/icons-material';
 import { Button, Grid } from '@mui/material';
+import axios from 'axios';
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { addComment } from '../../Redux/actions/postActions';
 import MyComment from '../Comments/MyComment';
 import { Tiptap } from '../MyTextBar/Tiptap';
 
-export default function PostDetails({ post }) { // принять post при нажатии на пост
+export default function PostDetails() {
   const dispatch = useDispatch();
-  // const posts = useSelector((state) => state.posts);
-  // console.log('posts------>', posts);
+  const [post, setPost] = useState();
   const [comment, setComment] = useState('');
-  console.log('comment----->', comment);
+  const { id } = useParams();
+  useEffect(() => {
+    axios(`/api/post/${id}`)
+      .then((res) => setPost(res.data));
+  }, [post]);
+
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(addComment(post?.id, comment));
@@ -30,7 +38,13 @@ export default function PostDetails({ post }) { // принять post при н
         {/* <CommentBox /> */}
         <Button variant="contained" type="submit">Ок</Button>
       </form>
-      {post?.filter((el) => el?.Comments)?.map((el) => <MyComment key={el.id} comment={el} />)}
+      {post?.Comments.length && post?.Comments?.map((el) => (
+        <MyComment
+          key={el.id}
+          post={post}
+          comment={el}
+        />
+      ))}
     </Grid>
 
   );

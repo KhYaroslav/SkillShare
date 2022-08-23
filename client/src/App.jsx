@@ -4,7 +4,6 @@ import {
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 import Sidebar from './Components/AddBar/Sidebar/Sidebar';
 import Feed from './Components/Feed/Feed';
 import Rightbar from './Components/AddBar/Rightbar/Rightbar';
@@ -25,8 +24,8 @@ import PostDetails from './Components/PostDetails.jsx/PostDetails';
 export default function App() {
   const [mode, setMode] = useState('light');
   const user = useSelector((state) => state.user);
+  const posts = useSelector((state) => state.posts);
 
-  const location = useLocation();
   const dispatch = useDispatch();
 
   const darkTheme = createTheme({
@@ -62,7 +61,7 @@ export default function App() {
                 <Route path="/favorite" element={<MyFavorites />} />
                 <Route path="/mytape" element={<MyTape />} />
                 <Route path="/editmypost/:id" element={<AddPost />} />
-                <Route path="/post/1" element={<PostDetails />} />
+                <Route path="/post/:id" element={<PostDetails />} />
                 <Route path="/login" element={<Signin />} />
                 <Route path="/signup" element={<Signup />} />
               </Routes>

@@ -55,6 +55,16 @@ wss.on('connection', (ws, request, wsMap) => {
         );
 
         break;
+      case 'WS_ALARM':
+        console.log('🚀 ~ file: index.js ~ line 72 ~ ws.on ~ WS_ALARM', 'WS_ALARM');
+        for (const [, wsClient] of wsMap) {
+          wsClient.ws.send(
+            JSON.stringify({
+              type: 'SET_ALL_USERS_ALARM',
+              payload: true,
+            }),
+          );
+        }
 
       default:
         break;
