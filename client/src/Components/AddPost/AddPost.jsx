@@ -15,7 +15,7 @@ export default function AddPost() {
   const navigate = useNavigate();
   const [allPosts, setAllPosts] = useState('');
   // console.log('posts----->', posts);
-  const [post, setPost] = useState({ title: posts?.id.title || '', description: posts?.id.description || '', file: posts?.id.file || null });
+  const [post, setPost] = useState({ title: posts?.id?.title || '', description: posts?.id?.description || '', file: posts?.id?.file || null });
   const changeHandler = (e) => setPost((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   const changeHandler2 = (e) => {
     setPost((prev) => ({ ...prev, [e.target.name]: e.target.files[0] }));

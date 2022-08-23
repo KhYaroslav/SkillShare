@@ -1,7 +1,7 @@
 const express = require('express');
 const upload = require('../middleware/multer/multer');
 const {
-  Post, User, Like, Favorite,
+  Post, User, Like, Favorite, Comment,
 } = require('../db/models');
 
 const router = express.Router();
@@ -12,6 +12,7 @@ router.get('/posts', async (req, res) => {
       { model: User },
       { model: Like },
       { model: Favorite },
+      { model: Comment },
     ],
   });
   // res.sendStatus(200);
@@ -41,6 +42,9 @@ router.patch('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   const { id } = req.params;
   const userId = req.session.user.id;
+  await Like.destroy({ where: { post_id: id, user_id: userId } });
+  await Favorite.destroy({ where: { post_id: id, user_id: userId } });
+
   await Post.destroy({
     where: {
       id,
