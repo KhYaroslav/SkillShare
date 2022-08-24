@@ -45,6 +45,7 @@ export default function Post({ post, mypost, myFavPost }) {
   const deleteHandler = () => {
     dispatch(deletePost(mypost?.id || post?.id));
   };
+
   return (
     <Card sx={{ margin: 5 }} onClick={() => navigate(`post/${post.id}`)}>
       <CardHeader

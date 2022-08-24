@@ -63,56 +63,79 @@ const Chat = () => {
     setInput(e.target.value);
   };
 
+  const onKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      dispatch(sendChatMessage({ message: input, user: user.name }));
+      setInput('');
+    }
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(sendChatMessage({ message: input }));
+    dispatch(sendChatMessage({ message: input, user: user.name }));
     setInput('');
   };
   return (
-    <>
-      <Button sx={{ right: '5%' }} variant="contained" onClick={() => dispatch(alarmWsAction())}>Тревога</Button>
-      <div>
-        <Grid container>
-          <Grid item xs={12}>
-            <Typography variant="h5" className="header-message">Chat</Typography>
-          </Grid>
+    <div style={{ margin: 'auto',
+      paddingTop: '30px' }}
+    >
+      <>
+        <Button sx={{ right: '5%' }} variant="contained" onClick={() => dispatch(alarmWsAction())}>Тревога</Button>
+      </>
+      <Grid container>
+        <Grid item xs={12}>
+          <Typography variant="h5" className="header-message" style={{ textAlign: 'center', marginBottom: '1%', backgroundColor: '#D1DEEF', borderRadius: '8px' }}>Чат</Typography>
         </Grid>
-        <Grid container component={Paper} className="asfsf">
-          <Grid item xs={3} className="asfasf">
-            <ChatUserId user={user} />
-            <Divider />
-            {chatUsers.filter((el) => el.id !== user.id).map(
-              (el) => <OtherUser key={el.id} user={el} />
+      </Grid>
+      <Grid container component={Paper} className="asfsf">
+        <Grid item xs={3} className="asfasf">
+          <ChatUserId user={user} />
+          <Divider />
+          {chatUsers.filter((el) => el.id !== user.id).map(
+            (el) => <OtherUser key={el.id} user={el} />
+          )}
+        </Grid>
+        <Grid item xs={9}>
+          <List
+            className="sagsg"
+            style={{ overflowY: 'scroll',
+              position: 'fixed',
+              height: '60%',
+              width: '100%' }}
+          >
+            {messages.map((el) => ((el.id === user.id)
+              ? <IdMessage key={el.msId} message={el} />
+              : <OtherMessage key={el.msId} message={el} />))}
+
+            {/* {messages.filter((el) => el.id === user.id).map(
+              (el) => <IdMessage key={el.msId} message={el} />
             )}
-          </Grid>
-          <Grid item xs={9}>
-            <List className="sagsg">
-              {messages.filter((el) => el.id === user.id).map(
-                (el) => <IdMessage key={el.msId} message={el} />
-              )}
-              {messages.filter((el) => el.id !== user.id).map(
-                (el) => <OtherMessage key={el.msId} message={el} />
-              )}
-            </List>
-            <Divider />
-            <Grid container style={{ padding: '20px' }}>
-              <Grid item xs={11}>
-                <TextField
-                  id="outlined-basic-email"
-                  value={input}
-                  onChange={inputHAndler}
-                  label="Введите сообщение.."
-                  fullWidth
-                />
-              </Grid>
-              <Grid xs={1} align="right">
-                <Fab color="primary" aria-label="add" onClick={submitHandler}><SendIcon /></Fab>
-              </Grid>
+
+            {messages.filter((el) => el.id !== user.id).map(
+              (el) => <OtherMessage key={el.msId} message={el} />
+            )} */}
+
+          </List>
+          <Divider />
+          <Grid container style={{ paddingTop: '80%', paddingBottom: '2%', paddingRight: '2%' }}>
+            <Grid item xs={11}>
+              <TextField
+                id="outlined-basic-email"
+                value={input}
+                onChange={inputHAndler}
+                label="Введите сообщение.."
+                fullWidth
+                onKeyDown={onKeyDown}
+              />
+            </Grid>
+            <Grid xs={1} align="right">
+              <Fab color="primary" aria-label="add" onClick={submitHandler}><SendIcon /></Fab>
             </Grid>
           </Grid>
         </Grid>
-      </div>
-    </>
+      </Grid>
+    </div>
   );
 };
 

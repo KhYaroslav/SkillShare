@@ -40,36 +40,34 @@ const Sidebar = ({ mode, setMode }) => {
 
   const location = useLocation();
   return (
-    <>
-      {(location.pathname !== '/login' && location.pathname !== '/signup') && (
-        <Box flex={1} p={2} sx={{ display: { xs: 'none', sm: 'block' } }}>
-          <Box position="fixed">
-            <List>
-              <ListItem disablePadding>
-                <ListItemButton component="a" onClick={() => navigate('/')}>
-                  <ListItemIcon>
-                    <Home />
-                  </ListItemIcon>
-                  <ListItemText primary="Домой" />
-                </ListItemButton>
-              </ListItem>
-              <ListItem disablePadding>
-                <ListItemButton component="a" onClick={() => navigate('/popular')}>
-                  <ListItemIcon>
-                    <ShowChartIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Популярные" />
-                </ListItemButton>
-              </ListItem>
-              <ListItem disablePadding>
-                <ListItemButton component="a" onClick={() => navigate('/new')}>
-                  <ListItemIcon>
-                    <ScatterPlotIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Новые" />
-                </ListItemButton>
-              </ListItem>
-              {user.id
+    <Box flex={1} p={2} sx={{ maxWidth: '20%' }}>
+      <Box position="fixed">
+        <List>
+          <ListItem disablePadding>
+            <ListItemButton component="a" onClick={() => navigate('/')}>
+              <ListItemIcon>
+                <Home />
+              </ListItemIcon>
+              <ListItemText primary="Домой" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton component="a" onClick={() => navigate('/popular')}>
+              <ListItemIcon>
+                <ShowChartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Популярные" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton component="a" onClick={() => navigate('/new')}>
+              <ListItemIcon>
+                <ScatterPlotIcon />
+              </ListItemIcon>
+              <ListItemText primary="Новые" />
+            </ListItemButton>
+          </ListItem>
+          {user.id
             && (
               <>
                 <ListItem disablePadding>
@@ -115,20 +113,17 @@ const Sidebar = ({ mode, setMode }) => {
                 </ListItem>
               </>
             )}
-              <ListItem disablePadding>
-                <ListItemButton component="a">
-                  <ListItemIcon>
-                    <ModeNight />
-                  </ListItemIcon>
-                  <Switch onChange={(e) => setMode(mode === 'light' ? 'dark' : 'light')} />
-                </ListItemButton>
-              </ListItem>
-            </List>
-          </Box>
-        </Box>
-      )}
-    </>
+          <ListItem disablePadding>
+            <ListItemButton component="a">
+              <ListItemIcon>
+                <ModeNight />
+              </ListItemIcon>
+              <Switch onChange={(e) => setMode(mode === 'light' ? 'dark' : 'light')} />
+            </ListItemButton>
+          </ListItem>
+        </List>
+      </Box>
+    </Box>
   );
 };
-
 export default Sidebar;
