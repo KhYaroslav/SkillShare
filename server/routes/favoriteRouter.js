@@ -1,30 +1,29 @@
 const express = require('express');
-const { Like, User, Post } = require('../db/models');
+const { Favorite, User, Post } = require('../db/models');
 
 const router = express.Router();
 
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
   const userId = req.session.user.id;
-  const checkLike = await Like.findAll({
+  const checkFavorite = await Favorite.findAll({
     where: {
       user_id: userId,
       post_id: id,
     },
   });
-  // console.log('checkLike---->', checkLike);
-  if (checkLike.length === 0) {
-    await Like.create({ user_id: req.session.user.id, post_id: id });
+  if (checkFavorite.length === 0) {
+    await Favorite.create({ user_id: req.session.user.id, post_id: id });
     const post = await Post.findOne({
       where: { id },
       include: [
         { model: User },
-        { model: Like },
+        { model: Favorite },
       ],
     });
     return res.json(post);
   }
-  await Like.destroy({
+  await Favorite.destroy({
     where: {
       user_id: userId,
       post_id: id,
@@ -34,7 +33,7 @@ router.get('/:id', async (req, res) => {
     where: { id },
     include: [
       { model: User },
-      { model: Like },
+      { model: Favorite },
     ],
   });
   res.json(post);

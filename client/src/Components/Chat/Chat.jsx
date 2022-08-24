@@ -13,11 +13,13 @@ import Avatar from '@mui/material/Avatar';
 import Fab from '@mui/material/Fab';
 import SendIcon from '@mui/icons-material/Send';
 import { useSelector, useDispatch } from 'react-redux';
+import { Button } from '@mui/material';
 import ChatUserId from './ChatUserId';
 import { sendChatMessage, getChatMessages } from '../../Redux/actions/chatActions';
 import OtherUser from './OtherUser';
 import IdMessage from './IdMessage';
 import OtherMessage from './OtherMessage';
+import { alarmWsAction } from '../../Redux/actions/alarmActions';
 
 // const useStyles = styled({
 //   table: {
@@ -74,11 +76,13 @@ const Chat = () => {
     dispatch(sendChatMessage({ message: input, user: user.name }));
     setInput('');
   };
-  console.log('🚀 ~ file: Chat.jsx ~ line 46 ~ Chat ~ chatUsers', chatUsers.filter((el) => el.id !== user.id));
   return (
     <div style={{ margin: 'auto',
       paddingTop: '30px' }}
     >
+      <>
+        <Button sx={{ right: '5%' }} variant="contained" onClick={() => dispatch(alarmWsAction())}>Тревога</Button>
+      </>
       <Grid container>
         <Grid item xs={12}>
           <Typography variant="h5" className="header-message" style={{ textAlign: 'center', marginBottom: '1%', backgroundColor: '#D1DEEF', borderRadius: '8px' }}>Чат</Typography>
@@ -100,7 +104,6 @@ const Chat = () => {
               height: '60%',
               width: '100%' }}
           >
-
             {messages.map((el) => ((el.id === user.id)
               ? <IdMessage key={el.msId} message={el} />
               : <OtherMessage key={el.msId} message={el} />))}

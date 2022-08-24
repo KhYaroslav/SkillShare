@@ -16,6 +16,9 @@ const userRouter = require('./routes/userRouter');
 const newsRouter = require('./routes/newsRouter');
 const postRouter = require('./routes/postRouter');
 const likeRouter = require('./routes/likesRouter');
+const favoriteRouter = require('./routes/favoriteRouter');
+const commentRouter = require('./routes/commentRouter');
+const statsRouter = require('./routes/statsRouter');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -45,6 +48,9 @@ app.use('/api/user', userRouter);
 app.use('/news', newsRouter);
 app.use('/api/post', postRouter);
 app.use('/api/likes', likeRouter);
+app.use('/api/favorites', favoriteRouter);
+app.use('/api/comment', commentRouter);
+app.use('/api/stats', statsRouter);
 
 const server = http.createServer(app);
 

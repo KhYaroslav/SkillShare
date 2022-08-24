@@ -12,6 +12,7 @@ import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
 import Stack from '@mui/material/Stack';
 import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import News from '../../News/News';
 import { getChatMessages } from '../../../Redux/actions/chatActions';
 
@@ -57,53 +58,60 @@ const Rightbar = () => {
     }
   }, [user, ws, StyledBadge]);
 
+  const location = useLocation();
+
   return (
-    <Box flex={2} p={2} sx={{ display: { sm: 'block' } }}>
-      <Box position="fixed" width={300}>
-        {user.id && (
-          <>
-            <Typography variant="h6" fontWeight={100}>
-              Пользователи онлайн
+    <>
+      {(location.pathname === '/' || location.pathname === '/popular'
+        || location.pathname === '/new') && (
+        <Box flex={2} p={2} sx={{ display: { sm: 'block' } }}>
+          <Box position="fixed" width={300}>
+            {user.id && (
+              <>
+                <Typography variant="h6" fontWeight={100}>
+                  Пользователи онлайн
+                </Typography>
+                <Stack direction="row" spacing={2} max={7}>
+                  {chatUsers.map((el) => (
+                    <StyledBadge
+                      overlap="circular"
+                      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                      variant="dot"
+                    >
+                      <Avatar alt={el.name} src={el?.img || '/broken-image.jpg'} />
+                    </StyledBadge>
+                  ))}
+                </Stack>
+              </>
+            )}
+            <Typography variant="h6" fontWeight={100} mt={2} mb={2}>
+              Последние фото
             </Typography>
-            <Stack direction="row" spacing={2} max={7}>
-              {chatUsers.map((el) => (
-                <StyledBadge
-                  overlap="circular"
-                  anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                  variant="dot"
-                >
-                  <Avatar alt={el.name} src={el?.img || '/broken-image.jpg'} />
-                </StyledBadge>
-              ))}
-            </Stack>
-          </>
-        )}
-        <Typography variant="h6" fontWeight={100} mt={2} mb={2}>
-          Последние фото
-        </Typography>
-        <ImageList cols={3} rowHeight={100} gap={5}>
-          <ImageListItem>
-            <img
-              src="https://material-ui.com/static/images/image-list/breakfast.jpg"
-              alt=""
-            />
-          </ImageListItem>
-          <ImageListItem>
-            <img
-              src="https://material-ui.com/static/images/image-list/burgers.jpg"
-              alt=""
-            />
-          </ImageListItem>
-          <ImageListItem>
-            <img
-              src="https://material-ui.com/static/images/image-list/camera.jpg"
-              alt=""
-            />
-          </ImageListItem>
-        </ImageList>
-        <News />
-      </Box>
-    </Box>
+            <ImageList cols={3} rowHeight={100} gap={5}>
+              <ImageListItem>
+                <img
+                  src="https://material-ui.com/static/images/image-list/breakfast.jpg"
+                  alt=""
+                />
+              </ImageListItem>
+              <ImageListItem>
+                <img
+                  src="https://material-ui.com/static/images/image-list/burgers.jpg"
+                  alt=""
+                />
+              </ImageListItem>
+              <ImageListItem>
+                <img
+                  src="https://material-ui.com/static/images/image-list/camera.jpg"
+                  alt=""
+                />
+              </ImageListItem>
+            </ImageList>
+            <News />
+          </Box>
+        </Box>
+      )}
+    </>
   );
 };
 

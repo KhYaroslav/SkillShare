@@ -7,6 +7,8 @@ import wsReducer from './reducers/wsReducer';
 import rootSaga from './sagas/rootSaga';
 import alertReducer from './reducers/alertReducer';
 import postReducer from './reducers/postReducer';
+import alarmReducer from './reducers/alarmReducer';
+import statsReducer from './reducers/statsReducer';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -18,6 +20,8 @@ const store = configureStore({
     messages: chatMessageReducer,
     alert: alertReducer,
     posts: postReducer,
+    alarm: alarmReducer,
+    stats: statsReducer,
   },
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware(),

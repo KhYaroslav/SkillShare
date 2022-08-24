@@ -13,13 +13,14 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import React, { useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import { logoutUser } from '../../../Redux/actions/userActions';
+import { getSearchPost } from '../../../Redux/actions/postActions';
 
 const StyledToolbar = styled(Toolbar)({
   display: 'flex',
@@ -53,6 +54,7 @@ const UserBox = styled(Box)(({ theme }) => ({
 export default function Navbar() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [input, setInput] = useState({});
   const user = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -64,12 +66,8 @@ export default function Navbar() {
   };
   const [avatar, setAvatar] = useState({ avatar: null });
   const [ava, setAva] = useState('');
-  console.log('avatar------>', avatar);
-  console.log('ava------>', ava);
-
   const changeHandler2 = (e) => setAvatar((prev) => (
     { ...prev, [e.target.name]: e.target.files[0] }));
-  // console.log('ava----->', ava);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -86,12 +84,15 @@ export default function Navbar() {
       });
   };
 
-  /// //////////////////////////
+  const changeHandler = (e) => {
+    setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
-  // const [input, setInput] = useState({});
-  // const [photo, setPhoto] = useState('');
-
-  console.log('-------------------fff', user);
+  useEffect(() => {
+    if (input.input) {
+      dispatch(getSearchPost(input));
+    }
+  }, [input]);
 
   return (
     <AppBar position="sticky">
@@ -113,7 +114,12 @@ export default function Navbar() {
           || location.pathname === '/new' || location.pathname === '/mytape'
         || location.pathname === '/favorite') && (
           <Search style={{ position: 'absolute', marginLeft: '28%' }}>
-            <InputBase placeholder="Поиск..." />
+            <InputBase
+              name="input"
+              value={input.input || ''}
+              onChange={changeHandler}
+              placeholder="Поиск..."
+            />
           </Search>
         )}
         {user.id ? (
@@ -148,7 +154,6 @@ export default function Navbar() {
                 horizontal: 'right',
               }}
             >
-              {/* Загрузить фото */}
               <form name="avatar-update" id="avatar-form" onSubmit={(e) => submitHandler(e)}>
                 <label htmlFor="avatar-update">
                   <Input name="avatar" accept="image/*" id="avatar-update" multiple type="file" onChange={changeHandler2} style={{ display: 'none' }} />
@@ -158,12 +163,6 @@ export default function Navbar() {
                   Обновить
                 </Button>
               </form>
-
-              {/* <label htmlFor="avatar-update">
-                <Input name="file" accept="image/*" id="avatar-update" multiple type="file" />
-                <div className="avatar-fade">Выбрать новую</div>
-
-            </form> */}
               <MenuItem onClick={logoutHandler}>Добавить фото</MenuItem>
               <MenuItem onClick={logoutHandler}>Выйти</MenuItem>
             </Menu>
