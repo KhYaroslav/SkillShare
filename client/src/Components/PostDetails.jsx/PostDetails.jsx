@@ -12,6 +12,8 @@ import { TiptapComment } from '../MyTextBar/TiptapComment';
 
 export default function PostDetails() {
   const dispatch = useDispatch();
+  const posts = useSelector((state) => state.posts);
+  // const [toggle, setToggle] = useState(false);
   const [post, setPost] = useState();
   const [comment, setComment] = useState('');
   const { id } = useParams();
@@ -19,11 +21,18 @@ export default function PostDetails() {
     axios(`/api/post/${id}`)
       .then((res) => setPost(res.data));
   }, []);
-  // console.log('post---->', post);
+  console.log('posts---->', posts);
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(addComment(post?.id, comment));
+    // setToggle(!toggle);
   };
+  // console.log('posts.find((el) => el.id === id)?.Comments', posts.find((el) => {
+  //   console.log(+el.id === +id);
+  //   console.log(el.id);
+  //   console.log(id);
+  //   return false;
+  // }));
   return (
     <Grid
       container
@@ -39,7 +48,8 @@ export default function PostDetails() {
         {/* <CommentBox /> */}
         <Button variant="contained" type="submit">Ок</Button>
       </form>
-      {post?.Comments?.length && post?.Comments?.map((el) => (
+      {posts.find((el) => +el.id === +id)?.Comments?.length
+      && posts.find((el) => +el.id === +id)?.Comments?.map((el) => (
         <MyComment
           key={el.id}
           post={post}

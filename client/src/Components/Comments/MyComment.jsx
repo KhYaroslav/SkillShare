@@ -9,7 +9,6 @@ import { deleteComment } from '../../Redux/actions/postActions';
 
 export default function MyComment({ comment, post }) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const deleteHandler = () => {
     dispatch(deleteComment(comment?.id));
   };
