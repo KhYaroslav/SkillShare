@@ -83,14 +83,16 @@ function App() {
                 || location.pathname === '/addpost' || location.pathname === '/favorite') && (
                 <>
                   <Navbar />
-                  <Stack direction="row" spacing={2} justifyContent="space-between" style={{ position: 'relative' }}>
+                  <Stack direction="row" spacing={2} style={{ position: 'relative' }}>
                     <Sidebar setMode={setMode} mode={mode} />
-                    <Routes>
-                      <Route path="/mytape" element={<h1>Моя лента</h1>} />
-                      <Route path="/chat" element={<Chat />} />
-                      <Route path="/addpost" element={<AddPost />} />
-                      <Route path="/favorite" element={<h1>favorite</h1>} />
-                    </Routes>
+                    <Box sx={{ width: '50%', margin: 'auto' }}>
+                      <Routes>
+                        <Route path="/mytape" element={<h1>Моя лента</h1>} />
+                        <Route path="/chat" element={<Chat />} />
+                        <Route path="/addpost" element={<AddPost />} />
+                        <Route path="/favorite" element={<h1>favorite</h1>} />
+                      </Routes>
+                    </Box>
                   </Stack>
                   <Add />
                 </>

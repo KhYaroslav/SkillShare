@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 import { take, put, call, fork, takeLatest, takeEvery } from 'redux-saga/effects';
 import { eventChannel, END } from 'redux-saga';
 import { GET_CHAT_MESSAGES, SET_CHAT_MESSAGE, SET_WS } from '../types';

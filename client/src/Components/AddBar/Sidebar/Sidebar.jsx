@@ -35,7 +35,7 @@ const Sidebar = ({ mode, setMode }) => {
     navigate('/');
   };
   return (
-    <Box flex={1} p={2} sx={{ display: { xs: 'none', sm: 'block' } }}>
+    <Box flex={1} p={2} sx={{ maxWidth: '20%' }}>
       <Box position="fixed">
         <List>
           <ListItem disablePadding>

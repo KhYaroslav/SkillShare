@@ -24,6 +24,7 @@ export default function Post({ post }) {
   const user = useSelector((state) => state.user);
   console.log('post---->', post);
   const [checked, setChecked] = useState(false);
+  // eslint-disable-next-line max-len
   useEffect(() => { if (post?.Likes?.find((el) => el.user_id === user.id)) { setChecked(true); } }, []);
   return (
     <Card sx={{ margin: 5 }}>
