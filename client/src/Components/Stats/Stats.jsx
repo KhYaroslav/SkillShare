@@ -8,7 +8,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function Stats() {
   const stats = useSelector((state) => state.stats);
-//h
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(allStats());

@@ -25,7 +25,6 @@ import Stats from './Components/Stats/Stats';
 export default function App() {
   const [mode, setMode] = useState('light');
   const user = useSelector((state) => state.user);
-  const posts = useSelector((state) => state.posts);
 
   const dispatch = useDispatch();
 
