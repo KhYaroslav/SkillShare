@@ -14,6 +14,7 @@ export default function Feed() {
     dispatch(allPosts());
     // }
   }, []);
+  console.log('post---s>', posts);
   return (
     <>
       <Box flex={4} p={{ xs: 0, md: 2 }}>

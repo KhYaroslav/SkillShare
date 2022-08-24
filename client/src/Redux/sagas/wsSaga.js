@@ -5,6 +5,7 @@ import {
   SET_CHAT_MESSAGE,
   SET_WS,
   WS_ALARM,
+  ALL_STATS_USERS,
 } from '../types';
 import alarmWsAction from '../actions/alarmActions';
 
@@ -58,6 +59,13 @@ function* alarmUserEffect(socket) {
   }
 }
 
+function* statsUserEffect(socket) {
+  while (true) {
+    const message = yield take(ALL_STATS_USERS);
+    socket.send(JSON.stringify(message));
+  }
+}
+
 function* chatWatcer(action) {
   const socket = yield call(createWebSocketConnection);
   const socketChannel = yield call(createSocketChannel, socket, action);
@@ -65,6 +73,7 @@ function* chatWatcer(action) {
   yield fork(userMessage, socket);
   yield fork(getUserMessages, socket);
   yield fork(alarmUserEffect, socket);
+  yield fork(statsUserEffect, socket);
 
   while (true) {
     try {
