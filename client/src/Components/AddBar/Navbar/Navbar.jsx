@@ -1,9 +1,10 @@
-import { Notifications, Pets } from '@mui/icons-material';
+import { Notifications, Computer } from '@mui/icons-material';
 import {
   AppBar,
   Avatar,
   Badge,
   Box,
+  Input,
   InputBase,
   Menu,
   MenuItem,
@@ -65,19 +66,21 @@ export default function Navbar() {
   };
   const [avatar, setAvatar] = useState({ avatar: null });
   const [ava, setAva] = useState('');
-
   const changeHandler2 = (e) => setAvatar((prev) => (
     { ...prev, [e.target.name]: e.target.files[0] }));
-  // console.log('ava----->', ava);
+
   const submitHandler = (e) => {
     e.preventDefault();
     const data = new FormData();
+    console.log('--------------------------;lj', data);
     data.append('avatar', avatar.avatar);
     console.log('data--->', data);
     axios.post('/api/user/avatar', data)
       .then((res) => {
+        console.log('--------------------------res', res);
+        setAvatar(res?.data);
         setAva(res?.data);
-        // navigate('/');
+        navigate('/');
       });
   };
 
@@ -99,19 +102,18 @@ export default function Navbar() {
           variant="h6"
           sx={{ display: { xs: 'none', sm: 'block' } }}
         >
-          <a>
-            <img src="https://i.ibb.co/dGbBs5f/666.png" alt="logo" border="0" width="10%" height="10%" style={{ marginTop: '8px' }} />
-            {' '}
-            <a>
-              Skill Share
-            </a>
+          <img src="https://i.ibb.co/dGbBs5f/666.png" alt="logo" border="0" width="20%" height="20%" style={{ marginTop: '8px' }} />
+          {' '}
+          <a style={{ top: '20%', position: 'absolute', marginLeft: '1%' }}>
+            Skill Share
           </a>
+
         </Typography>
-        <Pets sx={{ display: { xs: 'block', sm: 'none' } }} />
+        <Computer sx={{ display: { xs: 'block', sm: 'none' } }} />
         {(location.pathname === '/' || location.pathname === '/popular'
           || location.pathname === '/new' || location.pathname === '/mytape'
         || location.pathname === '/favorite') && (
-          <Search>
+          <Search style={{ position: 'absolute', marginLeft: '28%' }}>
             <InputBase
               name="input"
               value={input.input || ''}
@@ -152,18 +154,26 @@ export default function Navbar() {
                 horizontal: 'right',
               }}
             >
-              {/* Загрузить фото */}
-              <form onSubmit={submitHandler}>
-                <TextField name="avatar" type="file" onChange={changeHandler2} />
-                <button type="submit">Ok</button>
+              <form name="avatar-update" id="avatar-form" onSubmit={(e) => submitHandler(e)}>
+                <label htmlFor="avatar-update">
+                  <Input name="avatar" accept="image/*" id="avatar-update" multiple type="file" onChange={changeHandler2} style={{ display: 'none' }} />
+                  <div className="avatar-fade">Выбрать новую</div>
+                </label>
+                <Button variant="contained" type="submit" className="form-button" size="large">
+                  Обновить
+                </Button>
               </form>
+              <MenuItem onClick={logoutHandler}>Добавить фото</MenuItem>
               <MenuItem onClick={logoutHandler}>Выйти</MenuItem>
             </Menu>
           </>
         ) : (
           <>
-            <Button sx={{ right: '5%' }} variant="contained" onClick={() => navigate('/login')}>Вход</Button>
-            <Button variant="contained" onClick={() => navigate('/signup')}>Регистрация</Button>
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
+              <Button variant="contained" onClick={() => navigate('/login')}>Вход</Button>
+              <Button variant="contained" onClick={() => navigate('/signup')}>Регистрация</Button>
+            </div>
+
           </>
         )}
       </StyledToolbar>

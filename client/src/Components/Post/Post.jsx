@@ -48,6 +48,7 @@ export default function Post({ post, mypost, myFavPost, popular }) {
   const deleteHandler = () => {
     dispatch(deletePost(mypost?.id || post?.id));
   };
+
   return (
     <Card sx={{ margin: 5 }}>
       <CardHeader

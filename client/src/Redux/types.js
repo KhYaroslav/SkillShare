@@ -25,3 +25,8 @@ export const ADD_LIKES = 'ADD_LIKE';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const ADD_COMMENTS = 'ADD_COMMENTS';
 export const DEL_COMMENT = 'DEL_COMMENT';
+
+export const WS_ALARM = 'WS_ALARM';
+export const SET_ALL_USERS_ALARM = 'SET_ALL_USERS_ALARM';
+
+export const ALL_STATS_USERS = 'ALL_STATS_USERS';

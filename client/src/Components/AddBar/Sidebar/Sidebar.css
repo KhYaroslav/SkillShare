@@ -1,0 +1,18 @@
+.alarm {
+  text-align: center;
+  color: black;
+  animation: glow 0.2s ease-in-out infinite alternate;
+  margin-right: 50%;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 10 10 5px red, 0 0 10px red, 0 0 15px red, 0 0 20px red,
+    5 5 25px red, 0 0 30px red, 0 0 35px red;
+  }
+  to {
+    text-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red,
+      0 0 40px red, 0 0 50px red, 0 0 60px red, 0 0 70px red;
+  }
+
+}
