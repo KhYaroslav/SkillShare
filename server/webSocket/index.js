@@ -53,7 +53,6 @@ wss.on('connection', (ws, request, wsMap) => {
             payload: data,
           }),
         );
-
         break;
       case 'WS_ALARM':
         console.log('🚀 ~ file: index.js ~ line 72 ~ ws.on ~ WS_ALARM', 'WS_ALARM');
