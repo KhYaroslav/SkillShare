@@ -20,7 +20,7 @@ export default function AddPost() {
   // const [editPost, setEditPost] = useState();
   const [post, setPost] = useState({ title: '', description: '', file: null });
   useEffect(() => { if (id) { axios(`/api/post/${id}`).then((res) => setPost(res.data)); } }, []);
-  console.log('editPost--+--->', post);
+  // console.log('editPost--+--->', post);
   const changeHandler = (e) => setPost((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   const changeHandler2 = (e) => {
     setPost((prev) => ({ ...prev, [e.target.name]: e.target.files[0] }));
@@ -59,7 +59,7 @@ export default function AddPost() {
               type="file"
               name="file"
               onChange={changeHandler2}
-              // value={editPost?.file || null}
+              // value={post?.file || null}
             />
           </div>
           <Button type="submit" variant="contained" color="primary">

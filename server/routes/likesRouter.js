@@ -1,5 +1,7 @@
 const express = require('express');
-const { Like, User, Post } = require('../db/models');
+const {
+  Like, User, Post, Favorite, Comment,
+} = require('../db/models');
 
 const router = express.Router();
 
@@ -20,6 +22,8 @@ router.get('/:id', async (req, res) => {
       include: [
         { model: User },
         { model: Like },
+        { model: Comment },
+        { model: Favorite },
       ],
     });
     return res.json(post);
@@ -35,6 +39,8 @@ router.get('/:id', async (req, res) => {
     include: [
       { model: User },
       { model: Like },
+      { model: Comment },
+      { model: Favorite },
     ],
   });
   res.json(post);

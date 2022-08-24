@@ -26,7 +26,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { addFavorite, addLike, deletePost } from '../../Redux/actions/postActions';
 
 export default function Post({ post, mypost, myFavPost, popular }) {
-  // console.log('popular---->', popular);
+  // console.log('post---->', post);
   // const location = useLocation();
   // console.log('location---->', location);
   const navigate = useNavigate();
@@ -53,13 +53,13 @@ export default function Post({ post, mypost, myFavPost, popular }) {
       <CardHeader
         avatar={(
           <Avatar sx={{ bgcolor: 'red' }} aria-label="recipe">
-            {myFavPost?.User?.id || mypost?.User?.id || post?.User?.id || popular?.User.id}
+            {myFavPost?.User?.id || mypost?.User?.id || post?.User?.id || popular?.User?.id}
           </Avatar>
         )}
         action={(
           <IconButton
             aria-label="settings"
-            onClick={() => navigate(`post/${post.id || myFavPost?.id || mypost.id || popular.id}`)}
+            onClick={() => navigate(`post/${post.id || myFavPost?.id || mypost?.id || popular?.id}`)}
           >
             <MoreVert />
           </IconButton>
@@ -72,12 +72,13 @@ export default function Post({ post, mypost, myFavPost, popular }) {
       <CardMedia
         component="img"
         height="20%"
-        image={`${process.env.REACT_APP_BASEURL}/${myFavPost?.file || mypost?.file || post?.file || popular?.file}` || 'https://images.pexels.com/photos/4534200/pexels-photo-4534200.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'}
+        image={`${process.env.REACT_APP_BASEURL}/${myFavPost?.file || mypost?.file || post?.file || popular?.file || ''}`}
         alt="Paella dish"
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          {myFavPost?.User?.name || mypost?.User?.name || post?.User?.name || popular?.User.name}
+          {myFavPost?.User?.name || mypost?.User?.name || post?.User?.name || popular?.User?.name}
+          {console.log('postId', post.id, post, myFavPost?.description || mypost?.description || post?.description || popular?.description)}
           <div className="ProseMirror">{parse(myFavPost?.description || mypost?.description || post?.description || popular?.description)}</div>
         </Typography>
       </CardContent>
@@ -97,7 +98,9 @@ export default function Post({ post, mypost, myFavPost, popular }) {
             />
           </Badge>
         </IconButton>
-        <CommentIcon />
+        <Badge badgeContent={myFavPost?.Comments?.length || mypost?.Comments?.length || post?.Comments?.length || popular?.Comments?.length} color="success">
+          <CommentIcon />
+        </Badge>
         <IconButton
           aria-label="share"
           onClick={() => {

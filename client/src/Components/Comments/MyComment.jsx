@@ -40,9 +40,9 @@ export default function MyComment({ comment, post }) {
         >
           <DeleteIcon />
         </IconButton>
-        <IconButton aria-label="edit">
+        {/* <IconButton aria-label="edit">
           <EditIcon onClick={() => navigate(`/post/${post?.id}`)} />
-        </IconButton>
+        </IconButton> */}
       </Grid>
       <Divider variant="fullWidth" style={{ margin: '30px 0' }} />
     </>

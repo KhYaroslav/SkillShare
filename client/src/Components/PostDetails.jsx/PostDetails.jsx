@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { addComment } from '../../Redux/actions/postActions';
 import MyComment from '../Comments/MyComment';
 import { Tiptap } from '../MyTextBar/Tiptap';
+import { TiptapComment } from '../MyTextBar/TiptapComment';
 
 export default function PostDetails() {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ export default function PostDetails() {
     axios(`/api/post/${id}`)
       .then((res) => setPost(res.data));
   }, []);
-  // console.log('comment-post--->', post);
+  // console.log('post---->', post);
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(addComment(post?.id, comment));
@@ -34,11 +35,11 @@ export default function PostDetails() {
     >
       <form onSubmit={submitHandler}>
         PostDetails
-        <Tiptap setComment={setComment} editComment={post} />
+        <TiptapComment setComment={setComment} />
         {/* <CommentBox /> */}
         <Button variant="contained" type="submit">Ок</Button>
       </form>
-      {post?.Comments.length && post?.Comments?.map((el) => (
+      {post?.Comments?.length && post?.Comments?.map((el) => (
         <MyComment
           key={el.id}
           post={post}
