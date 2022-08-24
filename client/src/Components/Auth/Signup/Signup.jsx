@@ -131,7 +131,7 @@ export default function SignUp() {
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link onClick={() => navigate('/login')} variant="body2">
-                У вас уже усть аккаунт? Войти
+                У вас уже есть аккаунт? Войти
               </Link>
             </Grid>
           </Grid>

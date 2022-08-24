@@ -18,6 +18,7 @@ const postRouter = require('./routes/postRouter');
 const likeRouter = require('./routes/likesRouter');
 const favoriteRouter = require('./routes/favoriteRouter');
 const commentRouter = require('./routes/commentRouter');
+const statsRouter = require('./routes/statsRouter');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -31,7 +32,7 @@ app.use(
 
 const sessionParser = session({
   name: process.env.SESSION_NAME,
-  store: new FileStore({}),
+  store: new FileStore(),
   secret: process.env.SESSION_SECRET,
   saveUninitialized: false,
   resave: false,
@@ -49,6 +50,7 @@ app.use('/api/post', postRouter);
 app.use('/api/likes', likeRouter);
 app.use('/api/favorites', favoriteRouter);
 app.use('/api/comment', commentRouter);
+app.use('/api/stats', statsRouter);
 
 const server = http.createServer(app);
 

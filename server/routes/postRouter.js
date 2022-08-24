@@ -22,6 +22,7 @@ router.get('/posts', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
+  await Post.increment({ view: 1 }, { where: { id } });
   const post = await Post.findOne({
     where: { id },
     include: [
@@ -31,6 +32,7 @@ router.get('/:id', async (req, res) => {
       { model: Comment },
     ],
   });
+  // await Post.update({ view: post.view + 1 }, { where: { id } });// добавляем счетчик
   // res.sendStatus(200);
   res.json(post);
 });

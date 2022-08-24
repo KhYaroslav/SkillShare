@@ -3,8 +3,16 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import React from 'react';
 import parse from 'html-react-parser';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { deleteComment } from '../../Redux/actions/postActions';
 
 export default function MyComment({ comment, post }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const deleteHandler = () => {
+    dispatch(deleteComment(comment?.id));
+  };
   return (
     <>
       <Grid
@@ -25,12 +33,16 @@ export default function MyComment({ comment, post }) {
             posted 1 minute ago
           </p>
         </Grid>
-        <IconButton aria-label="delete" size="large">
+        <IconButton
+          aria-label="delete"
+          size="large"
+          onClick={deleteHandler}
+        >
           <DeleteIcon />
         </IconButton>
-        <IconButton aria-label="edit">
-          <EditIcon />
-        </IconButton>
+        {/* <IconButton aria-label="edit">
+          <EditIcon onClick={() => navigate(`/post/${post?.id}`)} />
+        </IconButton> */}
       </Grid>
       <Divider variant="fullWidth" style={{ margin: '30px 0' }} />
     </>

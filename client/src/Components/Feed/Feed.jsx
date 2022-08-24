@@ -10,15 +10,14 @@ export default function Feed() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!posts.length) {
-      dispatch(allPosts());
-    }
-  }, [posts]);
-
+    // if (!posts.length) {
+    dispatch(allPosts());
+    // }
+  }, []);
   return (
     <>
       <Box flex={4} p={{ xs: 0, md: 2 }}>
-        {posts.length && posts.map((el) => <Post key={el.id} post={el} />)}
+        {posts?.length && posts.map((el) => <Post key={el.id} post={el} />)}
       </Box>
     </>
   );
