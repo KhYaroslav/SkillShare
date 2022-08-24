@@ -6,7 +6,7 @@ const {
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-  const posts = await Post.findOne({
+  const posts = await Post.findAll({
     where: {
       user_id: req.session.user.id,
     },
@@ -17,6 +17,7 @@ router.get('/', async (req, res) => {
       { model: Comment },
     ],
   });
+  console.log("🚀 ~ file: statsRouter.js ~ line 20 ~ router.get ~ posts", JSON.stringify(posts))
   // res.sendStatus(200);
   res.json(posts);
 });

@@ -8,7 +8,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function Stats() {
   const stats = useSelector((state) => state.stats);
-  console.log("🚀 ~ file: Stats.jsx ~ line 11 ~ Stats ~ stats", stats)
+  console.log('🚀 ~ file: Stats.jsx ~ line 11 ~ Stats ~ stats', stats);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -17,13 +17,14 @@ export default function Stats() {
 
   const likes = stats?.reduce((acc, el) => acc + el?.Likes?.length, 0);
   const favorites = stats.reduce((acc, el) => acc + el?.Favorites?.length, 0);
+  const views = stats.reduce((acc, el) => acc + el?.view, 0);
 
   const data = {
     labels: ['Лайки', 'Избранные', 'Просмотры', 'Комментарии'],
     datasets: [
       {
         label: '# of Votes',
-        data: [likes, favorites],
+        data: [likes, favorites, views],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
