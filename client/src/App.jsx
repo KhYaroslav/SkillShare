@@ -20,6 +20,7 @@ import Chat from './Components/Chat/Chat';
 import MyTape from './Components/MyTape/MyTape';
 import MyFavorites from './Components/MyFavorites/MyFavorites';
 import PostDetails from './Components/PostDetails.jsx/PostDetails';
+import Stats from './Components/Stats/Stats';
 
 export default function App() {
   const [mode, setMode] = useState('light');
@@ -60,6 +61,7 @@ export default function App() {
                 <Route path="/addpost" element={<AddPost />} />
                 <Route path="/favorite" element={<MyFavorites />} />
                 <Route path="/mytape" element={<MyTape />} />
+                <Route path="/stats" element={<Stats />} />
                 <Route path="/editmypost/:id" element={<AddPost />} />
                 <Route path="/post/:id" element={<PostDetails />} />
                 <Route path="/login" element={<Signin />} />
