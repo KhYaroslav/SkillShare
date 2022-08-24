@@ -32,7 +32,7 @@ app.use(
 
 const sessionParser = session({
   name: process.env.SESSION_NAME,
-  store: new FileStore({}),
+  store: new FileStore(),
   secret: process.env.SESSION_SECRET,
   saveUninitialized: false,
   resave: false,
