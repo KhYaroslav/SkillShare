@@ -17,8 +17,6 @@ router.get('/', async (req, res) => {
       { model: Comment },
     ],
   });
-  console.log("🚀 ~ file: statsRouter.js ~ line 20 ~ router.get ~ posts", JSON.stringify(posts))
-  // res.sendStatus(200);
   res.json(posts);
 });
 

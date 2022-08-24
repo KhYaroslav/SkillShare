@@ -8,7 +8,6 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function Stats() {
   const stats = useSelector((state) => state.stats);
-  console.log('🚀 ~ file: Stats.jsx ~ line 11 ~ Stats ~ stats', stats);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -43,8 +42,11 @@ export default function Stats() {
   };
 
   return (
-    <div style={{ width: '500px' }}>
-      <Doughnut data={data} />
+    <div>
+      <h1>Статистика всех ваших постов:</h1>
+      <div style={{ width: '500px' }}>
+        <Doughnut data={data} />
+      </div>
     </div>
   );
 }
