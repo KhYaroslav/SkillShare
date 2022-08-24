@@ -8,13 +8,14 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function Stats() {
   const stats = useSelector((state) => state.stats);
+  console.log("🚀 ~ file: Stats.jsx ~ line 11 ~ Stats ~ stats", stats)
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(allStats());
   }, []);
 
-  const likes = stats.reduce((acc, el) => acc + el?.Likes?.length, 0);
+  const likes = stats?.reduce((acc, el) => acc + el?.Likes?.length, 0);
   const favorites = stats.reduce((acc, el) => acc + el?.Favorites?.length, 0);
 
   const data = {

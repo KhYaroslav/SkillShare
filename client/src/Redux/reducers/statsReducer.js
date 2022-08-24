@@ -4,7 +4,7 @@ const statsReducer = (state = [], action) => {
   const { type, payload } = action;
   switch (type) {
     case ALL_STATS_USERS:
-      return payload;
+      return [payload];
     default:
       return state;
   }
