@@ -8,7 +8,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function Stats() {
   const stats = useSelector((state) => state.stats);
-  console.log("🚀 ~ file: Stats.jsx ~ line 11 ~ Stats ~ stats", stats)
+  console.log('🚀 ~ file: Stats.jsx ~ line 11 ~ Stats ~ stats', stats);
 
   const dispatch = useDispatch();
   useEffect(() => {

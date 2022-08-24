@@ -79,7 +79,6 @@ export default function Post({ post, mypost, myFavPost, popular }) {
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {myFavPost?.User?.name || mypost?.User?.name || post?.User?.name || popular?.User?.name}
-          {console.log('postId', post.id, post, myFavPost?.description || mypost?.description || post?.description || popular?.description)}
           <div className="ProseMirror">{parse(myFavPost?.description || mypost?.description || post?.description || popular?.description)}</div>
         </Typography>
       </CardContent>
@@ -91,7 +90,13 @@ export default function Post({ post, mypost, myFavPost, popular }) {
             setChecked(!checked);
           }}
         >
-          <Badge badgeContent={myFavPost?.Likes?.length || mypost?.Likes?.length || post?.Likes?.length || popular?.length} color="error">
+          <Badge
+            badgeContent={myFavPost?.Likes?.length
+            || mypost?.Likes?.length || post?.Likes?.length
+            || popular?.length}
+            max={10000}
+            color="error"
+          >
             <Checkbox
               icon={<FavoriteBorder />}
               checkedIcon={<Favorite sx={{ color: 'red' }} />}
@@ -99,7 +104,7 @@ export default function Post({ post, mypost, myFavPost, popular }) {
             />
           </Badge>
         </IconButton>
-        <Badge badgeContent={myFavPost?.Comments?.length || mypost?.Comments?.length || post?.Comments?.length || popular?.Comments?.length} color="success">
+        <Badge badgeContent={myFavPost?.Comments?.length || mypost?.Comments?.length || post?.Comments?.length || popular?.Comments?.length} max={10000} color="success">
           <CommentIcon />
         </Badge>
         <IconButton
@@ -128,7 +133,7 @@ export default function Post({ post, mypost, myFavPost, popular }) {
         >
           <EditIcon />
         </IconButton>
-        <Badge badgeContent={myFavPost?.view || mypost?.view || post?.view || popular?.view} color="success">
+        <Badge badgeContent={myFavPost?.view || mypost?.view || post?.view || popular?.view} max={10000} color="success">
           <RemoveRedEye />
         </Badge>
       </CardActions>
