@@ -10,11 +10,9 @@ export default function Feed() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // if (!posts.length) {
     dispatch(allPosts());
-    // }
   }, []);
-  console.log('post---s>', posts);
+
   return (
     <>
       <Box flex={4} p={{ xs: 0, md: 2 }}>
