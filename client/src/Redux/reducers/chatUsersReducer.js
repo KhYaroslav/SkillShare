@@ -5,7 +5,6 @@ const chatUserReducer = (state = [], action) => {
   switch (type) {
     case ADD_CHAT_USER:
       return payload;
-
     default:
       return state;
   }
