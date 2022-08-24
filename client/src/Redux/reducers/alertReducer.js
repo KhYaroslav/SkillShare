@@ -1,6 +1,6 @@
 import { ALERT_TRUE, ALERT_FALSE } from '../types';
 
-const alertReducer = (state = [], action) => {
+const alertReducer = (state = null, action) => {
   const { type, payload } = action;
   switch (type) {
     case ALERT_TRUE:
