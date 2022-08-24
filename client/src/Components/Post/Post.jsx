@@ -26,25 +26,26 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { addFavorite, addLike, deletePost } from '../../Redux/actions/postActions';
 
 export default function Post({ post, mypost, myFavPost, popular }) {
-  // console.log('post---->', post);
-  // const location = useLocation();
-  // console.log('location---->', location);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const user = useSelector((state) => state.user);
+
   const [checked, setChecked] = useState(false);
   const [checked2, setChecked2] = useState(false);
-  // useEffect(()=>{if(location.path==="/popular")})
+
   useEffect(() => {
     if (post?.Likes?.find((el) => el.user_id === user.id)) {
       setChecked(true);
     }
   }, []);
+
   useEffect(() => {
     if (post?.Favorites?.find((el) => el.user_id === user.id)) {
       setChecked2(true);
     }
   }, []);
+
   const deleteHandler = () => {
     dispatch(deletePost(mypost?.id || post?.id));
   };

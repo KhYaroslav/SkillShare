@@ -53,9 +53,12 @@ const UserBox = styled(Box)(({ theme }) => ({
 }));
 export default function Navbar() {
   const navigate = useNavigate();
+
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState({});
+
   const user = useSelector((state) => state.user);
+  const posts = useSelector((state) => state.posts);
 
   const dispatch = useDispatch();
   const location = useLocation();
