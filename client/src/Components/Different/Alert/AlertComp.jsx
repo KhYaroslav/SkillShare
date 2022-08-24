@@ -1,14 +1,15 @@
 import React from 'react';
 import Alert from '@mui/material/Alert';
 import { useSelector } from 'react-redux';
+import Stack from '@mui/material/Stack';
 
 export default function AlertComp() {
   const alert = useSelector((state) => state.alert);
 
   return (
-    <>
-      {alert ? <Alert severity="success">This is a success alert — check it out!</Alert>
-        : <Alert severity="warning">This is a warning alert — check it out!</Alert>}
-    </>
+    <Stack sx={{ width: '20%' }} spacing={1}>
+      {alert ? <Alert severity="success">Вы успешно зарегестрировались!</Alert>
+        : <Alert severity="warning">Вы не верно зарегестрировались</Alert>}
+    </Stack>
   );
 }

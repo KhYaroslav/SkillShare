@@ -22,6 +22,7 @@ import MyFavorites from './Components/MyFavorites/MyFavorites';
 import PostDetails from './Components/PostDetails.jsx/PostDetails';
 import Popular from './Components/Popular/Popular';
 import Stats from './Components/Stats/Stats';
+import AlertComp from './Components/Different/Alert/AlertComp';
 
 export default function App() {
   const [mode, setMode] = useState('light');
@@ -66,6 +67,7 @@ export default function App() {
                 <Route path="/post/:id" element={<PostDetails />} />
                 <Route path="/login" element={<Signin />} />
                 <Route path="/signup" element={<Signup />} />
+                <Route path="/alert" element={<AlertComp />} />
               </Routes>
               <Rightbar />
             </Stack>
