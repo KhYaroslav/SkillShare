@@ -18,14 +18,15 @@ import {
 import EditIcon from '@mui/icons-material/Edit';
 import CommentIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import DeleteIcon from '@mui/icons-material/Delete';
-import parse from 'html-react-parser';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import parse from 'html-react-parser';
 import { addFavorite, addLike, deletePost } from '../../Redux/actions/postActions';
 
-export default function Post({ post, mypost, myFavPost, popular }) {
+export default function Post({ post, mypost, myFavPost, popular, newTen }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -51,45 +52,54 @@ export default function Post({ post, mypost, myFavPost, popular }) {
   };
 
   return (
-    <Card sx={{ margin: 5 }}>
+    <Card sx={{ margin: 5, border: 1, borderColor: 'text.primary' }}>
       <CardHeader
+        sx={{ borderBottom: 1, borderColor: 'text.primary' }}
         avatar={(
           <Avatar sx={{ bgcolor: 'red' }} aria-label="recipe" alt={user.name} src={`${process.env.REACT_APP_BASEURL}${post?.User?.avatar}` || '/broken-image.jpg'} />
         )}
         action={(
           <IconButton
             aria-label="settings"
-            onClick={() => navigate(`post/${post.id || myFavPost?.id || mypost?.id || popular?.id}`)}
+            onClick={() => navigate(`post/${post?.id || myFavPost?.id || mypost?.id || popular?.id || newTen?.id}`)}
           >
             <MoreVert />
           </IconButton>
         )}
-        title={myFavPost?.title || mypost?.title || post?.title || popular?.title}
+        title={myFavPost?.User?.name
+          || mypost?.User?.name
+          || post?.User?.name
+          || popular?.User?.name
+          || newTen?.User?.name}
         subheader={
-          myFavPost?.createdAt || mypost?.createdAt || post?.createdAt || popular?.createdAt
+          myFavPost?.createdAt.replace(/T/i, ' ').slice(0, 19) || mypost?.createdAt.replace(/T/i, ' ').slice(0, 19) || post?.createdAt.replace(/T/i, ' ').slice(0, 19) || popular?.createdAt.replace(/T/i, ' ').slice(0, 19)
         }
       />
-      <CardMedia
-        component="img"
-        height="20%"
-        image={`${process.env.REACT_APP_BASEURL}/${myFavPost?.file || mypost?.file || post?.file || popular?.file || ''}`}
-        alt="Paella dish"
-      />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          {myFavPost?.User?.name || mypost?.User?.name || post?.User?.name || popular?.User?.name}
-          <div className="ProseMirror">{parse(myFavPost?.description || mypost?.description || post?.description || popular?.description)}</div>
+        <Typography sx={{ textAlign: 'center', fontSize: '30px' }} variant="body2" color="text.secondary">
+          {myFavPost?.title
+            || mypost?.title
+            || post?.title
+            || popular?.title
+            || newTen?.title}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton
           aria-label="add to favorites"
           onClick={() => {
-            dispatch(addLike(myFavPost?.id || mypost?.id || post?.id || popular?.id));
+            dispatch(addLike(
+              myFavPost?.id
+              || mypost?.id
+              || post?.id
+              || popular?.id
+              || newTen?.id
+            ));
             setChecked(!checked);
           }}
         >
           <Badge
+            sx={{ top: '7px', left: '8px' }}
             badgeContent={myFavPost?.Likes?.length
             || mypost?.Likes?.length || post?.Likes?.length
             || popular?.length}
@@ -97,19 +107,25 @@ export default function Post({ post, mypost, myFavPost, popular }) {
             color="error"
           >
             <Checkbox
+              sx={{ bottom: '7px', left: '10px' }}
               icon={<FavoriteBorder />}
-              checkedIcon={<Favorite sx={{ color: 'red' }} />}
+              checkedIcon={<Favorite sx={{ color: 'red', top: '10px' }} />}
               checked={checked}
             />
           </Badge>
         </IconButton>
-        <Badge badgeContent={myFavPost?.Comments?.length || mypost?.Comments?.length || post?.Comments?.length || popular?.Comments?.length} max={10000} color="success">
+        <Badge sx={{ marginLeft: '30px' }} badgeContent={myFavPost?.Comments?.length || mypost?.Comments?.length || post?.Comments?.length || popular?.Comments?.length} max={10000} color="success">
           <CommentIcon />
         </Badge>
+        <Badge sx={{ marginLeft: '30px' }} badgeContent={myFavPost?.view || mypost?.view || post?.view || popular?.view} max={10000} color="success">
+          <VisibilityOutlinedIcon />
+        </Badge>
         <IconButton
+          style={{ position: 'relative', left: '70%', bottom: '153px' }}
           aria-label="share"
           onClick={() => {
-            dispatch(addFavorite(myFavPost?.id || mypost?.id || post?.id || popular?.id));
+            dispatch(addFavorite(myFavPost?.id || mypost?.id || post?.id
+              || popular?.id || newTen?.id));
             setChecked2(!checked2);
           }}
         >
@@ -119,9 +135,9 @@ export default function Post({ post, mypost, myFavPost, popular }) {
             checked={checked2}
           />
         </IconButton>
-        {(user?.id === post.User?.id
+        {(user?.id === post?.User?.id
           && (
-            <>
+            <div style={{ position: 'relative', marginLeft: '63%' }}>
               <IconButton
                 aria-label="delete"
                 size="large"
@@ -131,15 +147,12 @@ export default function Post({ post, mypost, myFavPost, popular }) {
               </IconButton>
               <IconButton
                 aria-label="edit"
-                onClick={() => navigate(`/mypost/${myFavPost?.id || post?.id || mypost?.id || popular?.id}`)}
+                onClick={() => navigate(`/mypost/${myFavPost?.id || post?.id || mypost?.id || popular?.id || newTen?.id}`)}
               >
                 <EditIcon />
               </IconButton>
-            </>
+            </div>
           ))}
-        <Badge badgeContent={myFavPost?.view || mypost?.view || post?.view || popular?.view} max={10000} color="success">
-          <RemoveRedEye />
-        </Badge>
       </CardActions>
     </Card>
   );

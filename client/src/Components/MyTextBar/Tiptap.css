@@ -9,11 +9,16 @@
 /* TitTap Editor Design */
 .ProseMirror {
   padding: 10px;
-  border-top: 1px solid grey;
   background: white;
   border-radius: 0 0 5px 5px;
   min-height: 100px;
 }
+
+.textDescription{
+  text-align: center;
+  font-size: 30px;
+}
+
 .ProseMirror:focus {
   border: none;
   outline: 1px solid aqua;

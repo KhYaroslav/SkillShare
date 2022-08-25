@@ -21,6 +21,7 @@ const commentRouter = require('./routes/commentRouter');
 const statsRouter = require('./routes/statsRouter');
 const popularRouter = require('./routes/popularRouter');
 const newRouter = require('./routes/newRouter');
+const questionRouter = require('./routes/questionRouter');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -55,6 +56,7 @@ app.use('/api/popular', popularRouter);
 app.use('/api/comment', commentRouter);
 app.use('/api/stats', statsRouter);
 app.use('/api/new', newRouter);
+app.use('/api/question', questionRouter);
 
 const server = http.createServer(app);
 

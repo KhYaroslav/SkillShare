@@ -23,6 +23,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import ConnectedTvIcon from '@mui/icons-material/ConnectedTv';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import './Sidebar.css';
 
 import { logoutUser } from '../../../Redux/actions/userActions';
@@ -77,6 +78,14 @@ const Sidebar = ({ mode, setMode }) => {
                       <CropDinIcon />
                     </ListItemIcon>
                     <ListItemText primary="Моя лента" />
+                  </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                  <ListItemButton component="a" onClick={() => navigate('/question')}>
+                    <ListItemIcon>
+                      <HelpOutlineIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Вопросы" />
                   </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>

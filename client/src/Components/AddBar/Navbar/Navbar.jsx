@@ -29,9 +29,14 @@ const StyledToolbar = styled(Toolbar)({
 
 const Search = styled('div')(({ theme }) => ({
   backgroundColor: 'white',
+  color: 'black',
   padding: '0 10px',
   borderRadius: theme.shape.borderRadius,
-  width: '40%',
+  width: '20%',
+  position: 'absolute',
+  left: '40%',
+  border: 1,
+  borderColor: 'text.primary'
 }));
 
 const Icons = styled(Box)(({ theme }) => ({
@@ -118,12 +123,13 @@ export default function Navbar() {
         {(location.pathname === '/' || location.pathname === '/popular'
           || location.pathname === '/new' || location.pathname === '/mytape'
         || location.pathname === '/favorite') && (
-          <Search style={{ position: 'absolute', marginLeft: '28%' }}>
+          <Search>
             <InputBase
               name="input"
               value={input.input || ''}
               onChange={changeHandler}
               placeholder="Поиск..."
+              sx={{ color: 'black' }}
             />
           </Search>
         )}

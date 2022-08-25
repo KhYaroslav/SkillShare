@@ -23,6 +23,9 @@ import PostDetails from './Components/PostDetails.jsx/PostDetails';
 import Popular from './Components/Popular/Popular';
 import Stats from './Components/Stats/Stats';
 import NewTen from './Components/NewTen/NewTen';
+import Questions from './Components/Questions/Questions';
+import AddQuestions from './Components/Questions/addQuestions';
+import Question from './Components/Questions/Question/Question';
 
 export default function App() {
   const [mode, setMode] = useState('light');
@@ -67,6 +70,9 @@ export default function App() {
                 <Route path="/post/:id" element={<PostDetails />} />
                 <Route path="/login" element={<Signin />} />
                 <Route path="/signup" element={<Signup />} />
+                <Route path="/question" element={<Questions />} />
+                <Route path="/question/:id" element={<Question />} />
+                <Route path="/newquestion" element={<AddQuestions />} />
               </Routes>
               <Rightbar />
             </Stack>
