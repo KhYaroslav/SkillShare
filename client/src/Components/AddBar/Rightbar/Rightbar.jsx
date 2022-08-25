@@ -61,7 +61,10 @@ const Rightbar = () => {
   const location = useLocation();
 
   return (
-    <>
+    <div style={{
+      marginRight: '16%'
+    }}
+    >
       {(location.pathname === '/' || location.pathname === '/popular'
         || location.pathname === '/new') && (
         <Box flex={2} p={2} sx={{ display: { sm: 'block' } }}>
@@ -111,7 +114,7 @@ const Rightbar = () => {
           </Box>
         </Box>
       )}
-    </>
+    </div>
   );
 };
 
