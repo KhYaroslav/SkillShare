@@ -86,7 +86,6 @@ export default function SignUp() {
                   value={reg.email}
                   onChange={ChangeSignUp}
                   name="email"
-                  required
                   fullWidth
                   id="email"
                   label="Введите почту..."
@@ -95,19 +94,17 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  fullWidth
-                  required
                   value={reg.password}
                   onChange={ChangeSignUp}
                   name="password"
                   label="Введите пароль..."
                   id="password"
+                  type="password"
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  required
-                  fullWidth
+                  type="password"
                   value={reg.repeat}
                   onChange={ChangeSignUp}
                   name="repeat"
