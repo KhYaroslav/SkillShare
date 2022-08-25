@@ -31,6 +31,7 @@ router.route('/signin').post(async (req, res) => {
 });
 
 router.route('/signup').post(async (req, res) => {
+  console.log('sigbup ===================>');
   const { name, email, password } = req.body;
   if (name && email && password) {
     const pass = await bcrypt.hash(password, 10);

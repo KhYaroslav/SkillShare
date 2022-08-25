@@ -15,6 +15,7 @@ export default function AddPost() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
+
   const [post, setPost] = useState({ title: '', description: '', file: null });
   useEffect(() => { if (id) { axios(`/api/post/${id}`).then((res) => setPost(res.data)); } }, []);
   const changeHandler = (e) => setPost((prev) => ({ ...prev, [e.target.name]: e.target.value }));

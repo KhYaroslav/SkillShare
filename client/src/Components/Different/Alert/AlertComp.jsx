@@ -1,14 +1,102 @@
 import React from 'react';
 import Alert from '@mui/material/Alert';
 import { useSelector } from 'react-redux';
+import Stack from '@mui/material/Stack';
+import { useDispatch } from 'react-redux';
+import { alertCondition } from '../../../Redux/actions/alertActions';
 
-export default function AlertComp() {
+export function AlertSignupSuccess() {
   const alert = useSelector((state) => state.alert);
+  const dispatch = useDispatch();
+
+  if (alert === 2) {
+    setTimeout(() => {
+      dispatch(alertCondition(1));
+    }, 3000);
+  }
 
   return (
-    <>
-      {alert ? <Alert severity="success">This is a success alert — check it out!</Alert>
-        : <Alert severity="warning">This is a warning alert — check it out!</Alert>}
-    </>
+    <Stack
+      sx={{
+        position: 'absolute',
+        top: '0%',
+        right: '0%',
+      }}
+      spacing={1}
+    >
+      {alert === 2 && <Alert severity="success">Вы успешно зарегестрировались!</Alert>}
+    </Stack>
+  );
+}
+
+export function AlertSignupWarning() {
+  const alert = useSelector((state) => state.alert);
+  const dispatch = useDispatch();
+
+  if (alert === 3) {
+    setTimeout(() => {
+      dispatch(alertCondition(1));
+    }, 3000);
+  }
+
+  return (
+    <Stack
+      sx={{
+        position: 'absolute',
+        top: '0%',
+        right: '0%',
+      }}
+      spacing={1}
+    >
+      {alert === 3 && <Alert severity="warning">Неверно указаны данные!</Alert>}
+    </Stack>
+  );
+}
+
+export function AlertSigninSuccess() {
+  const alert = useSelector((state) => state.alert);
+  const dispatch = useDispatch();
+
+  if (alert === 4) {
+    setTimeout(() => {
+      dispatch(alertCondition(1));
+    }, 3000);
+  }
+
+  return (
+    <Stack
+      sx={{
+        position: 'absolute',
+        top: '0%',
+        right: '0%',
+      }}
+      spacing={1}
+    >
+      {alert === 4 && <Alert severity="success">Авторизиризация выполнена!</Alert>}
+    </Stack>
+  );
+}
+
+export function AlertSigninWarning() {
+  const alert = useSelector((state) => state.alert);
+  const dispatch = useDispatch();
+
+  if (alert === 5) {
+    setTimeout(() => {
+      dispatch(alertCondition(1));
+    }, 3000);
+  }
+
+  return (
+    <Stack
+      sx={{
+        position: 'absolute',
+        top: '0%',
+        right: '0%',
+      }}
+      spacing={1}
+    >
+      {alert === 5 && <Alert severity="warning">Неверно указан логин или пароль!</Alert>}
+    </Stack>
   );
 }

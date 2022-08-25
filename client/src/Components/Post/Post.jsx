@@ -22,25 +22,30 @@ import parse from 'html-react-parser';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { addFavorite, addLike, deletePost } from '../../Redux/actions/postActions';
 
 export default function Post({ post, mypost, myFavPost, popular }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const user = useSelector((state) => state.user);
+
   const [checked, setChecked] = useState(false);
   const [checked2, setChecked2] = useState(false);
+
   useEffect(() => {
     if (post?.Likes?.find((el) => el.user_id === user.id)) {
       setChecked(true);
     }
   }, []);
+
   useEffect(() => {
     if (post?.Favorites?.find((el) => el.user_id === user.id)) {
       setChecked2(true);
     }
   }, []);
+
   const deleteHandler = () => {
     dispatch(deletePost(mypost?.id || post?.id));
   };
@@ -84,7 +89,13 @@ export default function Post({ post, mypost, myFavPost, popular }) {
             setChecked(!checked);
           }}
         >
-          <Badge badgeContent={myFavPost?.Likes?.length || mypost?.Likes?.length || post?.Likes?.length || popular?.length} color="error">
+          <Badge
+            badgeContent={myFavPost?.Likes?.length
+            || mypost?.Likes?.length || post?.Likes?.length
+            || popular?.length}
+            max={10000}
+            color="error"
+          >
             <Checkbox
               icon={<FavoriteBorder />}
               checkedIcon={<Favorite sx={{ color: 'red' }} />}
@@ -92,7 +103,7 @@ export default function Post({ post, mypost, myFavPost, popular }) {
             />
           </Badge>
         </IconButton>
-        <Badge badgeContent={myFavPost?.Comments?.length || mypost?.Comments?.length || post?.Comments?.length || popular?.Comments?.length} color="success">
+        <Badge badgeContent={myFavPost?.Comments?.length || mypost?.Comments?.length || post?.Comments?.length || popular?.Comments?.length} max={10000} color="success">
           <CommentIcon />
         </Badge>
         <IconButton
@@ -121,7 +132,7 @@ export default function Post({ post, mypost, myFavPost, popular }) {
         >
           <EditIcon />
         </IconButton>
-        <Badge badgeContent={myFavPost?.view || mypost?.view || post?.view || popular?.view} color="success">
+        <Badge badgeContent={myFavPost?.view || mypost?.view || post?.view || popular?.view} max={10000} color="success">
           <RemoveRedEye />
         </Badge>
       </CardActions>

@@ -25,13 +25,15 @@ const postReducer = (state = [], action) => {
       });
     case ADD_COMMENT:
       return state.map((el) => {
-        if (el.id === payload.id) {
-          return { ...payload };// сделать на комменты
+        if (el.id === payload.post_id) {
+          return { ...el, Comments: [...el.Comments, payload] };
         }
-        return { ...el };
+        return el;
       });
     case DEL_COMMENT:
-      return state.map((el) => el?.Comments).filter((el) => el.id !== payload);
+      return state.map((el) => (
+        { ...el, Comments: el?.Comments.filter((item) => item.id !== payload)
+        }));
     default:
       return state;
   }

@@ -53,7 +53,6 @@ wss.on('connection', (ws, request, wsMap) => {
             payload: data,
           }),
         );
-
         break;
       case 'WS_ALARM':
         for (const [, wsClient] of wsMap) {
