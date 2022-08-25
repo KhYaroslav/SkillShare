@@ -35,7 +35,14 @@ export default function AddPost() {
 
   return (
     <Container>
-      <div className="App">
+
+      <div
+        className="App"
+        style={{
+          position: 'relative',
+          left: '25%',
+        }}
+      >
         <Typography variant="h5">Добавить пост</Typography>
         <form onSubmit={(e) => submitHandler(e, post)}>
           <div className="12">
@@ -49,8 +56,7 @@ export default function AddPost() {
               onChange={changeHandler}
             />
             <div className="App">
-              {post.description
-              && <Tiptap setPost={setPost} post={post} />}
+              <Tiptap setPost={setPost} post={post} />
             </div>
             <TextField
               type="file"
@@ -58,8 +64,15 @@ export default function AddPost() {
               onChange={changeHandler2}
             />
           </div>
-          <Button type="submit" variant="contained" color="primary">
-            save
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            sx={{
+              marginTop: '2%'
+            }}
+          >
+            Добавить
           </Button>
         </form>
       </div>

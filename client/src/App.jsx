@@ -52,7 +52,7 @@ export default function App() {
         <ThemeProvider theme={darkTheme}>
           <Box bgcolor="background.default" color="text.primary">
             <Navbar />
-            <Stack direction="row" spacing={2} justifyContent="space-between" style={{ position: 'relative' }}>
+            <Stack direction="row" spacing={20} justifyContent="space-between" style={{ position: 'relative' }}>
               <Sidebar setMode={setMode} mode={mode} />
               <Routes>
                 <Route path="/" element={<Feed />} />
