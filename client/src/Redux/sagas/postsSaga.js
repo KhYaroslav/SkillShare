@@ -12,7 +12,6 @@ function* allPostSagaWorker() {
     const posts = yield call(allPostSaga);
     yield put(addPosts(posts.data));
   } catch (e) {
-    console.log(e);
     yield put(addPosts([{ word: 'Error from back' }]));
   }
 }

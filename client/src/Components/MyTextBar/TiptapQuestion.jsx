@@ -110,16 +110,16 @@ const MenuBar = ({ editor }) => {
 };
 
 export const TiptapComment = ({ setComment }) => {
+  // console.log('post Tiptap-->', post);
 
   const editor = useEditor({
     extensions: [StarterKit, Underline],
     content: '',
-    // eslint-disable-next-line no-shadow
     onUpdate: ({ editor }) => {
       const htmlComm = editor.getHTML();
       setComment((prev) => ({ ...prev, input: htmlComm }));
     },
-  }, []);
+  }, []);// post, чтобы передал post?.description
 
   return (
     <div className="textEditor">

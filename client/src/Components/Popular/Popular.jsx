@@ -1,14 +1,16 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Post from '../Post/Post';
 
 export default function Popular() {
-  const posts = useSelector((state) => state.posts);
-  const popular = posts?.map((el) => el?.Likes).filter((el) => el.length > 0);
+  const [populars, setPopulars] = useState();
+  useEffect(() => { axios('/api/popular').then((res) => setPopulars(res.data)); }, []);
+
   return (
     <>
       <div>Popular</div>
-      <Post popular={popular} />
+      {populars?.map((el) => <Post popular={el} />)}
     </>
   );
 }

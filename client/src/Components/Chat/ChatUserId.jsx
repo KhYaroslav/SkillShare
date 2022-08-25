@@ -10,7 +10,7 @@ export default function ChatUser({ user }) {
     <List>
       <ListItem button key="RemySharp">
         <ListItemIcon>
-          <Avatar alt={user.name} src={user?.avatar || '/broken-image.jpg"'} />
+          <Avatar alt={user.name} src={`${process.env.REACT_APP_BASEURL}${user.avatar}` || '/broken-image.jpg'} />
         </ListItemIcon>
         <ListItemText primary={user.name} />
       </ListItem>

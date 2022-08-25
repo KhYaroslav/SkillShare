@@ -4,8 +4,8 @@ import Post from '../Post/Post';
 
 export default function MyTape() {
   const posts = useSelector((state) => state.posts);
-  // console.log('posts---->', posts);
   const user = useSelector((state) => state.user);
+
   return (
     <div>
       Мои посты

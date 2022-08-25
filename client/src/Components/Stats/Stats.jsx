@@ -17,13 +17,14 @@ export default function Stats() {
   const likes = stats?.reduce((acc, el) => acc + el?.Likes?.length, 0);
   const favorites = stats.reduce((acc, el) => acc + el?.Favorites?.length, 0);
   const views = stats.reduce((acc, el) => acc + el?.view, 0);
+  const comments = stats.reduce((acc, el) => acc + el?.Comments?.length, 0);
 
   const data = {
     labels: ['Лайки', 'Избранные', 'Просмотры', 'Комментарии'],
     datasets: [
       {
         label: '# of Votes',
-        data: [likes, favorites, views],
+        data: [likes, favorites, views, comments],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
