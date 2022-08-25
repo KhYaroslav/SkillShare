@@ -30,7 +30,6 @@ router.get('/v1', async (req, res) => {
         obj.url = urlArr[i];
         result.push(obj);
       }
-
       return result;
     });
   };

@@ -54,9 +54,7 @@ export default function Post({ post, mypost, myFavPost, popular }) {
     <Card sx={{ margin: 5 }}>
       <CardHeader
         avatar={(
-          <Avatar sx={{ bgcolor: 'red' }} aria-label="recipe">
-            {myFavPost?.User?.id || mypost?.User?.id || post?.User?.id || popular?.User?.id}
-          </Avatar>
+          <Avatar sx={{ bgcolor: 'red' }} aria-label="recipe" alt={user.name} src={`${process.env.REACT_APP_BASEURL}${post?.User?.avatar}` || '/broken-image.jpg'} />
         )}
         action={(
           <IconButton

@@ -52,11 +52,9 @@ export default function AddPost() {
               <Tiptap setPost={setPost} post={post} />
             </div>
             <TextField
-              // style={{ width: '400px', margin: '5px' }}
               type="file"
               name="file"
               onChange={changeHandler2}
-              // value={post?.file || null}
             />
           </div>
           <Button type="submit" variant="contained" color="primary">

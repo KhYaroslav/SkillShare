@@ -19,7 +19,6 @@ router.route('/signin').post(async (req, res) => {
       });
       if (user && (await bcrypt.compare(password, user.password))) {
         req.session.user = { id: user.id, name: user.name, avatar: user.avatar };
-        console.log('----------------------------requser2', req.session.user);
         return res.json({ id: user.id, name: user.name, avatar: user.avatar });
       }
       return res.sendStatus(401);
@@ -50,7 +49,6 @@ router.route('/signup').post(async (req, res) => {
 
 router.route('/check').post((req, res) => {
   if (req.session.user) {
-    console.log('----------------------------requser', req.session.user);
     return res.json(req.session.user);
   }
   return res.sendStatus(401);
@@ -71,13 +69,10 @@ router.route('/logout').get((req, res) => {
 });
 
 router.post('/avatar', upload.single('avatar'), async (req, res) => {
-  console.log('req.file---->', req.file);
   const avatar = req.file?.path.replace('public', '');
-  console.log('avatar----->', avatar);
   const findUser = await User.findOne({ where: { id: req.session.user.id } });
-  console.log('user------>', findUser);
   await findUser.update({ avatar });
-  // await User.create({ avatar: req.file?.path.replace('public', '') });
+  req.session.user.avatar = findUser.avatar;
   res.json(avatar);
 });
 

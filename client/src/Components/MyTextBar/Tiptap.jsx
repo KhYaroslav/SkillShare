@@ -110,8 +110,6 @@ const MenuBar = ({ editor }) => {
 };
 
 export const Tiptap = ({ setPost, setComment, post }) => {
-  // console.log('post Tiptap-->', post);
-
   const editor = useEditor({
     extensions: [StarterKit, Underline],
     content: `${post?.description || ''}`,
@@ -120,7 +118,7 @@ export const Tiptap = ({ setPost, setComment, post }) => {
       const html = editor.getHTML();
       setPost((prev) => ({ ...prev, description: html }));
     },
-  }, []);// post, чтобы передал post?.description
+  }, []);
 
   return (
     <div className="textEditor">

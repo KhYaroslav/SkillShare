@@ -22,8 +22,7 @@ router.patch('/:id', async (req, res) => {
   });
   const comment = await findComment.update({
     user_id: userId, post_id: id, comment_desc,
-  });// скорее всего ошибка в comment_desc
-  // res.sendStatus(200);
+  })
   res.json(comment);
 });
 

@@ -21,31 +21,21 @@ export default function PostDetails() {
     axios(`/api/post/${id}`)
       .then((res) => setPost(res.data));
   }, []);
-  console.log('posts---->', posts);
+
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(addComment(post?.id, comment));
-    // setToggle(!toggle);
   };
-  // console.log('posts.find((el) => el.id === id)?.Comments', posts.find((el) => {
-  //   console.log(+el.id === +id);
-  //   console.log(el.id);
-  //   console.log(id);
-  //   return false;
-  // }));
+
   return (
     <Grid
       container
       spacing={0}
-      //   direction="column"
-      //   alignItems="center"
       justifyContent="center"
-    //   style={{ minHeight: '100vh' }}
     >
       <form onSubmit={submitHandler}>
         PostDetails
         <TiptapComment setComment={setComment} />
-        {/* <CommentBox /> */}
         <Button variant="contained" type="submit">Ок</Button>
       </form>
       {posts.find((el) => +el.id === +id)?.Comments?.length
