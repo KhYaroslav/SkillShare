@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addQuestion } from '../../Redux/actions/questionAction.js';
 import { TiptapQuestion } from '../MyTextBar/TiptapQuestion';
 
-export default function AddPost() {
+export default function AddQuestions() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [question, setQuestion] = useState({ title: '', description: '' });

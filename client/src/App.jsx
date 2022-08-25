@@ -24,8 +24,9 @@ import Popular from './Components/Popular/Popular';
 import Stats from './Components/Stats/Stats';
 import NewTen from './Components/NewTen/NewTen';
 import Questions from './Components/Questions/Questions';
-import AddQuestions from './Components/Questions/addQuestions';
+import AddQuestions from './Components/Questions/AddQuestions';
 import Question from './Components/Questions/Question/Question';
+import AddQuest from './Components/AddQuest/AddQuest';
 
 export default function App() {
   const [mode, setMode] = useState('light');
@@ -76,6 +77,7 @@ export default function App() {
               </Routes>
               <Rightbar />
             </Stack>
+            <AddQuest />
             <Add />
           </Box>
         </ThemeProvider>
