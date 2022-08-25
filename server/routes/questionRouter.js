@@ -6,37 +6,57 @@ const {
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-  const question = await Question.create({
-    title: req.body.title,
-    description: req.body.description,
-    user_id: req.session.user.id,
-  });
+  try {
+    const question = await Question.create({
+      title: req.body.title,
+      description: req.body.description,
+      user_id: req.session.user.id,
+    });
+    res.json(question);
+  } catch (error) {
+    console.log(error);
+    console.log('here error!');
+  }
+
   // res.sendStatus(200);
-  res.json(question);
 });
 
 router.get('/all', async (req, res) => {
-  const questions = await Question.findAll({
-    include: [
-      { model: User },
-    ],
-  });
-  // res.sendStatus(200);
-  res.json(questions);
+  ('here--------------------------->!!!!');
+
+  try {
+    const questions = await Question.findAll({
+      include: [
+        { model: User },
+      ],
+    });
+    // res.sendStatus(200);
+    console.log('questions------>', questions);
+    res.json(questions);
+  } catch (error) {
+    console.log('sdfhsgdhhsdgsdhshdgsd');
+
+    res.sendStatus(402);
+  }
 });
 
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
-  await Question.increment({ view: 1 }, { where: { id } });
-  const question = await Question.findOne({
-    where: { id },
-    include: [
-      { model: User },
-    ],
-  });
+  try {
+    const question = await Question.findOne({
+      where: { id },
+      include: [
+        { model: User },
+      ],
+    });
+
+    res.json(question);
+  } catch (error) {
+    console.log('here mistake!', error);
+  }
+
   // await Post.update({ view: post.view + 1 }, { where: { id } });// добавляем счетчик
   // res.sendStatus(200);
-  res.json(question);
 });
 
 // router.patch('/:id', async (req, res) => {
@@ -56,14 +76,17 @@ router.get('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   const { id } = req.params;
   const userId = req.session.user.id;
-
-  await Question.destroy({
-    where: {
-      id,
-      user_id: userId,
-    },
-  });
-  res.sendStatus(200);
+  try {
+    await Question.destroy({
+      where: {
+        id,
+        user_id: userId,
+      },
+    });
+    res.sendStatus(200);
+  } catch (error) {
+    console.log('error here', error);
+  }
 });
 
 module.exports = router;
