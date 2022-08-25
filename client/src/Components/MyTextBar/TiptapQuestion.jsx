@@ -14,7 +14,7 @@ import {
   FaUndo,
 } from 'react-icons/fa';
 import './Tiptap.css';
-
+//here
 const MenuBar = ({ editor }) => {
   if (!editor) {
     return null;
@@ -109,16 +109,16 @@ const MenuBar = ({ editor }) => {
   );
 };
 
-export const Tiptap = ({ setPost, setComment, post }) => {
-  console.log('post Tiptap-->', post);
+export const TiptapComment = ({ setComment }) => {
+  // console.log('post Tiptap-->', post);
 
   const editor = useEditor({
     extensions: [StarterKit, Underline],
-    content: `${post?.description || ''}`,
+    content: '',
     // eslint-disable-next-line no-shadow
     onUpdate: ({ editor }) => {
-      const html = editor.getHTML();
-      setPost((prev) => ({ ...prev, description: html }));
+      const htmlComm = editor.getHTML();
+      setComment((prev) => ({ ...prev, input: htmlComm }));
     },
   }, []);// post, чтобы передал post?.description
 

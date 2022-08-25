@@ -52,7 +52,8 @@ export default function AddPost() {
               onChange={changeHandler}
             />
             <div className="App">
-              <Tiptap setPost={setPost} post={post} />
+              {post.description
+              && <Tiptap setPost={setPost} post={post} />}
             </div>
             <TextField
               // style={{ width: '400px', margin: '5px' }}
