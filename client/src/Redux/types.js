@@ -29,3 +29,7 @@ export const WS_ALARM = 'WS_ALARM';
 export const SET_ALL_USERS_ALARM = 'SET_ALL_USERS_ALARM';
 
 export const ALL_STATS_USERS = 'ALL_STATS_USERS';
+
+export const ADD_QUESTIONS = 'ADD_QUESTIONS';
+export const ADD_QUESTION = 'ADD_QUESTION';
+export const DEL_QUESTION = 'DEL_QUESTION';

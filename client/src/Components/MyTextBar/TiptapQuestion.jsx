@@ -109,7 +109,7 @@ const MenuBar = ({ editor }) => {
   );
 };
 
-export const TiptapComment = ({ setComment }) => {
+export const TiptapQuestion = ({ setQuestion }) => {
   // console.log('post Tiptap-->', post);
 
   const editor = useEditor({
@@ -117,7 +117,7 @@ export const TiptapComment = ({ setComment }) => {
     content: '',
     onUpdate: ({ editor }) => {
       const htmlComm = editor.getHTML();
-      setComment((prev) => ({ ...prev, input: htmlComm }));
+      setQuestion((prev) => ({ ...prev, input: htmlComm }));
     },
   }, []);// post, чтобы передал post?.description
 

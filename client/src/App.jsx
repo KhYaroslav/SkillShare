@@ -23,6 +23,8 @@ import PostDetails from './Components/PostDetails.jsx/PostDetails';
 import Popular from './Components/Popular/Popular';
 import Stats from './Components/Stats/Stats';
 import NewTen from './Components/NewTen/NewTen';
+import Question from './Components/Question/Question';
+import Questions from './Components/Question/Questions';
 
 export default function App() {
   const [mode, setMode] = useState('light');
@@ -63,6 +65,8 @@ export default function App() {
                 <Route path="/favorite" element={<MyFavorites />} />
                 <Route path="/mytape" element={<MyTape />} />
                 <Route path="/mypost/:id" element={<AddPost />} />
+                <Route path="/questions" element={<Questions />} />
+                <Route path="/question/:id" element={<Question />} />
                 <Route path="/stats" element={<Stats />} />
                 <Route path="/post/:id" element={<PostDetails />} />
                 <Route path="/login" element={<Signin />} />
@@ -71,6 +75,7 @@ export default function App() {
               <Rightbar />
             </Stack>
             <Add />
+            <AddQuestion />
           </Box>
         </ThemeProvider>
       ) : <Loading />}

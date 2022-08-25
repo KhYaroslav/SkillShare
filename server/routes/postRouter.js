@@ -8,7 +8,6 @@ const {
 const router = express.Router();
 
 router.get('/posts', async (req, res) => {
-  console.log('here!!!!---->');
   const posts = await Post.findAll({
     include: [
       { model: User },
@@ -88,19 +87,6 @@ router.delete('/:id', async (req, res) => {
     },
   });
   res.sendStatus(200);
-});
-
-router.get('/popular', async (req, res) => {
-  const posts = await Post.findAll({
-    include: [
-      { model: User },
-      { model: Like },
-      { model: Favorite },
-      { model: Comment },
-    ],
-  });
-
-  res.json(posts);
 });
 
 module.exports = router;

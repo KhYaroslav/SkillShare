@@ -1,4 +1,12 @@
-import { ADD_POSTS, ADD_POST, DEL_POST, ADD_LIKE, FAVORITE_POST, ADD_COMMENT, DEL_COMMENT } from '../types';
+import {
+  ADD_POSTS,
+  ADD_POST,
+  DEL_POST,
+  ADD_LIKE,
+  FAVORITE_POST,
+  ADD_COMMENT,
+  DEL_COMMENT,
+} from '../types';
 
 const postReducer = (state = [], action) => {
   const { type, payload } = action;

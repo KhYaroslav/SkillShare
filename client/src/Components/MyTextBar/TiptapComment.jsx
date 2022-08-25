@@ -110,7 +110,6 @@ const MenuBar = ({ editor }) => {
 };
 
 export const TiptapComment = ({ setComment }) => {
-
   const editor = useEditor({
     extensions: [StarterKit, Underline],
     content: '',
