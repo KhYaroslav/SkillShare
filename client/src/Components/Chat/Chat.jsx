@@ -51,11 +51,13 @@ const Chat = () => {
   };
 
   return (
-    <div style={{ margin: 'auto',
-      paddingTop: '30px',
-      marginRight: '30%',
-      width: '40%',
-      height: '80%' }}
+    <div
+      style={{ margin: 'auto',
+        paddingTop: '30px',
+        marginRight: '30%',
+        width: '40%',
+        height: '80%'
+      }}
     >
       <>
       </>

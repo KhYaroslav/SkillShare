@@ -8,7 +8,6 @@ const {
 const router = express.Router();
 
 router.get('/posts', async (req, res) => {
-  console.log('here!!!!---->');
   const posts = await Post.findAll({
     include: [
       { model: User },

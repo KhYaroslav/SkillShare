@@ -18,11 +18,12 @@ import {
 import EditIcon from '@mui/icons-material/Edit';
 import CommentIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import DeleteIcon from '@mui/icons-material/Delete';
-import parse from 'html-react-parser';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import parse from 'html-react-parser';
 import { addFavorite, addLike, deletePost } from '../../Redux/actions/postActions';
 
 export default function Post({ post, mypost, myFavPost, popular, newTen }) {
@@ -51,8 +52,9 @@ export default function Post({ post, mypost, myFavPost, popular, newTen }) {
   };
 
   return (
-    <Card sx={{ margin: 5 }}>
+    <Card sx={{ margin: 5, border: 1, borderColor: 'text.primary' }}>
       <CardHeader
+        sx={{ borderBottom: 1, borderColor: 'text.primary' }}
         avatar={(
           <Avatar sx={{ bgcolor: 'red' }} aria-label="recipe" alt={user.name} src={`${process.env.REACT_APP_BASEURL}${post?.User?.avatar}` || '/broken-image.jpg'} />
         )}
@@ -70,11 +72,7 @@ export default function Post({ post, mypost, myFavPost, popular, newTen }) {
           || popular?.title
           || newTen?.title}
         subheader={
-          myFavPost?.createdAt
-          || mypost?.createdAt
-          || post?.createdAt
-          || popular?.createdAt
-          || newTen?.createdAt
+          myFavPost?.createdAt.replace(/T/i, ' ').slice(0, 19) || mypost?.createdAt.replace(/T/i, ' ').slice(0, 19) || post?.createdAt.replace(/T/i, ' ').slice(0, 19) || popular?.createdAt.replace(/T/i, ' ').slice(0, 19)
         }
       />
       <CardMedia
@@ -115,23 +113,29 @@ export default function Post({ post, mypost, myFavPost, popular, newTen }) {
           }}
         >
           <Badge
-            badgeContent={
-              myFavPost?.Likes?.length || mypost?.Likes?.length || post?.Likes?.length || popular?.Likes?.length || newTen?.Likes?.length
-            }
+            sx={{ top: '7px', left: '8px' }}
+            badgeContent={myFavPost?.Likes?.length
+            || mypost?.Likes?.length || post?.Likes?.length
+            || popular?.length}
             max={10000}
             color="error"
           >
             <Checkbox
+              sx={{ bottom: '7px', left: '10px' }}
               icon={<FavoriteBorder />}
-              checkedIcon={<Favorite sx={{ color: 'red' }} />}
+              checkedIcon={<Favorite sx={{ color: 'red', top: '10px' }} />}
               checked={checked}
             />
           </Badge>
         </IconButton>
-        <Badge badgeContent={myFavPost?.Comments?.length || mypost?.Comments?.length || post?.Comments?.length || popular?.Comments?.length || newTen?.Comments.length} max={10000} color="success">
+        <Badge sx={{ marginLeft: '30px' }} badgeContent={myFavPost?.Comments?.length || mypost?.Comments?.length || post?.Comments?.length || popular?.Comments?.length} max={10000} color="success">
           <CommentIcon />
         </Badge>
+        <Badge sx={{ marginLeft: '30px' }} badgeContent={myFavPost?.view || mypost?.view || post?.view || popular?.view} max={10000} color="success">
+          <VisibilityOutlinedIcon />
+        </Badge>
         <IconButton
+          style={{ position: 'relative', left: '70%', bottom: '153px' }}
           aria-label="share"
           onClick={() => {
             dispatch(addFavorite(myFavPost?.id || mypost?.id || post?.id || popular?.id || newTen?.id));
@@ -146,7 +150,7 @@ export default function Post({ post, mypost, myFavPost, popular, newTen }) {
         </IconButton>
         {(user?.id === post?.User?.id
           && (
-            <>
+            <div style={{ position: 'relative', marginLeft: '63%' }}>
               <IconButton
                 aria-label="delete"
                 size="large"
@@ -160,7 +164,7 @@ export default function Post({ post, mypost, myFavPost, popular, newTen }) {
               >
                 <EditIcon />
               </IconButton>
-            </>
+            </div>
           ))}
         <Badge badgeContent={myFavPost?.view || mypost?.view || post?.view || popular?.view || newTen?.id} max={10000} color="success">
           <RemoveRedEye />
