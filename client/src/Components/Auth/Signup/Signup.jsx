@@ -11,8 +11,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { userSignUp, alertFalse, alertTrue } from '../../../Redux/actions/userActions';
-import { AlertFalseComp } from '../../Different/Alert/AlertComp';
+import { userSignUp, alertCondition } from '../../../Redux/actions/userActions';
+import { AlertSignupWarning } from '../../Different/Alert/AlertComp';
 
 function Copyright(props) {
   return (
@@ -37,11 +37,11 @@ export default function SignUp() {
     e.preventDefault();
     if (reg.password !== '' && reg.name !== '' && reg.repeat === reg.password) {
       dispatch(userSignUp(reg));
-      dispatch(alertTrue());
+      dispatch(alertCondition(2));
       setReg();
       navigate('/');
     } else {
-      dispatch(alertFalse());
+      dispatch(alertCondition(3));
     }
   };
 
@@ -49,7 +49,7 @@ export default function SignUp() {
 
   return (
     <>
-      <AlertFalseComp />
+      <AlertSignupWarning />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box

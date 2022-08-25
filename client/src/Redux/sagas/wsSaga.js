@@ -59,13 +59,6 @@ function* alarmUserEffect(socket) {
   }
 }
 
-function* statsUserEffect(socket) {
-  while (true) {
-    const message = yield take(ALL_STATS_USERS);
-    socket.send(JSON.stringify(message));
-  }
-}
-
 function* chatWatcer(action) {
   const socket = yield call(createWebSocketConnection);
   const socketChannel = yield call(createSocketChannel, socket, action);
@@ -73,7 +66,6 @@ function* chatWatcer(action) {
   yield fork(userMessage, socket);
   yield fork(getUserMessages, socket);
   yield fork(alarmUserEffect, socket);
-  yield fork(statsUserEffect, socket);
 
   while (true) {
     try {

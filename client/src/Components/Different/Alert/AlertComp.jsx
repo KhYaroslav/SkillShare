@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Alert from '@mui/material/Alert';
 import { useSelector } from 'react-redux';
 import Stack from '@mui/material/Stack';
+import { useDispatch } from 'react-redux';
+import { alertCondition } from '../../../Redux/actions/userActions';
 
-export function AlertTrueComp() {
+export function AlertSignupSuccess() {
   const alert = useSelector((state) => state.alert);
-  const [alertTrue, setAlertTrue] = useState(false);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    setAlertTrue(true);
+  if (alert === 2) {
     setTimeout(() => {
-      setAlertTrue(false);
+      dispatch(alertCondition(1));
     }, 3000);
-  }, []);
+  }
 
   return (
     <Stack
@@ -23,21 +24,20 @@ export function AlertTrueComp() {
       }}
       spacing={1}
     >
-      {alertTrue && alert && <Alert severity="success">Вы успешно зарегестрировались!</Alert>}
+      {alert === 2 && <Alert severity="success">Вы успешно зарегестрировались!</Alert>}
     </Stack>
   );
 }
 
-export function AlertFalseComp() {
+export function AlertSignupWarning() {
   const alert = useSelector((state) => state.alert);
-  const [alertFalse, setAlertFalse] = useState(false);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    setAlertFalse(true);
+  if (alert === 3) {
     setTimeout(() => {
-      setAlertFalse(false);
+      dispatch(alertCondition(1));
     }, 3000);
-  }, [alert]);
+  }
 
   return (
     <Stack
@@ -48,7 +48,55 @@ export function AlertFalseComp() {
       }}
       spacing={1}
     >
-      {alertFalse && <Alert severity="warning">Неверно указана почта или пароль!</Alert>}
+      {alert === 3 && <Alert severity="warning">Неверно указаны данные!</Alert>}
+    </Stack>
+  );
+}
+
+export function AlertSigninSuccess() {
+  const alert = useSelector((state) => state.alert);
+  const dispatch = useDispatch();
+
+  if (alert === 4) {
+    setTimeout(() => {
+      dispatch(alertCondition(1));
+    }, 3000);
+  }
+
+  return (
+    <Stack
+      sx={{
+        position: 'absolute',
+        top: '0%',
+        right: '0%',
+      }}
+      spacing={1}
+    >
+      {alert === 4 && <Alert severity="success">Авторизиризация выполнена!</Alert>}
+    </Stack>
+  );
+}
+
+export function AlertSigninWarning() {
+  const alert = useSelector((state) => state.alert);
+  const dispatch = useDispatch();
+
+  if (alert === 5) {
+    setTimeout(() => {
+      dispatch(alertCondition(1));
+    }, 3000);
+  }
+
+  return (
+    <Stack
+      sx={{
+        position: 'absolute',
+        top: '0%',
+        right: '0%',
+      }}
+      spacing={1}
+    >
+      {alert === 5 && <Alert severity="warning">Неверно указан логин или пароль!</Alert>}
     </Stack>
   );
 }
