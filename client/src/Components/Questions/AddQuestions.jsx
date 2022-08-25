@@ -6,10 +6,10 @@ import { Container } from '@mui/system';
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addQuestion } from '../../Redux/actions/questionAction.js';
+import { addQuestion } from '../../Redux/actions/questionAction.js.js';
 import { TiptapQuestion } from '../MyTextBar/TiptapQuestion';
 
-export default function AddPost() {
+export default function AddQuestions() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [question, setQuestion] = useState({ title: '', description: '' });

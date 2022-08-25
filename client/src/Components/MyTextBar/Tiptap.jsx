@@ -110,6 +110,7 @@ const MenuBar = ({ editor }) => {
 };
 
 export const Tiptap = ({ setPost, setComment, post }) => {
+  console.log('post-------------->', post);
   const editor = useEditor({
     extensions: [StarterKit, Underline],
     content: `${post?.description || ''}`,

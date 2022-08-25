@@ -24,8 +24,9 @@ import Popular from './Components/Popular/Popular';
 import Stats from './Components/Stats/Stats';
 import NewTen from './Components/NewTen/NewTen';
 import Questions from './Components/Questions/Questions';
-import AddQuestions from './Components/Questions/addQuestions';
+import AddQuestions from './Components/Questions/AddQuestions';
 import Question from './Components/Questions/Question/Question';
+import EditPost from './Components/EditPost/EditPost';
 
 export default function App() {
   const [mode, setMode] = useState('light');
@@ -65,7 +66,7 @@ export default function App() {
                 <Route path="/addpost" element={<AddPost />} />
                 <Route path="/favorite" element={<MyFavorites />} />
                 <Route path="/mytape" element={<MyTape />} />
-                <Route path="/mypost/:id" element={<AddPost />} />
+                <Route path="/mypost/:id" element={<EditPost />} />
                 <Route path="/stats" element={<Stats />} />
                 <Route path="/post/:id" element={<PostDetails />} />
                 <Route path="/login" element={<Signin />} />
