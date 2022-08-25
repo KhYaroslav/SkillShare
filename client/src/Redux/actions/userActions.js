@@ -1,14 +1,10 @@
 import axios from 'axios';
-import { ADD_USER, ALERT_CONDITION } from '../types';
+import { ADD_USER } from '../types';
+import { alertCondition } from './alertActions';
 
 export const userAdd = (value) => ({
   type: ADD_USER,
   payload: value,
-});
-
-export const alertCondition = (num) => ({
-  type: ALERT_CONDITION,
-  payload: num,
 });
 
 export const userCheck = () => (dispatch) => {

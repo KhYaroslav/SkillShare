@@ -3,7 +3,7 @@ import Alert from '@mui/material/Alert';
 import { useSelector } from 'react-redux';
 import Stack from '@mui/material/Stack';
 import { useDispatch } from 'react-redux';
-import { alertCondition } from '../../../Redux/actions/userActions';
+import { alertCondition } from '../../../Redux/actions/alertActions';
 
 export function AlertSignupSuccess() {
   const alert = useSelector((state) => state.alert);

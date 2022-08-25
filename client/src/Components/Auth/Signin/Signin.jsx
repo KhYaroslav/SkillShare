@@ -11,7 +11,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { alertCondition, userLogin } from '../../../Redux/actions/userActions';
+import { userLogin } from '../../../Redux/actions/userActions';
+import { alertCondition } from '../../../Redux/actions/alertActions';
 import { AlertSigninWarning } from '../../Different/Alert/AlertComp';
 
 function Copyright(props) {

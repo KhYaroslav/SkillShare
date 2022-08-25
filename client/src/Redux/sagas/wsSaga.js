@@ -5,7 +5,6 @@ import {
   SET_CHAT_MESSAGE,
   SET_WS,
   WS_ALARM,
-  ALL_STATS_USERS,
 } from '../types';
 import alarmWsAction from '../actions/alarmActions';
 
