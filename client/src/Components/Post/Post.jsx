@@ -66,36 +66,22 @@ export default function Post({ post, mypost, myFavPost, popular, newTen }) {
             <MoreVert />
           </IconButton>
         )}
-        title={myFavPost?.title
-          || mypost?.title
-          || post?.title
-          || popular?.title
-          || newTen?.title}
-        subheader={
-          myFavPost?.createdAt.replace(/T/i, ' ').slice(0, 19) || mypost?.createdAt.replace(/T/i, ' ').slice(0, 19) || post?.createdAt.replace(/T/i, ' ').slice(0, 19) || popular?.createdAt.replace(/T/i, ' ').slice(0, 19)
-        }
-      />
-      <CardMedia
-        component="img"
-        height="20%"
-        image={`${process.env.REACT_APP_BASEURL}/${myFavPost?.file || mypost?.file || post?.file || popular?.file || newTen?.file || ''}`}
-        alt="Paella dish"
-      />
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          {myFavPost?.User?.name
+        title={myFavPost?.User?.name
           || mypost?.User?.name
           || post?.User?.name
           || popular?.User?.name
           || newTen?.User?.name}
-          <div className="ProseMirror">
-            {parse(myFavPost?.description
-            || mypost?.description
-            || post?.description
-            || popular?.description
-            || newTen?.description)}
-
-          </div>
+        subheader={
+          myFavPost?.createdAt.replace(/T/i, ' ').slice(0, 19) || mypost?.createdAt.replace(/T/i, ' ').slice(0, 19) || post?.createdAt.replace(/T/i, ' ').slice(0, 19) || popular?.createdAt.replace(/T/i, ' ').slice(0, 19)
+        }
+      />
+      <CardContent>
+        <Typography sx={{ textAlign: 'center', fontSize: '30px' }} variant="body2" color="text.secondary">
+          {myFavPost?.title
+            || mypost?.title
+            || post?.title
+            || popular?.title
+            || newTen?.title}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -138,7 +124,8 @@ export default function Post({ post, mypost, myFavPost, popular, newTen }) {
           style={{ position: 'relative', left: '70%', bottom: '153px' }}
           aria-label="share"
           onClick={() => {
-            dispatch(addFavorite(myFavPost?.id || mypost?.id || post?.id || popular?.id || newTen?.id));
+            dispatch(addFavorite(myFavPost?.id || mypost?.id || post?.id
+              || popular?.id || newTen?.id));
             setChecked2(!checked2);
           }}
         >
@@ -166,9 +153,6 @@ export default function Post({ post, mypost, myFavPost, popular, newTen }) {
               </IconButton>
             </div>
           ))}
-        <Badge badgeContent={myFavPost?.view || mypost?.view || post?.view || popular?.view || newTen?.id} max={10000} color="success">
-          <RemoveRedEye />
-        </Badge>
       </CardActions>
     </Card>
   );
