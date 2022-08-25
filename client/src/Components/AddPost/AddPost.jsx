@@ -12,15 +12,11 @@ import { Tiptap } from '../MyTextBar/Tiptap';
 import { postAdd } from '../../Redux/actions/postActions';
 
 export default function AddPost() {
-  // const posts = useSelector((state) => state.posts);
   const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
-  // const [allPosts, setAllPosts] = useState('');
-  // const [editPost, setEditPost] = useState();
   const [post, setPost] = useState({ title: '', description: '', file: null });
   useEffect(() => { if (id) { axios(`/api/post/${id}`).then((res) => setPost(res.data)); } }, []);
-  // console.log('editPost--+--->', post);
   const changeHandler = (e) => setPost((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   const changeHandler2 = (e) => {
     setPost((prev) => ({ ...prev, [e.target.name]: e.target.files[0] }));
@@ -55,11 +51,9 @@ export default function AddPost() {
               <Tiptap setPost={setPost} post={post} />
             </div>
             <TextField
-              // style={{ width: '400px', margin: '5px' }}
               type="file"
               name="file"
               onChange={changeHandler2}
-              // value={post?.file || null}
             />
           </div>
           <Button type="submit" variant="contained" color="primary">

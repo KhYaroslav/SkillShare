@@ -19,7 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
-import { logoutUser } from '../../../Redux/actions/userActions';
+import { logoutUser, userCheck } from '../../../Redux/actions/userActions';
 import { getSearchPost } from '../../../Redux/actions/postActions';
 
 const StyledToolbar = styled(Toolbar)({
@@ -70,16 +70,13 @@ export default function Navbar() {
     { ...prev, [e.target.name]: e.target.files[0] }));
 
   const submitHandler = (e) => {
-    e.preventDefault();
     const data = new FormData();
-    console.log('--------------------------;lj', data);
     data.append('avatar', avatar.avatar);
-    console.log('data--->', data);
     axios.post('/api/user/avatar', data)
       .then((res) => {
-        console.log('--------------------------res', res);
         setAvatar(res?.data);
         setAva(res?.data);
+        dispatch(userCheck());
         navigate('/');
       });
   };
@@ -94,6 +91,12 @@ export default function Navbar() {
     }
   }, [input]);
 
+  useEffect((e) => {
+    if (avatar.avatar) {
+      submitHandler(e);
+    }
+  }, [avatar.avatar]);
+
   return (
     <AppBar position="sticky">
       <StyledToolbar>
@@ -107,7 +110,6 @@ export default function Navbar() {
           <a style={{ top: '20%', position: 'absolute', marginLeft: '1%' }}>
             Skill Share
           </a>
-
         </Typography>
         <Computer sx={{ display: { xs: 'block', sm: 'none' } }} />
         {(location.pathname === '/' || location.pathname === '/popular'
@@ -130,15 +132,17 @@ export default function Navbar() {
               </Badge>
               <Avatar
                 sx={{ width: 30, height: 30 }}
+                src={`${process.env.REACT_APP_BASEURL}${user.avatar}`}
                 onClick={(e) => setOpen(true)}
               />
             </Icons>
             <UserBox onClick={(e) => setOpen(true)}>
               <Avatar
                 sx={{ width: 30, height: 30 }}
-                src={user.avatar || '/broken-image.jpg'}
+                src={`${process.env.REACT_APP_BASEURL}${user.avatar}`}
               />
               <Typography variant="span">{user.name}</Typography>
+              <Typography variant="span">{user.avatar}</Typography>
             </UserBox>
             <Menu
               id="demo-positioned-menu"
@@ -157,13 +161,10 @@ export default function Navbar() {
               <form name="avatar-update" id="avatar-form" onSubmit={(e) => submitHandler(e)}>
                 <label htmlFor="avatar-update">
                   <Input name="avatar" accept="image/*" id="avatar-update" multiple type="file" onChange={changeHandler2} style={{ display: 'none' }} />
-                  <div className="avatar-fade">Выбрать новую</div>
+                  <MenuItem>Добавить фото</MenuItem>
                 </label>
-                <Button variant="contained" type="submit" className="form-button" size="large">
-                  Обновить
-                </Button>
               </form>
-              <MenuItem onClick={logoutHandler}>Добавить фото</MenuItem>
+
               <MenuItem onClick={logoutHandler}>Выйти</MenuItem>
             </Menu>
           </>

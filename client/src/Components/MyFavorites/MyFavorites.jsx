@@ -5,7 +5,6 @@ import Post from '../Post/Post';
 export default function MyFavorites() {
   const posts = useSelector((state) => state.posts);
   const user = useSelector((state) => state.user);
-  //   console.log('posts---->', posts);
   return (
     <div>
       MyFavorites

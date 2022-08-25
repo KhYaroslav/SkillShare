@@ -26,15 +26,11 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { addFavorite, addLike, deletePost } from '../../Redux/actions/postActions';
 
 export default function Post({ post, mypost, myFavPost, popular }) {
-  // console.log('post---->', post);
-  // const location = useLocation();
-  // console.log('location---->', location);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const [checked, setChecked] = useState(false);
   const [checked2, setChecked2] = useState(false);
-  // useEffect(()=>{if(location.path==="/popular")})
   useEffect(() => {
     if (post?.Likes?.find((el) => el.user_id === user.id)) {
       setChecked(true);
@@ -53,9 +49,7 @@ export default function Post({ post, mypost, myFavPost, popular }) {
     <Card sx={{ margin: 5 }}>
       <CardHeader
         avatar={(
-          <Avatar sx={{ bgcolor: 'red' }} aria-label="recipe">
-            {myFavPost?.User?.id || mypost?.User?.id || post?.User?.id || popular?.User?.id}
-          </Avatar>
+          <Avatar sx={{ bgcolor: 'red' }} aria-label="recipe" alt={user.name} src={`${process.env.REACT_APP_BASEURL}${post?.User?.avatar}` || '/broken-image.jpg'} />
         )}
         action={(
           <IconButton
@@ -79,7 +73,6 @@ export default function Post({ post, mypost, myFavPost, popular }) {
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {myFavPost?.User?.name || mypost?.User?.name || post?.User?.name || popular?.User?.name}
-          {console.log('postId', post.id, post, myFavPost?.description || mypost?.description || post?.description || popular?.description)}
           <div className="ProseMirror">{parse(myFavPost?.description || mypost?.description || post?.description || popular?.description)}</div>
         </Typography>
       </CardContent>

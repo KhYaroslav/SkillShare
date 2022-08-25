@@ -19,7 +19,6 @@ export default function PostDetails() {
     axios(`/api/post/${id}`)
       .then((res) => setPost(res.data));
   }, []);
-  // console.log('post---->', post);
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(addComment(post?.id, comment));
@@ -28,15 +27,11 @@ export default function PostDetails() {
     <Grid
       container
       spacing={0}
-      //   direction="column"
-      //   alignItems="center"
       justifyContent="center"
-    //   style={{ minHeight: '100vh' }}
     >
       <form onSubmit={submitHandler}>
         PostDetails
         <TiptapComment setComment={setComment} />
-        {/* <CommentBox /> */}
         <Button variant="contained" type="submit">Ок</Button>
       </form>
       {post?.Comments?.length && post?.Comments?.map((el) => (
