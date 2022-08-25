@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from 'react';
-// import  styled  from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Avatar from '@mui/material/Avatar';
 import Fab from '@mui/material/Fab';
 import SendIcon from '@mui/icons-material/Send';
 import { useSelector, useDispatch } from 'react-redux';
@@ -21,29 +16,7 @@ import IdMessage from './IdMessage';
 import OtherMessage from './OtherMessage';
 import { alarmWsAction } from '../../Redux/actions/alarmActions';
 
-// const useStyles = styled({
-//   table: {
-//     minWidth: 650,
-//   },
-//   chatSection: {
-//     width: '100%',
-//     height: '80vh'
-//   },
-//   headBG: {
-//     backgroundColor: '#e0e0e0'
-//   },
-//   borderRight500: {
-//     borderRight: '1px solid #e0e0e0'
-//   },
-//   messageArea: {
-//     height: '70vh',
-//     overflowY: 'auto'
-//   }
-// });
-
 const Chat = () => {
-  // const classes = useStyles();
-
   const [input, setInput] = useState('');
   const messages = useSelector((state) => state.messages);
   const chatUsers = useSelector((state) => state.chatUsers);
@@ -76,12 +49,15 @@ const Chat = () => {
     dispatch(sendChatMessage({ message: input, user: user.name }));
     setInput('');
   };
+
   return (
     <div style={{ margin: 'auto',
-      paddingTop: '30px' }}
+      paddingTop: '30px',
+      marginRight: '30%',
+      width: '40%',
+      height: '80%' }}
     >
       <>
-        <Button sx={{ right: '5%' }} variant="contained" onClick={() => dispatch(alarmWsAction())}>Тревога</Button>
       </>
       <Grid container>
         <Grid item xs={12}>
@@ -93,7 +69,11 @@ const Chat = () => {
           <ChatUserId user={user} />
           <Divider />
           {chatUsers.filter((el) => el.id !== user.id).map(
-            (el) => <OtherUser key={el.id} user={el} />
+            (el) => (
+              <>
+                <OtherUser key={el.id} user={el} />
+              </>
+            )
           )}
         </Grid>
         <Grid item xs={9}>
@@ -101,26 +81,20 @@ const Chat = () => {
             className="sagsg"
             style={{ overflowY: 'scroll',
               position: 'fixed',
-              height: '60%',
+              height: '47%',
               width: '100%' }}
           >
             {messages.map((el) => ((el.id === user.id)
               ? <IdMessage key={el.msId} message={el} />
               : <OtherMessage key={el.msId} message={el} />))}
-
-            {/* {messages.filter((el) => el.id === user.id).map(
-              (el) => <IdMessage key={el.msId} message={el} />
-            )}
-
-            {messages.filter((el) => el.id !== user.id).map(
-              (el) => <OtherMessage key={el.msId} message={el} />
-            )} */}
-
           </List>
           <Divider />
-          <Grid container style={{ paddingTop: '80%', paddingBottom: '2%', paddingRight: '2%' }}>
+          <Grid container style={{ paddingTop: '80%', paddingBottom: '2%', paddingRight: '7%' }}>
+
             <Grid item xs={11}>
+              <Button style={{ marginTop: '2%', backgroundColor: 'red' }} variant="contained" onClick={() => dispatch(alarmWsAction())}>Тревога</Button>
               <TextField
+                style={{ width: '65%', marginLeft: '1%' }}
                 id="outlined-basic-email"
                 value={input}
                 onChange={inputHAndler}
@@ -130,7 +104,7 @@ const Chat = () => {
               />
             </Grid>
             <Grid xs={1} align="right">
-              <Fab color="primary" aria-label="add" onClick={submitHandler}><SendIcon /></Fab>
+              <Fab color="primary" aria-label="add" onClick={submitHandler} style={{ marginRight: '5%' }}><SendIcon /></Fab>
             </Grid>
           </Grid>
         </Grid>

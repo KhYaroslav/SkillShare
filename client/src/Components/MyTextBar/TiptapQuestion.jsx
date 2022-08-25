@@ -14,7 +14,7 @@ import {
   FaUndo,
 } from 'react-icons/fa';
 import './Tiptap.css';
-//here
+
 const MenuBar = ({ editor }) => {
   if (!editor) {
     return null;
@@ -115,7 +115,6 @@ export const TiptapComment = ({ setComment }) => {
   const editor = useEditor({
     extensions: [StarterKit, Underline],
     content: '',
-    // eslint-disable-next-line no-shadow
     onUpdate: ({ editor }) => {
       const htmlComm = editor.getHTML();
       setComment((prev) => ({ ...prev, input: htmlComm }));

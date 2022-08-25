@@ -5,7 +5,11 @@ import Grid from '@mui/material/Grid';
 
 export default function OtherMessage({ key, message }) {
   return (
-    <ListItem key={key}>
+    <ListItem
+      key={key}
+      style={{ width: '30%',
+      }}
+    >
       <Grid container textAlign="left">
         <Grid item xs={12}>
           <ListItemText
@@ -13,25 +17,7 @@ export default function OtherMessage({ key, message }) {
             secondary={message.message}
           />
         </Grid>
-        {/* <Grid item xs={12}>
-          <ListItemText align="left" secondary="09:31" />
-        </Grid> */}
       </Grid>
     </ListItem>
   );
 }
-
-// export default function OtherMessage({ key, message }) {
-//   return (
-//     <ListItem key={key}>
-//       <Grid container>
-//         <Grid item xs={12}>
-//           <ListItemText align="left" primary={message.name} secondary={message.message} />
-//         </Grid>
-//         {/* <Grid item xs={12}>
-//           <ListItemText align="left" secondary="09:31" />
-//         </Grid> */}
-//       </Grid>
-//     </ListItem>
-//   );
-// }

@@ -14,7 +14,6 @@ router.get('/:id', async (req, res) => {
       post_id: id,
     },
   });
-  // console.log('checkLike---->', checkLike);
   if (checkLike.length === 0) {
     await Like.create({ user_id: req.session.user.id, post_id: id });
     const post = await Post.findOne({
