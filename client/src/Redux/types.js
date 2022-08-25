@@ -9,8 +9,7 @@ export const SET_CHAT_MESSAGE = 'SET_CHAT_MESSAGE';
 export const ADD_CHAT_MESSAGES = 'ADD_CHAT_MESSAGES';
 export const SOCKET_INIT = 'SOCKET_INIT';
 
-export const ALERT_TRUE = 'ALERT_TRUE';
-export const ALERT_FALSE = 'ALERT_FALSE';
+export const ALERT_CONDITION = 'ALERT_CONDITION';
 
 export const ALL_POST = 'ALL_POST';
 export const ADD_POST = 'ADD_POST';
