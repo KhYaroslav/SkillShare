@@ -129,6 +129,7 @@ export default function Navbar() {
               value={input.input || ''}
               onChange={changeHandler}
               placeholder="Поиск..."
+              sx={{ color: 'black' }}
             />
           </Search>
         )}
