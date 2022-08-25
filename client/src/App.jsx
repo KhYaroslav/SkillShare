@@ -25,6 +25,7 @@ import Stats from './Components/Stats/Stats';
 import NewTen from './Components/NewTen/NewTen';
 import Question from './Components/Question/Question';
 import Questions from './Components/Question/Questions';
+import AddQuestion from './Components/Add/Add Question';
 
 export default function App() {
   const [mode, setMode] = useState('light');
@@ -75,7 +76,6 @@ export default function App() {
               <Rightbar />
             </Stack>
             <Add />
-            <AddQuestion />
           </Box>
         </ThemeProvider>
       ) : <Loading />}
