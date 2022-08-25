@@ -49,8 +49,8 @@ export default function AddPost() {
               onChange={changeHandler}
             />
             <div className="App">
-              {post.description
-              && <Tiptap setPost={setPost} post={post} />}
+
+              <Tiptap setPost={setPost} post={post} />
             </div>
             <TextField
               type="file"
