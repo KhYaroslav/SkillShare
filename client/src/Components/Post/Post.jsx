@@ -72,7 +72,11 @@ export default function Post({ post, mypost, myFavPost, popular, newTen }) {
           || popular?.User?.name
           || newTen?.User?.name}
         subheader={
-          myFavPost?.createdAt.replace(/T/i, ' ').slice(0, 19) || mypost?.createdAt.replace(/T/i, ' ').slice(0, 19) || post?.createdAt.replace(/T/i, ' ').slice(0, 19) || popular?.createdAt.replace(/T/i, ' ').slice(0, 19)
+          myFavPost?.createdAt.replace(/T/i, ' ').slice(0, 19)
+          || mypost?.createdAt.replace(/T/i, ' ').slice(0, 19)
+          || post?.createdAt.replace(/T/i, ' ').slice(0, 19)
+          || popular?.createdAt.replace(/T/i, ' ').slice(0, 19)
+          || newTen?.createdAt.replace(/T/i, ' ').slice(0, 19)
         }
       />
       <CardContent>

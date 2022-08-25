@@ -21,6 +21,7 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import { logoutUser, userCheck } from '../../../Redux/actions/userActions';
 import { getSearchPost } from '../../../Redux/actions/postActions';
+import { allStats } from '../../../Redux/actions/statsActions';
 
 const StyledToolbar = styled(Toolbar)({
   display: 'flex',
@@ -58,15 +59,21 @@ const UserBox = styled(Box)(({ theme }) => ({
 }));
 export default function Navbar() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const location = useLocation();
 
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState({});
 
+  const stats = useSelector((state) => state.stats);
   const user = useSelector((state) => state.user);
   const posts = useSelector((state) => state.posts);
 
-  const dispatch = useDispatch();
-  const location = useLocation();
+  useEffect(() => {
+    dispatch(allStats());
+  }, [stats]);
+
+  const notification = stats?.reduce((acc, el) => acc + el?.Comments?.length, 0);
 
   const logoutHandler = () => {
     dispatch(logoutUser());
@@ -136,7 +143,7 @@ export default function Navbar() {
         {user.id ? (
           <>
             <Icons>
-              <Badge badgeContent={3} color="error">
+              <Badge badgeContent={notification} color="error">
                 <Notifications />
               </Badge>
               <Avatar
