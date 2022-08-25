@@ -43,6 +43,7 @@ router.get('/all', async (req, res) => {
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
   try {
+    await Question.increment({ view: 1 }, { where: { id } });
     const question = await Question.findOne({
       where: { id },
       include: [
