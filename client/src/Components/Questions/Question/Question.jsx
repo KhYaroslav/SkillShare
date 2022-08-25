@@ -5,9 +5,18 @@ import { useNavigate, useParams } from 'react-router-dom';
 import parse from 'html-react-parser';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { deleteQuestion } from '../../../Redux/actions/questionAction.js';
 
 export default function Question({ question }) {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const deleteHandler = () => {
+    dispatch(deleteQuestion(question?.id));
+  };
   const { id } = useParams();
   const [onequestion, setOnequestion] = useState();
   if (id) { useEffect(() => { axios(`api/question/${+id}`).then((res) => setOnequestion(res.data)); }, []); }
@@ -50,6 +59,24 @@ export default function Question({ question }) {
       <Badge badgeContent={question?.view} max={10000} color="success">
         <RemoveRedEye />
       </Badge>
+      { user?.id === question?.User?.id
+        && (
+          <div style={{ position: 'relative', marginLeft: '63%' }}>
+            <IconButton
+              aria-label="delete"
+              size="large"
+              onClick={deleteHandler}
+            >
+              <DeleteIcon />
+            </IconButton>
+            <IconButton
+              aria-label="edit"
+              // onClick={() => navigate(`/post/${id}`)}
+            >
+              <EditIcon />
+            </IconButton>
+          </div>
+        ) }
     </Card>
   );
 }
