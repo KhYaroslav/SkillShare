@@ -1,5 +1,5 @@
-import { MoreVert } from '@mui/icons-material';
-import { Avatar, Card, CardActions, CardContent, CardHeader, IconButton, Typography } from '@mui/material';
+import { MoreVert, RemoveRedEye } from '@mui/icons-material';
+import { Avatar, Badge, Card, CardActions, CardContent, CardHeader, IconButton, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import parse from 'html-react-parser';
@@ -11,8 +11,6 @@ export default function Question({ question }) {
   const { id } = useParams();
   const [onequestion, setOnequestion] = useState();
   if (id) { useEffect(() => { axios(`api/question/${+id}`).then((res) => setOnequestion(res.data)); }, []); }
-
-  console.log('onequestion------------->', onequestion);
   return (
     <Card sx={{ margin: 5 }}>
       <CardHeader
@@ -49,6 +47,9 @@ export default function Question({ question }) {
         )}
         </Typography>
       </CardContent>
+      <Badge badgeContent={question?.view} max={10000} color="success">
+        <RemoveRedEye />
+      </Badge>
     </Card>
   );
 }
