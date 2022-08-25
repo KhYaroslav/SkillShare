@@ -13,6 +13,10 @@ module.exports = {
       description: {
         type: Sequelize.TEXT,
       },
+      view: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+      },
       user_id: {
         type: Sequelize.INTEGER,
         references: {

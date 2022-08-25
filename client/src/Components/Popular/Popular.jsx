@@ -1,3 +1,4 @@
+import { Box } from '@mui/system';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -9,8 +10,12 @@ export default function Popular() {
 
   return (
     <>
-      <div>Popular</div>
-      {populars?.map((el) => <Post popular={el} />)}
+      <div className="posText">
+        <p>Популярные...</p>
+      </div>
+      <Box flex={4} p={{ xs: 0, md: 2 }}>
+        {populars?.map((el) => <Post popular={el} key={el.id} />)}
+      </Box>
     </>
   );
 }
