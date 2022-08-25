@@ -119,19 +119,24 @@ export default function Post({ post, mypost, myFavPost, popular }) {
             checked={checked2}
           />
         </IconButton>
-        <IconButton
-          aria-label="delete"
-          size="large"
-          onClick={deleteHandler}
-        >
-          <DeleteIcon />
-        </IconButton>
-        <IconButton
-          aria-label="edit"
-          onClick={() => navigate(`/mypost/${myFavPost?.id || post?.id || mypost?.id || popular?.id}`)}
-        >
-          <EditIcon />
-        </IconButton>
+        {(user?.id === post.User?.id
+          && (
+            <>
+              <IconButton
+                aria-label="delete"
+                size="large"
+                onClick={deleteHandler}
+              >
+                <DeleteIcon />
+              </IconButton>
+              <IconButton
+                aria-label="edit"
+                onClick={() => navigate(`/mypost/${myFavPost?.id || post?.id || mypost?.id || popular?.id}`)}
+              >
+                <EditIcon />
+              </IconButton>
+            </>
+          ))}
         <Badge badgeContent={myFavPost?.view || mypost?.view || post?.view || popular?.view} max={10000} color="success">
           <RemoveRedEye />
         </Badge>
