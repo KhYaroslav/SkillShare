@@ -174,7 +174,7 @@ export default function Navbar() {
         ) : (
           <>
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
-              <Button variant="contained" onClick={() => navigate('/login')}>Вход</Button>
+              <Button variant="contained" sx={{ marginRight: '10px' }} onClick={() => navigate('/login')}>Вход</Button>
               <Button variant="contained" onClick={() => navigate('/signup')}>Регистрация</Button>
             </div>
 
