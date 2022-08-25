@@ -18,7 +18,6 @@ import {
 import EditIcon from '@mui/icons-material/Edit';
 import CommentIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import DeleteIcon from '@mui/icons-material/Delete';
-import parse from 'html-react-parser';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -67,13 +66,14 @@ export default function Post({ post, mypost, myFavPost, popular }) {
           </IconButton>
         )}
         subheader={
-          myFavPost?.createdAt || mypost?.createdAt || post?.createdAt || popular?.createdAt
+          myFavPost?.createdAt.replace(/T/i, ' ').slice(0, 19) || mypost?.createdAt.replace(/T/i, ' ').slice(0, 19) || post?.createdAt.replace(/T/i, ' ').slice(0, 19) || popular?.createdAt.replace(/T/i, ' ').slice(0, 19)
         }
-        title={myFavPost?.title || mypost?.title || post?.title || popular?.title}
+        title={myFavPost?.User?.name || mypost?.User?.name || post?.User?.name
+          || popular?.User?.name}
       />
       <CardContent>
         <Typography variant="body2">
-          <div className="textDescription">{parse(myFavPost?.description || mypost?.description || post?.description || popular?.description)}</div>
+          <div className="textDescription">{myFavPost?.title || mypost?.title || post?.title || popular?.title}</div>
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
