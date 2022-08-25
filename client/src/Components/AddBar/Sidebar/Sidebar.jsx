@@ -22,6 +22,7 @@ import ChatIcon from '@mui/icons-material/Chat';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
+import ConnectedTvIcon from '@mui/icons-material/ConnectedTv';
 import './Sidebar.css';
 
 import { logoutUser } from '../../../Redux/actions/userActions';
@@ -101,6 +102,14 @@ const Sidebar = ({ mode, setMode }) => {
                     </ListItemIcon>
                     {alarm ? <ListItemText className="alarm" primary="Чат" />
                       : <ListItemText primary="Чат" />}
+                  </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                  <ListItemButton component="a" onClick={() => navigate('/live')}>
+                    <ListItemIcon>
+                      <ConnectedTvIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="LiveCoding" />
                   </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>

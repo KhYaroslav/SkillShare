@@ -22,6 +22,7 @@ import MyFavorites from './Components/MyFavorites/MyFavorites';
 import PostDetails from './Components/PostDetails.jsx/PostDetails';
 import Popular from './Components/Popular/Popular';
 import Stats from './Components/Stats/Stats';
+import NewTen from './Components/NewTen/NewTen';
 
 export default function App() {
   const [mode, setMode] = useState('light');
@@ -56,7 +57,7 @@ export default function App() {
               <Routes>
                 <Route path="/" element={<Feed />} />
                 <Route path="/popular" element={<Popular />} />
-                <Route path="/new" element={<h1>Новые посты</h1>} />
+                <Route path="/new" element={<NewTen />} />
                 <Route path="/chat" element={<Chat />} />
                 <Route path="/addpost" element={<AddPost />} />
                 <Route path="/favorite" element={<MyFavorites />} />
