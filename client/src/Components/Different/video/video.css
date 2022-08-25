@@ -1,17 +1,9 @@
-/* .videoDiv {
-  border-radius: 50%;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  -khtml-border-radius: 50%;
-} */
-
 .videoPos {
   position: absolute;
   border-radius: 100%;
   -moz-border-radius: 100%;
   -webkit-border-radius: 100%;
   -khtml-border-radius: 100%;
-  
   height: 47%;
   top: 53%;
   left: 50%;

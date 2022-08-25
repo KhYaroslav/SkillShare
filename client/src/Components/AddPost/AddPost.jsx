@@ -65,6 +65,7 @@ export default function AddPost() {
             />
           </div>
           <Button
+            disabled={!((post.title && post.description))}
             type="submit"
             variant="contained"
             color="primary"
