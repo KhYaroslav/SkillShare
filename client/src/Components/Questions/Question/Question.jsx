@@ -91,25 +91,6 @@ export default function Question({ question }) {
           </div>
         ) }
         </Card>
-        <form onSubmit={submitHandler}>
-          <TiptapCommentQuestion setCommentQuestion={setCommentQuestion} />
-          <Button
-            sx={{ marginTop: '15px' }}
-            disabled={!((comment))}
-            variant="contained"
-            type="submit"
-          >
-            Отправить
-          </Button>
-        </form>
-        {posts.find((el) => +el.id === +id)?.Comments?.length
-        && posts.find((el) => +el.id === +id)?.Comments?.map((el) => (
-          <MyComment
-            key={el.id}
-            post={post}
-            comment={el}
-          />
-        ))}
       </Grid>
     </>
   );
