@@ -13,7 +13,6 @@ router.get('/', async (req, res) => {
       { model: Favorite },
       { model: Comment },
     ],
-    limit: 10,
   });
   const popular = posts.sort((a, b) => b.Likes.length - a.Likes.length);
   //   res.sendStatus(200);

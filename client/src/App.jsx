@@ -26,6 +26,7 @@ import NewTen from './Components/NewTen/NewTen';
 import Questions from './Components/Questions/Questions';
 import AddQuestions from './Components/Questions/AddQuestions';
 import Question from './Components/Questions/Question/Question';
+import EditPost from './Components/EditPost/EditPost';
 import AddQuest from './Components/AddQuest/AddQuest';
 
 export default function App() {
@@ -66,7 +67,7 @@ export default function App() {
                 <Route path="/addpost" element={<AddPost />} />
                 <Route path="/favorite" element={<MyFavorites />} />
                 <Route path="/mytape" element={<MyTape />} />
-                <Route path="/mypost/:id" element={<AddPost />} />
+                <Route path="/mypost/:id" element={<EditPost />} />
                 <Route path="/stats" element={<Stats />} />
                 <Route path="/post/:id" element={<PostDetails />} />
                 <Route path="/login" element={<Signin />} />
