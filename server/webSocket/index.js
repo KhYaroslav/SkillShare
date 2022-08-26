@@ -4,6 +4,7 @@ const { Message, User, Question } = require('../db/models');
 const wss = new WebSocketServer({ clientTracking: false, noServer: true });
 
 wss.on('connection', (ws, request, wsMap, question) => {
+  console.log('question----->', question);
   const { id, name } = request.session.user;
   wsMap.set(id, { ws, user: request.session.user });
 

@@ -26,6 +26,8 @@ const questionReducer = (state = [], action) => {
       return state.map((el) => (
         { ...el, Comments: el?.Comments.filter((item) => item.id !== payload)
         }));
+    // case 'SET_QUESTION':
+    //   return payload;
     default:
       return state;
   }

@@ -10,6 +10,7 @@ import postReducer from './reducers/postReducer';
 import alarmReducer from './reducers/alarmReducer';
 import statsReducer from './reducers/statsReducer';
 import questionReducer from './reducers/questionReducer';
+import onequestionReducer from './reducers/onequestionReducer';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -24,6 +25,7 @@ const store = configureStore({
     alarm: alarmReducer,
     stats: statsReducer,
     questions: questionReducer,
+    oneQuestion: onequestionReducer,
   },
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware(),
