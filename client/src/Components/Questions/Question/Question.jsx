@@ -1,5 +1,5 @@
 import { MoreVert, RemoveRedEye } from '@mui/icons-material';
-import { Avatar, Badge, Card, CardActions, CardContent, CardHeader, IconButton, Typography } from '@mui/material';
+import { Avatar, Badge, Card, CardActions, CardContent, CardHeader, Grid, IconButton, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import parse from 'html-react-parser';
@@ -8,58 +8,71 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { deleteQuestion } from '../../../Redux/actions/questionAction.js';
+import { addCommentQuestion, deleteQuestion } from '../../../Redux/actions/questionAction.js';
+import { TiptapCommentQuestion } from '../../MyTextBar/TiptapCommentQuestion.jsx';
 
 export default function Question({ question }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const [commentQuestion, setCommentQuestion] = useState();
+
   const deleteHandler = () => {
     dispatch(deleteQuestion(question?.id));
   };
   const { id } = useParams();
   const [onequestion, setOnequestion] = useState();
   if (id) { useEffect(() => { axios(`api/question/${+id}`).then((res) => setOnequestion(res.data)); }, []); }
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(addCommentQuestion(question?.id, comment));//
+  };
   return (
-    <Card sx={{ margin: 5 }}>
-      <CardHeader
-        avatar={(
-          <Avatar sx={{ bgcolor: 'red' }} aria-label="recipe" alt={question?.User?.name} src={`${process.env.REACT_APP_BASEURL}${question?.User?.avatar || onequestion?.User?.avatar}` || '/broken-image.jpg'} />
-        )}
-        action={(
-          <IconButton
-            aria-label="settings"
-            onClick={() => navigate(`${question?.id}`)}
-          >
-            <MoreVert />
-          </IconButton>
-        )}
-        title={question?.title || onequestion?.title}
-        subheader={
-          question?.createdAt
-        }
-      />
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          {question?.User?.name || onequestion?.User?.name}
-          {question
+    <>
+      <Grid
+        container
+        spacing={0}
+        justifyContent="center"
+      >
+        <Card sx={{ margin: 5 }}>
+          <CardHeader
+            avatar={(
+              <Avatar sx={{ bgcolor: 'red' }} aria-label="recipe" alt={question?.User?.name} src={`${process.env.REACT_APP_BASEURL}${question?.User?.avatar || onequestion?.User?.avatar}` || '/broken-image.jpg'} />
+            )}
+            action={(
+              <IconButton
+                aria-label="settings"
+                onClick={() => navigate(`${question?.id}`)}
+              >
+                <MoreVert />
+              </IconButton>
+            )}
+            title={question?.title || onequestion?.title}
+            subheader={
+              question?.createdAt
+            }
+          />
+          <CardContent>
+            <Typography variant="body2" color="text.secondary">
+              {question?.User?.name || onequestion?.User?.name}
+              {question
         && (
           <div className="ProseMirror">
             {parse(question?.description)}
           </div>
         )}
-          {onequestion
+              {onequestion
         && (
           <div className="ProseMirror">
             {parse(onequestion?.description)}
           </div>
         )}
-        </Typography>
-      </CardContent>
-      <Badge badgeContent={question?.view} max={10000} color="success">
-        <RemoveRedEye />
-      </Badge>
-      { user?.id === question?.User?.id
+            </Typography>
+          </CardContent>
+          <Badge badgeContent={question?.view} max={10000} color="success">
+            <RemoveRedEye />
+          </Badge>
+          { user?.id === question?.User?.id
         && (
           <div style={{ position: 'relative', marginLeft: '63%' }}>
             <IconButton
@@ -77,6 +90,27 @@ export default function Question({ question }) {
             </IconButton>
           </div>
         ) }
-    </Card>
+        </Card>
+        <form onSubmit={submitHandler}>
+          <TiptapCommentQuestion setCommentQuestion={setCommentQuestion} />
+          <Button
+            sx={{ marginTop: '15px' }}
+            disabled={!((comment))}
+            variant="contained"
+            type="submit"
+          >
+            Отправить
+          </Button>
+        </form>
+        {posts.find((el) => +el.id === +id)?.Comments?.length
+        && posts.find((el) => +el.id === +id)?.Comments?.map((el) => (
+          <MyComment
+            key={el.id}
+            post={post}
+            comment={el}
+          />
+        ))}
+      </Grid>
+    </>
   );
 }

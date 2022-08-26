@@ -8,7 +8,6 @@ import Question from './Question/Question';
 export default function Questions() {
   const dispatch = useDispatch();
   useEffect(() => { dispatch(addQuestions()); }, []);
-
   const questions = useSelector((state) => state.questions);
   return (
     <>

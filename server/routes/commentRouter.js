@@ -1,6 +1,6 @@
 const express = require('express');
 const {
-  Comment,
+  Comment, User, CommentQ,
 } = require('../db/models');
 
 const router = express.Router();

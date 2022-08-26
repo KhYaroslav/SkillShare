@@ -1,6 +1,6 @@
 const express = require('express');
 const {
-  User, Question,
+  User, Question, CommentQ,
 } = require('../db/models');
 
 const router = express.Router();
@@ -84,6 +84,40 @@ router.delete('/:id', async (req, res) => {
     res.sendStatus(200);
   } catch (error) {
     console.log('error here', error);
+  }
+});
+
+router.post('comment/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { input } = req.body;
+    const userId = req.session.user.id;
+    const comment = await CommentQ.create({
+      user_id: userId, question_id: id, comment_desc: input,
+    });
+    res.json(comment);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.delete('comment/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.session.user.id;
+    await CommentQ.destroy({
+      where: {
+        id,
+        user_id: userId,
+      },
+      include: [
+        { model: User },
+        { model: Question },
+      ],
+    });
+    res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
   }
 });
 

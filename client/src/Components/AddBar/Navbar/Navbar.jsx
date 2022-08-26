@@ -68,10 +68,9 @@ export default function Navbar() {
   const stats = useSelector((state) => state.stats);
   const user = useSelector((state) => state.user);
   const posts = useSelector((state) => state.posts);
-
   useEffect(() => {
     dispatch(allStats());
-  }, [stats]);
+  }, []);// stats зацикливает
 
   const notification = stats?.reduce((acc, el) => acc + el?.Comments?.length, 0);
 
