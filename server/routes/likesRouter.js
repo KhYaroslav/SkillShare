@@ -6,16 +6,34 @@ const {
 const router = express.Router();
 
 router.get('/:id', async (req, res) => {
-  const { id } = req.params;
-  const userId = req.session.user.id;
-  const checkLike = await Like.findAll({
-    where: {
-      user_id: userId,
-      post_id: id,
-    },
-  });
-  if (checkLike.length === 0) {
-    await Like.create({ user_id: req.session.user.id, post_id: id });
+  try {
+    const { id } = req.params;
+    const userId = req.session.user.id;
+    const checkLike = await Like.findAll({
+      where: {
+        user_id: userId,
+        post_id: id,
+      },
+    });
+    if (checkLike.length === 0) {
+      await Like.create({ user_id: req.session.user.id, post_id: id });
+      const post = await Post.findOne({
+        where: { id },
+        include: [
+          { model: User },
+          { model: Like },
+          { model: Comment },
+          { model: Favorite },
+        ],
+      });
+      return res.json(post);
+    }
+    await Like.destroy({
+      where: {
+        user_id: userId,
+        post_id: id,
+      },
+    });
     const post = await Post.findOne({
       where: { id },
       include: [
@@ -25,24 +43,10 @@ router.get('/:id', async (req, res) => {
         { model: Favorite },
       ],
     });
-    return res.json(post);
+    res.json(post);
+  } catch (error) {
+    console.log(error);
   }
-  await Like.destroy({
-    where: {
-      user_id: userId,
-      post_id: id,
-    },
-  });
-  const post = await Post.findOne({
-    where: { id },
-    include: [
-      { model: User },
-      { model: Like },
-      { model: Comment },
-      { model: Favorite },
-    ],
-  });
-  res.json(post);
 });
 
 module.exports = router;

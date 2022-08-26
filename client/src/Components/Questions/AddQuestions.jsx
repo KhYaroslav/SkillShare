@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 import { Container } from '@mui/system';
 import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addQuestion } from '../../Redux/actions/questionAction.js';
 import { TiptapQuestion } from '../MyTextBar/TiptapQuestion';
@@ -13,7 +13,6 @@ export default function AddQuestions() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [question, setQuestion] = useState({ title: '', description: '' });
-  console.log('question----->', question);
 
   const changeHandler = (e) => {
     setQuestion((prev) => ({ ...prev, [e.target.name]: e.target.value }));

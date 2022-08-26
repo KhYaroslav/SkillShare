@@ -6,18 +6,22 @@ const {
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-  const posts = await Post.findAll({
-    where: {
-      user_id: req.session.user.id,
-    },
-    include: [
-      { model: User },
-      { model: Like },
-      { model: Favorite },
-      { model: Comment },
-    ],
-  });
-  res.json(posts);
+  try {
+    const posts = await Post.findAll({
+      where: {
+        user_id: req.session.user.id,
+      },
+      include: [
+        { model: User },
+        { model: Like },
+        { model: Favorite },
+        { model: Comment },
+      ],
+    });
+    res.json(posts);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 module.exports = router;

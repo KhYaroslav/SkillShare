@@ -15,15 +15,12 @@ router.post('/', async (req, res) => {
     res.json(question);
   } catch (error) {
     console.log(error);
-    console.log('here error!');
   }
 
   // res.sendStatus(200);
 });
 
 router.get('/all', async (req, res) => {
-  ('here--------------------------->!!!!');
-
   try {
     const questions = await Question.findAll({
       include: [
@@ -31,18 +28,18 @@ router.get('/all', async (req, res) => {
       ],
     });
     // res.sendStatus(200);
-    console.log('questions------>', questions);
+
     res.json(questions);
   } catch (error) {
-    console.log('sdfhsgdhhsdgsdhshdgsd');
+    console.log(error);
 
     res.sendStatus(402);
   }
 });
 
 router.get('/:id', async (req, res) => {
-  const { id } = req.params;
   try {
+    const { id } = req.params;
     await Question.increment({ view: 1 }, { where: { id } });
     const question = await Question.findOne({
       where: { id },
@@ -75,9 +72,9 @@ router.get('/:id', async (req, res) => {
 // });
 
 router.delete('/:id', async (req, res) => {
-  const { id } = req.params;
-  const userId = req.session.user.id;
   try {
+    const { id } = req.params;
+    const userId = req.session.user.id;
     await Question.destroy({
       where: {
         id,
