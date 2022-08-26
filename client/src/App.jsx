@@ -26,7 +26,11 @@ import NewTen from './Components/NewTen/NewTen';
 import Questions from './Components/Questions/Questions';
 import AddQuestions from './Components/Questions/AddQuestions';
 import Question from './Components/Questions/Question/Question';
+<<<<<<< HEAD
+import EditPost from './Components/EditPost/EditPost';
+=======
 import AddQuest from './Components/AddQuest/AddQuest';
+>>>>>>> 4058b2e1303882919d3b008db8d655d09880151b
 
 export default function App() {
   const [mode, setMode] = useState('light');
@@ -66,7 +70,7 @@ export default function App() {
                 <Route path="/addpost" element={<AddPost />} />
                 <Route path="/favorite" element={<MyFavorites />} />
                 <Route path="/mytape" element={<MyTape />} />
-                <Route path="/mypost/:id" element={<AddPost />} />
+                <Route path="/mypost/:id" element={<EditPost />} />
                 <Route path="/stats" element={<Stats />} />
                 <Route path="/post/:id" element={<PostDetails />} />
                 <Route path="/login" element={<Signin />} />
