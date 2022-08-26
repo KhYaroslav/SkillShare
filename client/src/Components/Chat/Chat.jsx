@@ -52,9 +52,8 @@ const Chat = () => {
 
   return (
     <div
-      style={{ margin: 'auto',
+      style={{
         paddingTop: '30px',
-        marginRight: '30%',
         width: '40%',
         height: '80%'
       }}
@@ -63,7 +62,7 @@ const Chat = () => {
       </>
       <Grid container>
         <Grid item xs={12}>
-          <Typography variant="h5" className="header-message" style={{ textAlign: 'center', marginBottom: '1%', backgroundColor: '#D1DEEF', borderRadius: '8px' }}>Чат</Typography>
+          <Typography variant="h5" className="header-message" style={{ textAlign: 'center', marginBottom: '1%', backgroundColor: '#2196f3', borderRadius: '8px' }}>Чат</Typography>
         </Grid>
       </Grid>
       <Grid container component={Paper} className="asfsf">
@@ -94,7 +93,7 @@ const Chat = () => {
           <Grid container style={{ paddingTop: '80%', paddingBottom: '2%', paddingRight: '7%' }}>
 
             <Grid item xs={11}>
-              <Button style={{ marginTop: '2%', backgroundColor: 'red' }} variant="contained" onClick={() => dispatch(alarmWsAction())}>Тревога</Button>
+              <Button sx={{ marginTop: '2%', bgcolor: 'error.main' }} variant="contained" onClick={() => dispatch(alarmWsAction())}>Тревога</Button>
               <TextField
                 style={{ width: '65%', marginLeft: '1%' }}
                 id="outlined-basic-email"

@@ -33,11 +33,11 @@ export default function AddQuestions() {
           left: '25%',
         }}
       >
-        <Typography variant="h5">Добавить вопрос</Typography>
+        <Typography variant="h5" sx={{ position: 'relative', left: '10%' }}>Добавить вопрос</Typography>
         <form onSubmit={(e) => submitHandler(e)}>
           <div className="12">
             <TextField
-              style={{ width: '400px', margin: '5px' }}
+              sx={{ width: '300px', top: '75px' }}
               type="text"
               label="Title"
               variant="outlined"
@@ -45,7 +45,7 @@ export default function AddQuestions() {
               value={question?.title}
               onChange={changeHandler}
             />
-            <div className="App">
+            <div style={{ position: 'relative', width: '500px', top: '5px', right: '100px' }} className="App">
               <TiptapQuestion setQuestion={setQuestion} />
             </div>
           </div>
@@ -54,7 +54,7 @@ export default function AddQuestions() {
             variant="contained"
             color="primary"
             sx={{
-              marginTop: '2%'
+              bottom: '70px'
             }}
           >
             Добавить

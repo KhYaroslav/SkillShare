@@ -71,7 +71,7 @@ export default function Navbar() {
 
   useEffect(() => {
     dispatch(allStats());
-  }, [stats]);
+  }, []);
 
   const notification = stats?.reduce((acc, el) => acc + el?.Comments?.length, 0);
 
