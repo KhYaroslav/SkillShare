@@ -1,0 +1,12 @@
+.anim {
+  position: relative;
+  right: 11%;
+  transition: 0.3s ease-in-out;
+  opacity: .8;
+}
+
+.anim:hover {
+  right: 17%;
+  opacity: 1;
+  z-index: 100;
+}

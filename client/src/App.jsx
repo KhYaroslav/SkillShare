@@ -57,7 +57,7 @@ export default function App() {
         <ThemeProvider theme={darkTheme}>
           <Box bgcolor="background.default" color="text.primary">
             <Navbar />
-            <Stack direction="row" spacing={20} justifyContent="space-between" style={{ position: 'relative' }}>
+            <Stack direction="row" spacing={20} style={{ position: 'relative', justifyContent: 'space-between' }}>
               <Sidebar setMode={setMode} mode={mode} />
               <Routes>
                 <Route path="/" element={<Feed />} />
@@ -86,3 +86,5 @@ export default function App() {
     </>
   );
 }
+
+//hh

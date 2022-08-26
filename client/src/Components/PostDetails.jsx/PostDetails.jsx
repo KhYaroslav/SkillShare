@@ -31,17 +31,23 @@ export default function PostDetails() {
   return (
     <Grid
       container
-      spacing={0}
-      justifyContent="center"
+      direction="column"
+      justifyContent="flex-end"
+      alignItems="center"
     >
       {post
       && (
         <Typography variant="body2" color="text.secondary">
-          <div><h1>hello</h1></div>
+          <div>
+            <h1>{post?.User?.name}</h1>
+          </div>
+          <div>
+            <h1>{post?.title}</h1>
+          </div>
           <div className="ProseMirror posTeg">
             {parse(post?.description)}
           </div>
-          <ImageList sx={{ width: 500, height: 450, position: 'relative', left: '60%' }} rowHeight={164}>
+          <ImageList sx={{ width: 500 }}>
             {post?.file && (
               <ImageListItem>
                 <img
@@ -54,7 +60,7 @@ export default function PostDetails() {
           </ImageList>
         </Typography>
       )}
-      <div style={{ position: 'relative', bottom: '250px', left: '50%' }}>
+      <div style={{ position: 'relative' }}>
         <form onSubmit={submitHandler}>
           <TiptapComment setComment={setComment} />
           <Button
@@ -76,6 +82,5 @@ export default function PostDetails() {
         />
       ))}
     </Grid>
-
   );
 }
