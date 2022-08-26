@@ -6,3 +6,9 @@
 ::-webkit-scrollbar {
   display: none;
 }
+
+.posText {
+  position: absolute;
+  top: 1%;
+  right: 80%;
+}
