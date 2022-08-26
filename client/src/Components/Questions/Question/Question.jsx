@@ -8,6 +8,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import { deleteQuestion } from '../../../Redux/actions/questionAction.js';
 
 export default function Question({ question }) {
@@ -21,8 +22,9 @@ export default function Question({ question }) {
   const [onequestion, setOnequestion] = useState();
   if (id) { useEffect(() => { axios(`api/question/${+id}`).then((res) => setOnequestion(res.data)); }, []); }
   return (
-    <Card sx={{ margin: 5 }}>
+    <Card sx={{ margin: 5, border: 1, borderColor: 'text.primary' }}>
       <CardHeader
+        sx={{ borderBottom: 1, borderColor: 'text.primary' }}
         avatar={(
           <Avatar sx={{ bgcolor: 'red' }} aria-label="recipe" alt={question?.User?.name} src={`${process.env.REACT_APP_BASEURL}${question?.User?.avatar || onequestion?.User?.avatar}` || '/broken-image.jpg'} />
         )}
@@ -34,19 +36,18 @@ export default function Question({ question }) {
             <MoreVert />
           </IconButton>
         )}
-        title={question?.title || onequestion?.title}
+        title={question?.User?.name || onequestion?.User?.name}
         subheader={
-          question?.createdAt
+          question?.createdAt.replace(/T/i, ' ').slice(0, 19)
         }
       />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          {question?.User?.name || onequestion?.User?.name}
+        <Typography sx={{ textAlign: 'center', fontSize: '30px' }} variant="body2" color="text.secondary">
           {question
         && (
-          <div className="ProseMirror">
-            {parse(question?.description)}
-          </div>
+          <>
+            {question?.title}
+          </>
         )}
           {onequestion
         && (
@@ -56,12 +57,12 @@ export default function Question({ question }) {
         )}
         </Typography>
       </CardContent>
-      <Badge badgeContent={question?.view} max={10000} color="success">
-        <RemoveRedEye />
+      <Badge sx={{ marginLeft: '30px', top: '30px' }} badgeContent={question?.view} max={10000} color="success">
+        <VisibilityOutlinedIcon />
       </Badge>
       { user?.id === question?.User?.id
         && (
-          <div style={{ position: 'relative', marginLeft: '63%' }}>
+          <div style={{ position: 'relative', left: '87%', bottom: '5px' }}>
             <IconButton
               aria-label="delete"
               size="large"
@@ -71,7 +72,6 @@ export default function Question({ question }) {
             </IconButton>
             <IconButton
               aria-label="edit"
-              // onClick={() => navigate(`/post/${id}`)}
             >
               <EditIcon />
             </IconButton>

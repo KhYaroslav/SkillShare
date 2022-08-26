@@ -6,17 +6,21 @@ const {
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-  const posts = await Post.findAll({
-    include: [
-      { model: User },
-      { model: Like },
-      { model: Favorite },
-      { model: Comment },
-    ],
-  });
-  const popular = posts.sort((a, b) => b.Likes.length - a.Likes.length);
-  //   res.sendStatus(200);
-  res.json(popular);
+  try {
+    const posts = await Post.findAll({
+      include: [
+        { model: User },
+        { model: Like },
+        { model: Favorite },
+        { model: Comment },
+      ],
+    });
+    const popular = posts.sort((a, b) => b.Likes.length - a.Likes.length);
+    //   res.sendStatus(200);
+    res.json(popular);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 module.exports = router;

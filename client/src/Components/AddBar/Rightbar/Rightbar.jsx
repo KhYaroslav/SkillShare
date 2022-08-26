@@ -66,7 +66,9 @@ const Rightbar = () => {
     }}
     >
       {(location.pathname === '/' || location.pathname === '/popular'
-        || location.pathname === '/new') && (
+        || location.pathname === '/new' || location.pathname === '/favorite'
+        || location.pathname === '/question' || location.pathname === '/mytape'
+        || location.pathname === '/addpost' || location.pathname === '/newquestion') && (
         <Box flex={2} p={2} sx={{ display: { sm: 'block' } }}>
           <Box position="fixed" width={300}>
             {user.id && (

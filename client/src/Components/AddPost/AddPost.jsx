@@ -39,15 +39,15 @@ export default function AddPost() {
       <div
         className="App"
         style={{
-          position: 'relative',
-          left: '25%',
+          position: 'absolute',
+          left: '35%',
         }}
       >
-        <Typography variant="h5">Добавить пост</Typography>
+        <Typography variant="h5" sx={{ position: 'relative', left: '30%' }}>Создать пост</Typography>
         <form onSubmit={(e) => submitHandler(e, post)}>
           <div className="12">
             <TextField
-              style={{ width: '400px', margin: '5px' }}
+              sx={{ width: '300px', top: '75px' }}
               type="text"
               label="Title"
               variant="outlined"
@@ -56,9 +56,13 @@ export default function AddPost() {
               onChange={changeHandler}
             />
             <div className="App">
-              <Tiptap setPost={setPost} post={post} />
+              <Tiptap
+                setPost={setPost}
+                post={post}
+              />
             </div>
             <TextField
+              sx={{ width: '70%', bottom: '75px' }}
               type="file"
               name="file"
               onChange={changeHandler2}
@@ -70,7 +74,7 @@ export default function AddPost() {
             variant="contained"
             color="primary"
             sx={{
-              marginTop: '2%'
+              bottom: '70px'
             }}
           >
             Добавить

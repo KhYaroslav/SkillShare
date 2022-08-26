@@ -47,12 +47,16 @@ export default function Stats() {
 
   return (
     <div>
-      <h1>Статистика всех ваших постов:</h1>
+      <div style={{ marginBottom: '50px' }}>
+        <h1>Статистика всех ваших постов:</h1>
+      </div>
       <div style={{ width: '500px', position: 'relative' }}>
         <Doughnut data={data} />
         {myrat && <Video />}
       </div>
-      <Button variant="contained" onClick={(e) => setMyrat((prev) => !prev)}>Не нажимать!</Button>
+      <div style={{ position: 'relative', left: '10%', top: '25%' }}>
+        <Button sx={{ bgcolor: 'error.main', width: '75%' }} variant="contained" onClick={(e) => setMyrat((prev) => !prev)}>Не нажимать!</Button>
+      </div>
     </div>
   );
 }
