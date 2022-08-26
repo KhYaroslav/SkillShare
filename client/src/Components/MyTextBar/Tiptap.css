@@ -14,7 +14,12 @@
   min-height: 100px;
 }
 
-.textDescription{
+.posTeg {
+  left: 30%;
+  width: 800px;
+}
+
+.textDescription {
   text-align: center;
   font-size: 30px;
 }
