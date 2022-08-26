@@ -1,5 +1,5 @@
 import { SettingsInputCompositeTwoTone } from '@mui/icons-material';
-import { Button, Grid, Typography } from '@mui/material';
+import { Button, Grid, ImageList, ImageListItem, Typography } from '@mui/material';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
@@ -14,7 +14,6 @@ import { TiptapComment } from '../MyTextBar/TiptapComment';
 export default function PostDetails() {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts);
-  // console.log('🚀 ~ file: PostDetails.jsx ~ line 16 ~ PostDetails ~ posts', posts);
   const [post, setPost] = useState();
   const [comment, setComment] = useState('');
   const { id } = useParams();
@@ -27,6 +26,7 @@ export default function PostDetails() {
     e.preventDefault();
     dispatch(addComment(post?.id, comment));
   };
+  console.log('🚀 ~ file: PostDetails.jsx ~ line 19 ~ PostDetails ~ post', post);
 
   return (
     <Grid
@@ -37,23 +37,36 @@ export default function PostDetails() {
       {post
       && (
         <Typography variant="body2" color="text.secondary">
-          <div className="ProseMirror">
+          <div><h1>hello</h1></div>
+          <div className="ProseMirror posTeg">
             {parse(post?.description)}
           </div>
+          <ImageList sx={{ width: 500, height: 450, position: 'relative', left: '60%' }} rowHeight={164}>
+            {post?.file && (
+              <ImageListItem>
+                <img
+                  src={`${process.env.REACT_APP_BASEURL}/${post?.file}`}
+                  alt={post?.title}
+                  loading="lazy"
+                />
+              </ImageListItem>
+            )}
+          </ImageList>
         </Typography>
       )}
-      <form onSubmit={submitHandler}>
-        PostDetails
-        <TiptapComment setComment={setComment} />
-        <Button
-          sx={{ marginTop: '15px' }}
-          disabled={!((comment))}
-          variant="contained"
-          type="submit"
-        >
-          Отправить
-        </Button>
-      </form>
+      <div style={{ position: 'relative', bottom: '250px', left: '50%' }}>
+        <form onSubmit={submitHandler}>
+          <TiptapComment setComment={setComment} />
+          <Button
+            sx={{ marginTop: '10px' }}
+            disabled={!((comment))}
+            variant="contained"
+            type="submit"
+          >
+            Отправить
+          </Button>
+        </form>
+      </div>
       {posts.find((el) => +el.id === +id)?.Comments?.length
       && posts.find((el) => +el.id === +id)?.Comments?.map((el) => (
         <MyComment
