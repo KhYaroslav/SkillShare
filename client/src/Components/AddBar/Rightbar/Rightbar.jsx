@@ -15,6 +15,7 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import News from '../../News/News';
 import { getChatMessages } from '../../../Redux/actions/chatActions';
+import './anim.css';
 
 const Rightbar = () => {
   const chatUsers = useSelector((state) => state.chatUsers);
@@ -61,9 +62,13 @@ const Rightbar = () => {
   const location = useLocation();
 
   return (
-    <div style={{
-      marginRight: '16%'
-    }}
+    <div
+      className="anim"
+      // style={{
+      //   marginRight: '16%',
+      //   position: 'relative',
+      //   right: '16%'
+      // }}
     >
       {(location.pathname === '/' || location.pathname === '/popular'
         || location.pathname === '/new' || location.pathname === '/favorite'
