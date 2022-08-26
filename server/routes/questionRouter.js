@@ -6,6 +6,7 @@ const {
 const router = express.Router();
 
 router.post('/', async (req, res) => {
+  console.log('req.session.user----->', req.session.user, req.session);
   try {
     const question = await Question.create({
       title: req.body.title,

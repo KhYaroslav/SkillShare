@@ -70,7 +70,7 @@ export default function Navbar() {
   const posts = useSelector((state) => state.posts);
   useEffect(() => {
     dispatch(allStats());
-  }, []);// stats зацикливает
+  }, [posts]);// stats зацикливает
 
   const notification = stats?.reduce((acc, el) => acc + el?.Comments?.length, 0);
 

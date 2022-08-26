@@ -57,7 +57,12 @@ function* alarmUserEffect(socket) {
     socket.send(JSON.stringify(message));
   }
 }
-
+function* joinRoomSaga(socket) {
+  while (true) {
+    const message = yield take('JOIN_ROOM');
+    socket.send(JSON.stringify(message));
+  }
+}
 function* chatWatcer(action) {
   const socket = yield call(createWebSocketConnection);
   const socketChannel = yield call(createSocketChannel, socket, action);
@@ -65,6 +70,7 @@ function* chatWatcer(action) {
   yield fork(userMessage, socket);
   yield fork(getUserMessages, socket);
   yield fork(alarmUserEffect, socket);
+  yield fork(joinRoomSaga, socket);
 
   while (true) {
     try {

@@ -28,6 +28,7 @@ import AddQuestions from './Components/Questions/AddQuestions';
 import Question from './Components/Questions/Question/Question';
 import EditPost from './Components/EditPost/EditPost';
 import AddQuest from './Components/AddQuest/AddQuest';
+import MyQuestion from './Components/MyQuestion/MyQuestion';
 
 export default function App() {
   const [mode, setMode] = useState('light');
@@ -73,7 +74,7 @@ export default function App() {
                 <Route path="/login" element={<Signin />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/question" element={<Questions />} />
-                <Route path="/question/:id" element={<Question />} />
+                <Route path="/question/:id" element={<MyQuestion />} />
                 <Route path="/newquestion" element={<AddQuestions />} />
               </Routes>
               <Rightbar />

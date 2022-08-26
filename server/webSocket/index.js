@@ -1,9 +1,9 @@
 const { WebSocketServer } = require('ws');
-const { Message, User } = require('../db/models');
+const { Message, User, Question } = require('../db/models');
 
 const wss = new WebSocketServer({ clientTracking: false, noServer: true });
 
-wss.on('connection', (ws, request, wsMap) => {
+wss.on('connection', (ws, request, wsMap, question) => {
   const { id, name } = request.session.user;
   wsMap.set(id, { ws, user: request.session.user });
 
@@ -63,7 +63,21 @@ wss.on('connection', (ws, request, wsMap) => {
             }),
           );
         }
-
+        break;
+      case 'JOIN_ROOM':
+        const questionData = question[payload.id];
+        if (!questionData) {
+          const currentQuestion = await Question.findOne({ where: { id: payload.id } });
+          question[payload.id] = JSON.parse(JSON.stringify(currentQuestion));
+        }
+        const userId = request.session.user.id;
+        wsMap.set(userId, { ws, room: payload.id, state: question[payload.id] });
+        ws.send(
+          JSON.stringify({
+            type: 'SET_QUESTION',
+            payload: question[payload.id],
+          }),
+        );
       default:
         break;
     }

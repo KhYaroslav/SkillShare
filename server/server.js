@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 app.locals.ws = new Map();
+app.locals.question = {};
 
 const userRouter = require('./routes/userRouter');
 const newsRouter = require('./routes/newsRouter');
@@ -71,7 +72,7 @@ server.on('upgrade', (request, socket, head) => {
     }
     console.log('Session is parsed!');
     wss.handleUpgrade(request, socket, head, (ws) => {
-      wss.emit('connection', ws, request, app.locals.ws);
+      wss.emit('connection', ws, request, app.locals.ws, app.locals.question);
     });
   });
 });

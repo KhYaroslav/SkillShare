@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { addCommentQuestion, deleteQuestion } from '../../../Redux/actions/questionAction.js';
-import { TiptapCommentQuestion } from '../../MyTextBar/TiptapCommentQuestion.jsx';
 
 export default function Question({ question }) {
   const dispatch = useDispatch();
@@ -22,11 +21,13 @@ export default function Question({ question }) {
   };
   const { id } = useParams();
   const [onequestion, setOnequestion] = useState();
-  if (id) { useEffect(() => { axios(`api/question/${+id}`).then((res) => setOnequestion(res.data)); }, []); }
-  const submitHandler = (e) => {
-    e.preventDefault();
-    dispatch(addCommentQuestion(question?.id, comment));//
-  };
+
+  // useEffect(() => { if (id) { axios(`api/question/${+id}`)
+  // .then((res) => setOnequestion(res.data)); } }, []);
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+  //   dispatch(addCommentQuestion(question?.id, comment));//
+  // };
   return (
     <>
       <Grid
