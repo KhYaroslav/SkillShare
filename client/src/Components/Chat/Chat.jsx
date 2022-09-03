@@ -93,7 +93,7 @@ const Chat = () => {
           <Grid container style={{ paddingTop: '80%', paddingBottom: '2%', paddingRight: '7%' }}>
 
             <Grid item xs={11}>
-              <Button sx={{ marginTop: '2%', bgcolor: 'error.main' }} variant="contained" onClick={() => dispatch(alarmWsAction())}>Тревога</Button>
+              <Button sx={{ marginTop: '2%', bgcolor: 'error.main' }} variant="contained" onClick={() => dispatch(alarmWsAction())}>На помощь!</Button>
               <TextField
                 style={{ width: '65%', marginLeft: '1%' }}
                 id="outlined-basic-email"
