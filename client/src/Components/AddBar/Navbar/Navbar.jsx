@@ -180,7 +180,6 @@ export default function Navbar() {
                   <MenuItem>Добавить фото</MenuItem>
                 </label>
               </form>
-
               <MenuItem onClick={logoutHandler}>Выйти</MenuItem>
             </Menu>
           </>

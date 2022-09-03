@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
-import { Button } from '@mui/material';
 import { allStats } from '../../Redux/actions/statsActions';
-import Video from '../Different/video/Video';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function Stats() {
   const stats = useSelector((state) => state.stats);
-  const [myrat, setMyrat] = useState(false);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -52,10 +49,6 @@ export default function Stats() {
       </div>
       <div style={{ width: '500px', position: 'relative' }}>
         <Doughnut data={data} />
-        {myrat && <Video />}
-      </div>
-      <div style={{ position: 'relative', left: '10%', top: '25%' }}>
-        <Button sx={{ bgcolor: 'error.main', width: '75%' }} variant="contained" onClick={(e) => setMyrat((prev) => !prev)}>Не нажимать!</Button>
       </div>
     </div>
   );
